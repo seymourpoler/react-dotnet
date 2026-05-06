@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="tecnyfarma.client/tecnyfarma.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="Tecnyfarma.Server/Tecnyfarma.Server.csproj" />
+</Solution>

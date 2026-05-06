@@ -1,0 +1,1 @@
+C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\tecnyfarma.client\obj\Debug\tecnyfarma.client.esproj.CoreCompileInputs.cache
