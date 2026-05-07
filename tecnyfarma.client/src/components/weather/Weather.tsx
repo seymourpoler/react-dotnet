@@ -6,9 +6,12 @@ export function Weather(){
     const [forecasts, setForecasts] = useState<Forecast[]>();
     
     useEffect(() => {
-        populateWeather(setForecasts);
+         populateWeather()
+             .then(forecasts => {
+            setForecasts(forecasts);
+        });
+        
     }, []);
-    
     
     return (
         <div>
