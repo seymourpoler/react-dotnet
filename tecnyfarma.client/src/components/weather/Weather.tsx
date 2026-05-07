@@ -1,12 +1,12 @@
 ﻿import { useEffect, useState } from 'react';
 import type { Forecast } from './Forecast';
-import { populateWeatherData } from "../WeatherDataService";
+import { populateWeather } from "./WeatherService";
 
 export function Weather(){
     const [forecasts, setForecasts] = useState<Forecast[]>();
     
     useEffect(() => {
-        populateWeatherData(setForecasts);
+        populateWeather(setForecasts);
     }, []);
     
     
