@@ -4,7 +4,7 @@ import { About } from './components/About';
 import { Home } from './components/Home';
 import { ContactUs } from './components/ContactUs';
 import { Weather } from './components/weather/Weather';
-import { Register } from './components/user/RegisterService';
+import { Register } from './components/user/Register';
 
 export function App() {
     return (
