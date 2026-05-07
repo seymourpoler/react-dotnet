@@ -25,14 +25,14 @@ describe('Register', () => {
 
     it('updates email and password fields on change', () => {
         render(<Register />);
-        const emailInput = screen.getByLabelText(/email/i);
-        const passwordInput = screen.getByLabelText(/password/i);
+        const email = screen.getByLabelText(/email/i);
+        const password = screen.getByLabelText(/password/i);
 
-        fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-        fireEvent.change(passwordInput, { target: { value: 'secret123' } });
+        fireEvent.change(email, { target: { value: 'test@example.com' } });
+        fireEvent.change(password, { target: { value: 'secret123' } });
 
-        expect(emailInput).toHaveValue('test@example.com');
-        expect(passwordInput).toHaveValue('secret123');
+        expect(email).toHaveValue('test@example.com');
+        expect(password).toHaveValue('secret123');
     });
 
     it('does not show a message initially', () => {
@@ -54,16 +54,16 @@ describe('Register', () => {
     });
 
     it('calls fetch with the correct payload', async () => {
-        const mockFetch = vi.fn().mockResolvedValue({ ok: true });
-        vi.stubGlobal('fetch', mockFetch);
+        const fetch = vi.fn().mockResolvedValue({ ok: true });
+        vi.stubGlobal('fetch', fetch);
 
         render(<Register />);
         fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'user@example.com' } });
         fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'pass456' } });
         fireEvent.click(screen.getByRole('button', { name: /register/i }));
 
-        await waitFor(() => expect(mockFetch).toHaveBeenCalledOnce());
-        expect(mockFetch).toHaveBeenCalledWith('/api/v0/register', {
+        await waitFor(() => expect(fetch).toHaveBeenCalledOnce());
+        expect(fetch).toHaveBeenCalledWith('/api/v0/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: 'user@example.com', password: 'pass456' }),
@@ -97,10 +97,10 @@ describe('Register', () => {
 
     it('disables the button while loading', async () => {
         let resolveFetch!: () => void;
-        const pendingPromise = new Promise<{ ok: boolean }>((resolve) => {
+        const promise = new Promise<{ ok: boolean }>((resolve) => {
             resolveFetch = () => resolve({ ok: true });
         });
-        vi.stubGlobal('fetch', vi.fn().mockReturnValue(pendingPromise));
+        vi.stubGlobal('fetch', vi.fn().mockReturnValue(promise));
 
         render(<Register />);
         const button = screen.getByRole('button', { name: /register/i });
