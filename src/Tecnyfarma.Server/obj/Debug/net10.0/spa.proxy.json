@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:54707",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\luisr\\Documents\\code\\dotnet\\Tecnyfarma\\src\\Tecnyfarma.Server\\..\\tecnyfarma.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

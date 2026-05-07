@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "sE+Z4XlRAZc=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\luisr\\Documents\\code\\dotnet\\Tecnyfarma\\src\\Tecnyfarma.Server\\Tecnyfarma.Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\luisr\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\10.0.7\\microsoft.aspnetcore.spaproxy.10.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}
