@@ -3,6 +3,7 @@ using Tecnyfarma.Server.User.Application;
 
 namespace Tecnyfarma.Server.User.Infrastructure;
 
+[ApiController]
 public class RegisterController(RegisterUserUseCase useCase) : ControllerBase
 {
     [HttpPost("/api/v0/register")]
