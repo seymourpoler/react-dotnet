@@ -10,7 +10,7 @@ export function Register() {
         setLoading(true);
         setMessage(null);
         try {
-            const response = await fetch('/api/register', {
+            const response = await fetch('/api/v0/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })

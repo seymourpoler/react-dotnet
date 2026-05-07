@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { About } from './components/About';
 import { Home } from './components/Home';
 import { ContactUs } from './components/ContactUs';
-import { Weather } from './components/Weather';
+import { Weather } from './components/weather/Weather';
 
 export function App() {
     return (

@@ -1,17 +1,12 @@
 ﻿import { useEffect, useState } from 'react';
-
-type Forecast = {
-    date: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
-}
+import type { Forecast } from './Forecast';
+import { populateWeatherData } from "../WeatherDataService";
 
 export function Weather(){
     const [forecasts, setForecasts] = useState<Forecast[]>();
     
     useEffect(() => {
-        populateWeatherData();
+        populateWeatherData(setForecasts);
     }, []);
     
     
@@ -43,12 +38,4 @@ export function Weather(){
             }
         </div>
     );
-
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        if (response.ok) {
-            const data = await response.json();
-            setForecasts(data);
-        }
-    }
 }
