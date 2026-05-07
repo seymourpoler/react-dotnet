@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "+8bIDILGYh8=",
+  "dgSpecHash": "mmx7DMGWP84=",
   "success": true,
   "projectFilePath": "C:\\Users\\luisr\\Documents\\code\\dotnet\\Tecnyfarma\\test\\Tecnyfarma.Server.Test\\Tecnyfarma.Server.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\luisr\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
+    "C:\\Users\\luisr\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\10.0.7\\microsoft.aspnetcore.spaproxy.10.0.7.nupkg.sha512",
     "C:\\Users\\luisr\\.nuget\\packages\\microsoft.codecoverage\\17.14.1\\microsoft.codecoverage.17.14.1.nupkg.sha512",
     "C:\\Users\\luisr\\.nuget\\packages\\microsoft.net.test.sdk\\17.14.1\\microsoft.net.test.sdk.17.14.1.nupkg.sha512",
     "C:\\Users\\luisr\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.14.1\\microsoft.testplatform.objectmodel.17.14.1.nupkg.sha512",
