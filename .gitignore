@@ -1,1 +1,8 @@
-﻿/.idea/.idea.Tecnyfarma/.idea/copilotDiffState.xml
+﻿# IDE
+.idea/
+
+# Build output
+bin/
+obj/
+
+
