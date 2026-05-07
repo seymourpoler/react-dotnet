@@ -10,7 +10,11 @@ public class RegisterController(RegisterUserUseCase useCase) : ControllerBase
     public async Task<IActionResult> Register(RegisterUserRequest request)
     {
         var args = new RegisterUserArgs(request.Email, request.Password);
-        await useCase.Execute(args);
-        return Ok();
+        var result = await useCase.Execute(args);
+
+        return result.Match<IActionResult>(
+            _ => Ok(),
+            error => BadRequest(error.Message)
+        );
     }
 }

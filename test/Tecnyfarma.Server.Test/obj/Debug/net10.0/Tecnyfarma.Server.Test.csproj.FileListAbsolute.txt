@@ -104,7 +104,6 @@ C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\
 C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\Tecnyfarma.Server.staticwebassets.endpoints.json
 C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\Tecnyfarma.Server.exe
 C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\Castle.Core.dll
-C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\FakeItEasy.dll
 C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\Microsoft.AspNetCore.SpaProxy.dll
 C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\Tecnyfarma.Server.dll
 C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\Tecnyfarma.Server.pdb
@@ -156,3 +155,6 @@ C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\
 C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\System.CodeDom.dll
 C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\System.Management.dll
 C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Management.dll
+C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\LanguageExt.Core.dll
+C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\luisr\Documents\code\dotnet\Tecnyfarma\test\Tecnyfarma.Server.Test\bin\Debug\net10.0\NSubstitute.dll

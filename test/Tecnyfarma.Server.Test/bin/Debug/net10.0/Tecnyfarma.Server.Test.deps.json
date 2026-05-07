@@ -8,8 +8,8 @@
     ".NETCoreApp,Version=v10.0": {
       "Tecnyfarma.Server.Test/1.0.0": {
         "dependencies": {
-          "FakeItEasy": "9.0.1",
           "Microsoft.NET.Test.Sdk": "17.14.1",
+          "NSubstitute": "5.3.0",
           "Shouldly": "4.3.0",
           "Tecnyfarma.Server": "1.0.0",
           "xunit": "2.9.3"
@@ -18,11 +18,11 @@
           "Tecnyfarma.Server.Test.dll": {}
         }
       },
-      "Castle.Core/5.2.1": {
+      "Castle.Core/5.1.1": {
         "runtime": {
           "lib/net6.0/Castle.Core.dll": {
             "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.2.1.0"
+            "fileVersion": "5.1.1.0"
           }
         }
       },
@@ -46,14 +46,14 @@
           }
         }
       },
-      "FakeItEasy/9.0.1": {
+      "LanguageExt.Core/4.4.9": {
         "dependencies": {
-          "Castle.Core": "5.2.1"
+          "Microsoft.Bcl.AsyncInterfaces": "7.0.0"
         },
         "runtime": {
-          "lib/net10.0/FakeItEasy.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.1.0"
+          "lib/netstandard2.0/LanguageExt.Core.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
           }
         }
       },
@@ -62,6 +62,14 @@
           "lib/net10.0/Microsoft.AspNetCore.SpaProxy.dll": {
             "assemblyVersion": "10.0.7.0",
             "fileVersion": "10.0.726.21808"
+          }
+        }
+      },
+      "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
           }
         }
       },
@@ -330,6 +338,17 @@
           }
         }
       },
+      "NSubstitute/5.3.0": {
+        "dependencies": {
+          "Castle.Core": "5.1.1"
+        },
+        "runtime": {
+          "lib/net6.0/NSubstitute.dll": {
+            "assemblyVersion": "5.3.0.0",
+            "fileVersion": "5.3.0.0"
+          }
+        }
+      },
       "Shouldly/4.3.0": {
         "dependencies": {
           "DiffEngine": "11.3.0",
@@ -421,6 +440,7 @@
       },
       "Tecnyfarma.Server/1.0.0": {
         "dependencies": {
+          "LanguageExt.Core": "4.4.9",
           "Microsoft.AspNetCore.SpaProxy": "10.0.7"
         },
         "runtime": {
@@ -438,12 +458,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Castle.Core/5.2.1": {
+    "Castle.Core/5.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wHARzQA695jwwKreOzNsq54KiGqKP38tv8hi8e2FXDEC/sA6BtrX90tVPDkOfVu13PbEzr00TCV8coikl+D1Iw==",
-      "path": "castle.core/5.2.1",
-      "hashPath": "castle.core.5.2.1.nupkg.sha512"
+      "sha512": "sha512-rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
+      "path": "castle.core/5.1.1",
+      "hashPath": "castle.core.5.1.1.nupkg.sha512"
     },
     "DiffEngine/11.3.0": {
       "type": "package",
@@ -459,12 +479,12 @@
       "path": "emptyfiles/4.4.0",
       "hashPath": "emptyfiles.4.4.0.nupkg.sha512"
     },
-    "FakeItEasy/9.0.1": {
+    "LanguageExt.Core/4.4.9": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-cqM6hKjoAmjuh+GzKLX7gcqCDownqffmQ3KSBMdFowCZgwQMXpu1jlsJE649FsrMF5Ea5kYpuokGTuOaUrz/2w==",
-      "path": "fakeiteasy/9.0.1",
-      "hashPath": "fakeiteasy.9.0.1.nupkg.sha512"
+      "sha512": "sha512-K9VGWkThJkaomifa3zcmwysw1BaSqIZZPZc6trBnJN8u9mpmA/cMMwCWEa/v7bPv/+NnG6PbyIDB7HtxBX7yCQ==",
+      "path": "languageext.core/4.4.9",
+      "hashPath": "languageext.core.4.4.9.nupkg.sha512"
     },
     "Microsoft.AspNetCore.SpaProxy/10.0.7": {
       "type": "package",
@@ -472,6 +492,13 @@
       "sha512": "sha512-K1zHPjHZap3NKURVED91/v2E9e5mazt/n0cIxY8S0PXDMk+bAUUbXWsOyz/mLAF+p5Mhv5ns6Pnff2sXIPaFqQ==",
       "path": "microsoft.aspnetcore.spaproxy/10.0.7",
       "hashPath": "microsoft.aspnetcore.spaproxy.10.0.7.nupkg.sha512"
+    },
+    "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3aeMZ1N0lJoSyzqiP03hqemtb1BijhsJADdobn/4nsMJ8V1H+CrpuduUe4hlRdx+ikBQju1VGjMD1GJ3Sk05Eg==",
+      "path": "microsoft.bcl.asyncinterfaces/7.0.0",
+      "hashPath": "microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512"
     },
     "Microsoft.CodeCoverage/17.14.1": {
       "type": "package",
@@ -507,6 +534,13 @@
       "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "path": "newtonsoft.json/13.0.3",
       "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
+    },
+    "NSubstitute/5.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lJ47Cps5Qzr86N99lcwd+OUvQma7+fBgr8+Mn+aOC0WrlqMNkdivaYD9IvnZ5Mqo6Ky3LS7ZI+tUq1/s9ERd0Q==",
+      "path": "nsubstitute/5.3.0",
+      "hashPath": "nsubstitute.5.3.0.nupkg.sha512"
     },
     "Shouldly/4.3.0": {
       "type": "package",

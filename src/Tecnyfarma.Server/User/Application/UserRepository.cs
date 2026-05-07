@@ -1,6 +1,8 @@
-﻿namespace Tecnyfarma.Server.User.Application;
+﻿using LanguageExt;
+
+namespace Tecnyfarma.Server.User.Application;
 
 public interface UserRepository
 {
-    Task SaveAsync(Domain.User user);
+    Task<Either<Error, Unit>> SaveAsync(Domain.User user);
 }

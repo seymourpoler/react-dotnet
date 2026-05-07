@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tecnyfarma.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e618ca9cc78ce51e3bb6ba013076fded3f03639")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f1fe77018601c22ef174474067534f1d5cc98814")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tecnyfarma.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tecnyfarma.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

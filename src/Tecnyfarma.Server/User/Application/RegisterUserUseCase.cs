@@ -1,10 +1,22 @@
-﻿namespace Tecnyfarma.Server.User.Application;
+﻿using LanguageExt;
 
-public class RegisterUserUseCase(UserRepository repository)
+namespace Tecnyfarma.Server.User.Application;
+
+public class RegisterUserUseCase
 {
-    public async Task Execute(RegisterUserArgs args)
+    private readonly UserRepository repository;
+    public RegisterUserUseCase(UserRepository repository)
+    {
+        this.repository = repository;
+    }
+    
+    public virtual async Task<Either<Error, Unit>> Execute(RegisterUserArgs args)
     {
         var user = new Domain.User(args.Email, args.Password);
-        await repository.SaveAsync(user);
+        var pp = await (
+            from a in repository.SaveAsync(user).ToAsync()
+            select Unit.Default
+        );
+        return pp;
     }
 }
