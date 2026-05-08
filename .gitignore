@@ -15,6 +15,6 @@ obj/
 *.cache.json
 *.AssemblyInfo.cs
 *.endpoints.json
-*.rntimeconfig.json
+*.runtimeconfig.json
 *.runtimeconfig.dev.json
-
+*.user
