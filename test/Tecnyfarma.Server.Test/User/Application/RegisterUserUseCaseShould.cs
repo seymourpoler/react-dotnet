@@ -29,10 +29,8 @@ public class RegisterUserUseCaseShould
 
         result.Match(
             _ => Assert.Fail("Expected an error but got a success result"),
-            error =>
-            {
-                error.Message.ShouldBe("Invalid email");
-            });
+            error => error.Message.ShouldBe("Invalid email")
+        );
     }
 
     [Theory]
