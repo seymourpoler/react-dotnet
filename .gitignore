@@ -4,5 +4,8 @@
 # Build output
 bin/
 obj/
+*.pdb
+*.dll
+*.exe
 
 
