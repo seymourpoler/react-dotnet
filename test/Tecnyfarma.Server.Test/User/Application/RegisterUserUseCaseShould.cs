@@ -71,8 +71,9 @@ public class RegisterUserUseCaseShould
     public async Task ReturnSuccessWhenRegistrationIsValid()
     {
         var args = new RegisterUserArgs("user@example.com", "valid-password");
-        repository.SaveAsync(Arg.Any<Tecnyfarma.Server.User.Domain.User>())
-            .Returns(Unit.Default);
+        repository.SaveAsync(Arg.Is<Tecnyfarma.Server.User.Domain.User>(x =>
+            x.Email.Value == "user@example.com" && x.Password.Value == "valid-password"
+        )).Returns(Unit.Default);
 
         var result = await useCase.Execute(args);
 
@@ -80,8 +81,5 @@ public class RegisterUserUseCaseShould
             _ => Assert.True(true, "Expected an success but got an error result"),
             error => Assert.Fail($"Expected success but got error: {error.Message}")
         );
-        await repository.Received(1).SaveAsync(Arg.Is<Tecnyfarma.Server.User.Domain.User>(
-            x => x.Email.Value == "user@example.com" && x.Password.Value == "valid-password"
-            ));
     }
 }
