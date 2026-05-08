@@ -69,9 +69,8 @@ public class RegisterUserUseCaseShould
     public async Task ReturnSuccessWhenRegistrationIsValid()
     {
         var args = new RegisterUserArgs("user@example.com", "valid-password");
-        repository.SaveAsync(Arg.Is<Server.User.Domain.User>(x =>
-            x.Email.Value == "user@example.com" && x.Password.Value == "valid-password"
-        )).Returns(Unit.Default);
+        repository.SaveAsync(Arg.Is<Server.User.Domain.User>(x => x.Email.Value == "user@example.com"))
+            .Returns(Unit.Default);
 
         var result = await useCase.Execute(args);
 

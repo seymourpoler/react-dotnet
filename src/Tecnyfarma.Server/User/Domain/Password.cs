@@ -1,4 +1,5 @@
 ﻿using LanguageExt;
+using Tecnyfarma.Server.User.Infrastructure;
 
 namespace Tecnyfarma.Server.User.Domain;
 
@@ -8,7 +9,7 @@ public class Password
         
     private Password(string value)
     {
-        Value = value; //hashing should be done here
+        Value = PasswordEncryptor.Encrypt(value);
     }
     
     public static Either<Error, Password> Create(string password)
