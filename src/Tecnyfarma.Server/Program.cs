@@ -1,5 +1,7 @@
 using Tecnyfarma.Server.User.Infrastructure;
 
+namespace Tecnyfarma.Server;
+
 public class Program
 {
     public static void Main(string[] args)
