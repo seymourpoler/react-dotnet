@@ -5,7 +5,7 @@ import { Login } from './Login';
 
 vi.mock('./LoginService');
 
-describe('Login component', () => {
+describe('Login', () => {
     beforeEach(() => {
         vi.clearAllMocks();
     });
