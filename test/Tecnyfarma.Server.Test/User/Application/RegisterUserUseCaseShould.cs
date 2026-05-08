@@ -80,6 +80,8 @@ public class RegisterUserUseCaseShould
             _ => Assert.True(true, "Expected an success but got an error result"),
             error => Assert.Fail($"Expected success but got error: {error.Message}")
         );
-        await repository.Received(1).SaveAsync(Arg.Any<Tecnyfarma.Server.User.Domain.User>());
+        await repository.Received(1).SaveAsync(Arg.Is<Tecnyfarma.Server.User.Domain.User>(
+            x => x.Email.Value == "user@example.com" && x.Password.Value == "valid-password"
+            ));
     }
 }
