@@ -1,19 +1,25 @@
 using Tecnyfarma.Server.User.Infrastructure;
 
-var builder = WebApplication.CreateBuilder(args);
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddUserDependencies();
+        // Add services to the container.
+        builder.Services.AddControllers();
+        builder.Services.AddUserDependencies();
 
-var app = builder.Build();
-app.UseDefaultFiles();
-app.MapStaticAssets();
+        var app = builder.Build();
+        app.UseDefaultFiles();
+        app.MapStaticAssets();
 
-// Configure the HTTP request pipeline.
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
-app.MapFallbackToFile("/index.html");
+        // Configure the HTTP request pipeline.
+        app.UseHttpsRedirection();
+        app.UseAuthorization();
+        app.MapControllers();
+        app.MapFallbackToFile("/index.html");
 
-app.Run();
+        app.Run();
+    }
+}
