@@ -35,10 +35,14 @@ public class RegisterUserUseCaseShould
             });
     }
 
-    [Fact]
-    public async Task ReturnErrorWhenPasswordIsInvalid()
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData("123")]
+    public async Task ReturnErrorWhenPasswordIsInvalid(string password)
     {
-        var args = new RegisterUserArgs("user@example.com", "123");
+        var args = new RegisterUserArgs("user@example.com", password);
         
         var result = await useCase.Execute(args);
 
