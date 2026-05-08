@@ -56,7 +56,7 @@ public class RegisterUserUseCaseShould
     public async Task ReturnErrorWhenRepositoryFails()
     {
         var args = new RegisterUserArgs("user@example.com", "validpassword");
-        repository.SaveAsync(Arg.Any<Tecnyfarma.Server.User.Domain.User>())
+        repository.SaveAsync(Arg.Any<Server.User.Domain.User>())
             .Returns(new Error("User already exists"));
 
         var result = await useCase.Execute(args);
@@ -71,7 +71,7 @@ public class RegisterUserUseCaseShould
     public async Task ReturnSuccessWhenRegistrationIsValid()
     {
         var args = new RegisterUserArgs("user@example.com", "valid-password");
-        repository.SaveAsync(Arg.Is<Tecnyfarma.Server.User.Domain.User>(x =>
+        repository.SaveAsync(Arg.Is<Server.User.Domain.User>(x =>
             x.Email.Value == "user@example.com" && x.Password.Value == "valid-password"
         )).Returns(Unit.Default);
 
