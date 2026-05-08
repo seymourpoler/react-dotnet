@@ -10,5 +10,7 @@ obj/
 *.cache
 *.cache.json
 *.AssemblyInfo.cs
-
+*.endpoints.json
+*.rntimeconfig.json
+*.runtimeconfig.dev.json
 
