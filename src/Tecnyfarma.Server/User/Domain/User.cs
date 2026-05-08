@@ -1,5 +1,4 @@
 ﻿namespace Tecnyfarma.Server.User.Domain;
-
 public class User
 {
     public Guid Id { get; private set; }
