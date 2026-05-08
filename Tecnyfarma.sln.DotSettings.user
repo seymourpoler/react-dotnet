@@ -5,6 +5,7 @@
     &lt;TestAncestor&gt;&#xD;
       &lt;TestId&gt;xUnit::228600C1-8EE1-217C-DA52-3EA52A59FA30::net10.0::Tecnyfarma.Server.Test.User.Infrastructure.RegisterControllerShould&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;xUnit::228600C1-8EE1-217C-DA52-3EA52A59FA30::net10.0::Tecnyfarma.Server.Test.User.Application.RegisterUserUseCaseShould.ReturnErrorWhenEmailIsInvalid&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::228600C1-8EE1-217C-DA52-3EA52A59FA30::net10.0::Tecnyfarma.Server.Test.User.Application.RegisterUserUseCaseShould&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
   &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
