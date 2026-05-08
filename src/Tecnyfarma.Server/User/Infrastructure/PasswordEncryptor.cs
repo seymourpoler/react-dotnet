@@ -10,7 +10,7 @@ public static class PasswordEncryptor
         return Convert.ToBase64String(
             KeyDerivation.Pbkdf2(
                 password: password!,
-                salt: RandomNumberGenerator.GetBytes(128 / 8),
+                salt: Array.Empty<byte>(),
                 prf: KeyDerivationPrf.HMACSHA256,
                 iterationCount: 100000,
                 numBytesRequested: 256 / 8)

@@ -11,7 +11,7 @@ public class SqlUserRepository : UserRepository
         throw new NotImplementedException();
     }
 
-    public Task<Option<Domain.User>> FindAsync(Email email)
+    public Task<Either<Error, Domain.User>> FindAsync(Email email)
     {
         throw new NotImplementedException();
     }

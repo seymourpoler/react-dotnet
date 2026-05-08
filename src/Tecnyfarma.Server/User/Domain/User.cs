@@ -1,4 +1,6 @@
-﻿namespace Tecnyfarma.Server.User.Domain;
+﻿using LanguageExt;
+
+namespace Tecnyfarma.Server.User.Domain;
 public class User
 {
     public Guid Id { get; private set; }
@@ -10,5 +12,10 @@ public class User
         Id = Guid.NewGuid();
         Email = email;
         Password = password;
+    }
+
+    public bool IsEqualTo(User other)
+    {
+        return  Email.IsEqualTo(other.Email) && Password.IsEqualTo(other.Password);
     }
 }

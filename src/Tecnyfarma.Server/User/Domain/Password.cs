@@ -21,4 +21,9 @@ public class Password
         
         return new Password(password);
     }
+
+    public bool IsEqualTo(Password other)
+    {
+        return  Value.Equals(other.Value, StringComparison.InvariantCultureIgnoreCase);
+    }
 }

@@ -20,4 +20,9 @@ public class Email
         
         return new Email(email);
     }
+
+    public bool IsEqualTo(Email other)
+    {
+        return Value.Equals(other.Value, StringComparison.InvariantCultureIgnoreCase);
+    }
 }
