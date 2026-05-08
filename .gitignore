@@ -1,5 +1,9 @@
 ﻿# IDE
 .idea/
+.vs/
+
+# User-specific files
+*.user
 
 # Build output
 bin/
