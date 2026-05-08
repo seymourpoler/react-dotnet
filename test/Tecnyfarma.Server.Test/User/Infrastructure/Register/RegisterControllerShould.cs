@@ -3,26 +3,27 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application;
-using Tecnyfarma.Server.User.Infrastructure;
+using Tecnyfarma.Server.User.Application.Register;
+using Tecnyfarma.Server.User.Infrastructure.Register;
 
-namespace Tecnyfarma.Server.Test.User.Infrastructure;
+namespace Tecnyfarma.Server.Test.User.Infrastructure.Register;
 
 public class RegisterControllerShould
 {
-    private readonly RegisterUserUseCase useCase;
+    private readonly RegisterUseCase useCase;
     private readonly RegisterController controller;
 
     public RegisterControllerShould()
     {
-        useCase = Substitute.For<RegisterUserUseCase>(Substitute.For<UserRepository>());
+        useCase = Substitute.For<RegisterUseCase>(Substitute.For<UserRepository>());
         controller = new RegisterController(useCase);
     }
     
     [Fact]
     public async Task ReturnOkWhenRegistrationSucceeds()
     {
-        useCase.Execute(Arg.Any<RegisterUserArgs>()).Returns(Unit.Default);
-        var request = new RegisterUserRequest { Email = "user@example.com", Password = "secret123" };
+        useCase.Execute(Arg.Any<UseCaseArgs>()).Returns(Unit.Default);
+        var request = new RegisterRequest { Email = "user@example.com", Password = "secret123" };
 
         var result = await controller.Register(request);
         
@@ -32,8 +33,8 @@ public class RegisterControllerShould
     [Fact]
     public async Task ReturnBadRequestWhenRegistrationFails()
     {
-        useCase.Execute(Arg.Any<RegisterUserArgs>()).Returns(new Error("error message"));
-        var request = new RegisterUserRequest { Email = "user@example.com", Password = "secret123" };
+        useCase.Execute(Arg.Any<UseCaseArgs>()).Returns(new Error("error message"));
+        var request = new RegisterRequest { Email = "user@example.com", Password = "secret123" };
 
         var result = await controller.Register(request);
 

@@ -2,18 +2,19 @@
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application;
+using Tecnyfarma.Server.User.Application.Register;
 
-namespace Tecnyfarma.Server.Test.User.Application;
+namespace Tecnyfarma.Server.Test.User.Application.Register;
 
 public class RegisterUserUseCaseShould
 {
     private readonly UserRepository repository;
-    private readonly RegisterUserUseCase useCase;
+    private readonly RegisterUseCase useCase;
 
     public RegisterUserUseCaseShould()
     {
         repository = Substitute.For<UserRepository>();
-        useCase = new RegisterUserUseCase(repository);
+        useCase = new RegisterUseCase(repository);
     }
     
     [Theory]
@@ -23,7 +24,7 @@ public class RegisterUserUseCaseShould
     [InlineData("invalid-email")]
     public async Task ReturnErrorWhenEmailIsInvalid(string email)
     {
-        var args = new RegisterUserArgs(email, "a-password");
+        var args = new UseCaseArgs(email, "a-password");
         
         var result = await useCase.Execute(args);
 
@@ -40,7 +41,7 @@ public class RegisterUserUseCaseShould
     [InlineData("123")]
     public async Task ReturnErrorWhenPasswordIsInvalid(string password)
     {
-        var args = new RegisterUserArgs("user@example.com", password);
+        var args = new UseCaseArgs("user@example.com", password);
         
         var result = await useCase.Execute(args);
 
@@ -53,7 +54,7 @@ public class RegisterUserUseCaseShould
     [Fact]
     public async Task ReturnErrorWhenRepositoryFails()
     {
-        var args = new RegisterUserArgs("user@example.com", "validpassword");
+        var args = new UseCaseArgs("user@example.com", "validpassword");
         repository.SaveAsync(Arg.Any<Server.User.Domain.User>())
             .Returns(new Error("User already exists"));
 
@@ -68,7 +69,7 @@ public class RegisterUserUseCaseShould
     [Fact]
     public async Task ReturnSuccessWhenRegistrationIsValid()
     {
-        var args = new RegisterUserArgs("user@example.com", "valid-password");
+        var args = new UseCaseArgs("user@example.com", "valid-password");
         repository.SaveAsync(Arg.Is<Server.User.Domain.User>(x => x.Email.Value == "user@example.com"))
             .Returns(Unit.Default);
 

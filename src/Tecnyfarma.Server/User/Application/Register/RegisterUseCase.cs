@@ -1,11 +1,11 @@
 ﻿using LanguageExt;
 using Tecnyfarma.Server.User.Domain;
 
-namespace Tecnyfarma.Server.User.Application;
+namespace Tecnyfarma.Server.User.Application.Register;
 
-public class RegisterUserUseCase(UserRepository repository)
+public class RegisterUseCase(UserRepository repository)
 {
-    public virtual async Task<Either<Error, Unit>> Execute(RegisterUserArgs args)
+    public virtual async Task<Either<Error, Unit>> Execute(UseCaseArgs args)
     {
         return await (
             from email in Email.Create(args.Email).ToAsync()
