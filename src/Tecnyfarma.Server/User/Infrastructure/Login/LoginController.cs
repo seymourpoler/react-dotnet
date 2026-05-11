@@ -6,6 +6,7 @@ namespace Tecnyfarma.Server.User.Infrastructure.Login;
 [ApiController]
 public class LoginController(LoginUseCase useCase) : ControllerBase
 {
+    [HttpPost("/api/v0/login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
         var args = new UseCaseArgs(request.Email, request.Password);
