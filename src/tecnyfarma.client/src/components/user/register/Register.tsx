@@ -27,12 +27,14 @@ export function Register() {
         }
     }
 
-    function onEmailChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-        setEmail(e.target.value);
+    function onEmailChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
+        event.preventDefault();
+        setEmail(event.target.value);
     }
     
-    function onPasswordChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-        setPassword(e.target.value);
+    function onPasswordChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
+        event.preventDefault();
+        setPassword(event.target.value);
     }
 
     return (
