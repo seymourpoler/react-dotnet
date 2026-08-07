@@ -9,17 +9,20 @@ describe('Register', () => {
 
     it('renders the Register heading', () => {
         render(<Register />);
+        
         expect(screen.getByRole('heading', { level: 2, name: /register/i })).toBeInTheDocument();
     });
 
     it('renders email and password inputs', () => {
         render(<Register />);
+        
         expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
     });
 
     it('renders a Register button', () => {
         render(<Register />);
+        
         expect(screen.getByRole('button', { name: /register/i })).toBeInTheDocument();
     });
 
@@ -37,15 +40,16 @@ describe('Register', () => {
 
     it('does not show a message initially', () => {
         render(<Register />);
+        
         expect(screen.queryByText(/registration/i)).not.toBeInTheDocument();
     });
 
     it('shows success message and clears inputs on successful registration', async () => {
         vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true }));
-
         render(<Register />);
         fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
         fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'secret123' } });
+        
         fireEvent.click(screen.getByRole('button', { name: /register/i }));
 
         await waitFor(() => expect(screen.getByText('Registration successful!')).toBeInTheDocument());
@@ -56,12 +60,12 @@ describe('Register', () => {
     it('calls fetch with the correct payload', async () => {
         const fetch = vi.fn().mockResolvedValue({ ok: true });
         vi.stubGlobal('fetch', fetch);
-
         render(<Register />);
         fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'user@example.com' } });
         fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'pass456' } });
+        
         fireEvent.click(screen.getByRole('button', { name: /register/i }));
-
+        
         await waitFor(() => expect(fetch).toHaveBeenCalledOnce());
         expect(fetch).toHaveBeenCalledWith('/api/v0/register', {
             method: 'POST',
@@ -75,10 +79,10 @@ describe('Register', () => {
             ok: false,
             text: async () => 'Email already taken',
         }));
-
         render(<Register />);
-        fireEvent.click(screen.getByRole('button', { name: /register/i }));
 
+        fireEvent.click(screen.getByRole('button', { name: /register/i }));
+        
         await waitFor(() =>
             expect(screen.getByText('Registration failed: Email already taken')).toBeInTheDocument()
         );
@@ -86,8 +90,8 @@ describe('Register', () => {
 
     it('shows error message on network error', async () => {
         vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('Network error')));
-
         render(<Register />);
+        
         fireEvent.click(screen.getByRole('button', { name: /register/i }));
 
         await waitFor(() =>
@@ -101,9 +105,9 @@ describe('Register', () => {
             resolveFetch = () => resolve({ ok: true });
         });
         vi.stubGlobal('fetch', vi.fn().mockReturnValue(promise));
-
         render(<Register />);
         const button = screen.getByRole('button', { name: /register/i });
+        
         fireEvent.click(button);
 
         expect(button).toBeDisabled();

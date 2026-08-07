@@ -11,7 +11,7 @@ export function Login() {
         setLoading(true);
         setMessage(null);
         try {
-            const response = await login( email, password);
+            const response = await login({ email, password });
             if (response.ok) {
                 setMessage('Login successful!');
                 setEmail('');
