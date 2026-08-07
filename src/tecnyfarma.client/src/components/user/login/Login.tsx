@@ -16,10 +16,10 @@ export function Login() {
                 setMessage('Login successful!');
                 setEmail('');
                 setPassword('');
-            } else {
-                const error = await response.text();
-                setMessage('Login failed: ' + error);
-            }
+                return;
+            } 
+            const error = await response.text();
+            setMessage('Login failed: ' + error);
         } catch (err) {
             setMessage('Login failed: ' + (err as Error).message);
         } finally {
