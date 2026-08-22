@@ -1,11 +1,21 @@
+using Tecnyfarma.Server.User.Application.SignUp;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Tecnyfarma.Server.User.Infrastructure.SignUp;
 
-public class SignUpController
+[ApiController]
+public class SignUpController(SignUpUseCase useCase) : ControllerBase
 {
-    public async Task<IActionResult> SingUp(SignUpRequest request)
+
+    [HttpPost("/api/v0/user/signup")]
+    public async Task<IActionResult> SignUp(SignUpRequest request)
     {
-        throw new NotImplementedException();
+        var args = new UseCaseArgs(request.Email, request.Password);
+        var result = await useCase.Execute(args);
+
+        return result.Match<IActionResult>(
+            _ => Ok(),
+            error => BadRequest(error.Message)
+        );
     }
 }
