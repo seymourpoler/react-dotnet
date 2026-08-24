@@ -2,6 +2,7 @@ using LanguageExt;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
+using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.SignUp;
 using Tecnyfarma.Server.User.Infrastructure.SignUp;
 

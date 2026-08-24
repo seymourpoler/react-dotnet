@@ -7,7 +7,7 @@ namespace Tecnyfarma.Server.User.Infrastructure.SignIn;
 [ApiController]
 public class SignInController(SignInUseCase useCase) : ControllerBase
 {
-    [HttpPost("/api/v0/signin")]
+    [HttpPost("/api/v0/user/signin")]
     public async Task<IActionResult> SignIn(SignInRequest request)
     {
         var args = new UseCaseArgs(request.Email, request.Password);
