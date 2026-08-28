@@ -5,6 +5,5 @@
   </Project>
   <Project Path="src/Tecnyfarma.Server.User/Tecnyfarma.Server.User.csproj" />
   <Project Path="src/Tecnyfarma.Server/Tecnyfarma.Server.csproj" />
-  <Project Path="test/Tecnyfarma.Server.Test/Tecnyfarma.Server.Test.csproj" />
   <Project Path="test/Tecnyfarma.Server.User.test/Tecnyfarma.Server.User.test.csproj" />
 </Solution>

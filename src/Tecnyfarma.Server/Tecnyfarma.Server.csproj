@@ -13,6 +13,7 @@
     <ProjectReference Include="..\tecnyfarma.client\tecnyfarma.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\Tecnyfarma.Server.User\Tecnyfarma.Server.User.csproj" />
   </ItemGroup>
 
   <ItemGroup>
