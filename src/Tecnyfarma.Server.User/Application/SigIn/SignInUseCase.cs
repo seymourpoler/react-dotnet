@@ -5,7 +5,7 @@ namespace Tecnyfarma.Server.User.Application.SigIn;
 
 public class SignInUseCase(UserRepository repository)
 {
-    public async Task<Either<Error, Unit>> Execute(UseCaseArgs args)
+    public virtual async Task<Either<Error, Unit>> Execute(UseCaseArgs args)
     {
         var result = await (
             from email in Email.Create(args.Email).ToAsync()
