@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Tecnyfarma.Server.User.Infrastructure;
 using Tecnyfarma.Server.User.Infrastructure.DataBase;
 
@@ -26,7 +27,7 @@ public class Program
         using (var scope = app.Services.CreateScope())
         {
             var usersDb = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
-            //usersDb.Database.Migrate();
+            usersDb.Database.Migrate();
         }
         
         app.Run();
