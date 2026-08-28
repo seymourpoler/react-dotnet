@@ -2,20 +2,20 @@ using LanguageExt;
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application;
-using Tecnyfarma.Server.User.Application.SigIn;
+using Tecnyfarma.Server.User.Application.SignIn;
 using Tecnyfarma.Server.User.Domain;
 
 namespace Tecnyfarma.Server.User.test.Application.SignIn;
 
-public class SignInUseCaseShould
+public class UseCaseShould
 {
     private readonly UserRepository repository;
-    private readonly SignInUseCase useCase;
+    private readonly UseCase useCase;
 
-    public SignInUseCaseShould()
+    public UseCaseShould()
     {
         repository =  Substitute.For<UserRepository>();
-        useCase = new SignInUseCase(repository);
+        useCase = new UseCase(repository);
     }
     
     [Theory]
@@ -25,7 +25,7 @@ public class SignInUseCaseShould
     [InlineData("invalid-email")]
     public async Task ReturnErrorWhenEmailIsInvalid(string email)
     {
-        var args = new UseCaseArgs(email, "validpassword");
+        var args = new Args(email, "validpassword");
 
         var result = await useCase.Execute(args);
 
@@ -42,7 +42,7 @@ public class SignInUseCaseShould
     [InlineData("123")]
     public async Task ReturnErrorWhenPasswordIsInvalid(string password)
     {
-        var args = new UseCaseArgs("user@example.com", password);
+        var args = new Args("user@example.com", password);
 
         var result = await useCase.Execute(args);
 
@@ -55,7 +55,7 @@ public class SignInUseCaseShould
     [Fact]
     public async Task ReturnErrorWhenUserNotFound()
     {
-        var args = new UseCaseArgs("user@example.com", "validpassword");
+        var args = new Args("user@example.com", "validpassword");
         repository.FindAsync(Arg.Any<Email>())
             .Returns(new Error("User not found"));
 
@@ -74,7 +74,7 @@ public class SignInUseCaseShould
         var password = Password.Create("a-password").Match(Right: x => x, Left: _ => throw new Exception());
         var storedUser = new Server.User.Domain.User(email, password);
         repository.FindAsync(Arg.Any<Email>()).Returns(storedUser);
-        var args = new UseCaseArgs("user@example.com", "wrongpassword!");
+        var args = new Args("user@example.com", "wrongpassword!");
 
         var result = await useCase.Execute(args);
 
@@ -94,7 +94,7 @@ public class SignInUseCaseShould
         repository.FindAsync(Arg.Any<Email>())
             .Returns(Task.FromResult<Either<Error, Server.User.Domain.User>>(storedUser));
 
-        var args = new UseCaseArgs("user@example.com", "a-password");
+        var args = new Args("user@example.com", "a-password");
 
         var result = await useCase.Execute(args);
 

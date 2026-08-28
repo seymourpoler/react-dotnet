@@ -6,15 +6,15 @@ using Tecnyfarma.Server.User.Application.SignUp;
 
 namespace Tecnyfarma.Server.User.test.Application.SignUp;
 
-public class SignUpUseCaseShould
+public class UseCaseShould
 {
     private readonly UserRepository repository;
-    private readonly SignUpUseCase useCase;
+    private readonly UseCase useCase;
 
-    public SignUpUseCaseShould()
+    public UseCaseShould()
     {
         repository = Substitute.For<UserRepository>();
-        useCase = new SignUpUseCase(repository);
+        useCase = new UseCase(repository);
     }
     
     [Theory]
@@ -24,7 +24,7 @@ public class SignUpUseCaseShould
     [InlineData("invalid-email")]
     public async Task ReturnErrorWhenEmailIsInvalid(string email)
     {
-        var args = new UseCaseArgs(email, "a-password");
+        var args = new Args(email, "a-password");
         
         var result = await useCase.Execute(args);
 
@@ -41,7 +41,7 @@ public class SignUpUseCaseShould
     [InlineData("123")]
     public async Task ReturnErrorWhenPasswordIsInvalid(string password)
     {
-        var args = new UseCaseArgs("user@example.com", password);
+        var args = new Args("user@example.com", password);
         
         var result = await useCase.Execute(args);
 
@@ -54,7 +54,7 @@ public class SignUpUseCaseShould
     [Fact]
     public async Task ReturnErrorWhenRepositoryFails()
     {
-        var args = new UseCaseArgs("user@example.com", "validpassword");
+        var args = new Args("user@example.com", "validpassword");
         repository.SaveAsync(Arg.Any<Server.User.Domain.User>())
             .Returns(new Error("User already exists"));
 
@@ -69,7 +69,7 @@ public class SignUpUseCaseShould
     [Fact]
     public async Task ReturnSuccessWhenRegistrationIsValid()
     {
-        var args = new UseCaseArgs("user@example.com", "valid-password");
+        var args = new Args("user@example.com", "valid-password");
         repository.SaveAsync(Arg.Is<Server.User.Domain.User>(x => x.Email.Value == "user@example.com"))
             .Returns(Unit.Default);
 
