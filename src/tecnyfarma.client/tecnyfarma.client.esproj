@@ -9,9 +9,6 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="objDebug\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="objDebug\package.g.props" />
   </ItemGroup>
 </Project>
