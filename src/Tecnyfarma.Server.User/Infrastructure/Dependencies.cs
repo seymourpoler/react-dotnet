@@ -8,7 +8,7 @@ public static class Dependencies
     public static void AddUserDependencies(this IServiceCollection services)
     {
         services.AddScoped<UserRepository, SqlUserRepository>();
-        services.AddScoped<Application.SignUp.UseCase>();
-        services.AddScoped<Application.SignIn.UseCase>();
+        services.AddScoped<Application.Register.UseCase>();
+        services.AddScoped<Application.LogIn.UseCase>();
     }
 }

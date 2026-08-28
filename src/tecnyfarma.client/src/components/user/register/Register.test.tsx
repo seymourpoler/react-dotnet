@@ -67,7 +67,7 @@ describe('Register', () => {
         fireEvent.click(screen.getByRole('button', { name: /register/i }));
         
         await waitFor(() => expect(fetch).toHaveBeenCalledOnce());
-        expect(fetch).toHaveBeenCalledWith('/api/v0/register', {
+        expect(fetch).toHaveBeenCalledWith('/api/v0/users/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: 'user@example.com', password: 'pass456' }),

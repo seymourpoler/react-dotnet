@@ -3,30 +3,31 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application;
-using Tecnyfarma.Server.User.Application.SignIn;
-using Tecnyfarma.Server.User.Infrastructure.SignIn;
-using Controller = Tecnyfarma.Server.User.Infrastructure.SignIn.Controller;
+using Tecnyfarma.Server.User.Application.Register;
+using Tecnyfarma.Server.User.Domain;
+using Tecnyfarma.Server.User.Infrastructure.Register;
+using Controller = Tecnyfarma.Server.User.Infrastructure.Register.Controller;
 
-namespace Tecnyfarma.Server.User.test.Infrastructure.SignIn;
+namespace Tecnyfarma.Server.User.test.Infrastructure.SignUp;
 
 public class ControllerShould
 {
     private readonly UseCase useCase;
     private readonly Controller controller;
 
-    public ControllerShould()
-    {
+    public ControllerShould(){
         useCase = Substitute.For<UseCase>(Substitute.For<UserRepository>());
         controller = new Controller(useCase);
     }
-    
+
+
     [Fact]
-    public async Task ReturnOkWhenLoginSucceeds()
+    public async Task ReturnOkWhenRegistrationSucceeds()
     {
-        useCase.Execute(Arg.Any<Args>()).Returns(Unit.Default);
+        useCase.Execute(Arg.Any<Args>()).Returns(Task.FromResult<Either<Error, Unit>>(Unit.Default));
         var request = new Request { Email = "user@example.com", Password = "secret123" };
 
-        var result = await controller.SignIn(request);
+        var result = await controller.SignUp(request);
         
         result.ShouldBeOfType<OkResult>();
     }
@@ -34,10 +35,10 @@ public class ControllerShould
     [Fact]
     public async Task ReturnBadRequestWhenRegistrationFails()
     {
-        useCase.Execute(Arg.Any<Args>()).Returns(new Error("error message"));
+        useCase.Execute(Arg.Any<Args>()).Returns(Task.FromResult<Either<Error, Unit>>(new Error("error message")));
         var request = new Request { Email = "user@example.com", Password = "secret123" };
 
-        var result = await controller.SignIn(request);
+        var result = await controller.SignUp(request);
 
         result.ShouldBeOfType<BadRequestObjectResult>();
         var badRequestResult = result as BadRequestObjectResult;

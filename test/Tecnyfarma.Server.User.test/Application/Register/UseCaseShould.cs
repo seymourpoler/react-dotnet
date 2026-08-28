@@ -2,9 +2,10 @@ using LanguageExt;
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application;
-using Tecnyfarma.Server.User.Application.SignUp;
+using Tecnyfarma.Server.User.Application.Register;
+using Tecnyfarma.Server.User.Domain;
 
-namespace Tecnyfarma.Server.User.test.Application.SignUp;
+namespace Tecnyfarma.Server.User.test.Application.Register;
 
 public class UseCaseShould
 {

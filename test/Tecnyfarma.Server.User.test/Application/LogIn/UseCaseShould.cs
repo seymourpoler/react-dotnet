@@ -2,10 +2,10 @@ using LanguageExt;
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application;
-using Tecnyfarma.Server.User.Application.SignIn;
+using Tecnyfarma.Server.User.Application.LogIn;
 using Tecnyfarma.Server.User.Domain;
 
-namespace Tecnyfarma.Server.User.test.Application.SignIn;
+namespace Tecnyfarma.Server.User.test.Application.LogIn;
 
 public class UseCaseShould
 {

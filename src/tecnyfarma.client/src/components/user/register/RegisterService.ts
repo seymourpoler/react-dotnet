@@ -4,7 +4,7 @@
     };
 
 export async function register(request: userRegisterRequest) : Promise<Response> {
-    const url = '/api/v0/users/signup';
+    const url = '/api/v0/users/register';
     
     return await fetch(url, {
         method: 'POST',

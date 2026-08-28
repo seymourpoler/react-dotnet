@@ -4,7 +4,7 @@
 };
 
 export async function login(request: UserLoginRequest) : Promise<Response> {
-    const url = '/api/v0/users/signin';
+    const url = '/api/v0/users/login';
     
     return fetch(url, {  
         method: 'POST',
