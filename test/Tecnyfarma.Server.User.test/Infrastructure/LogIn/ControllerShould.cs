@@ -8,7 +8,7 @@ using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.LogIn;
 using Controller = Tecnyfarma.Server.User.Infrastructure.LogIn.Controller;
 
-namespace Tecnyfarma.Server.User.test.Infrastructure.SignIn;
+namespace Tecnyfarma.Server.User.test.Infrastructure.LogIn;
 
 public class ControllerShould
 {
@@ -27,7 +27,7 @@ public class ControllerShould
         useCase.Execute(Arg.Any<Args>()).Returns(Unit.Default);
         var request = new Request { Email = "user@example.com", Password = "secret123" };
 
-        var result = await controller.SignIn(request);
+        var result = await controller.LogIn(request);
         
         result.ShouldBeOfType<OkResult>();
     }
@@ -38,7 +38,7 @@ public class ControllerShould
         useCase.Execute(Arg.Any<Args>()).Returns(new Error("error message"));
         var request = new Request { Email = "user@example.com", Password = "secret123" };
 
-        var result = await controller.SignIn(request);
+        var result = await controller.LogIn(request);
 
         result.ShouldBeOfType<BadRequestObjectResult>();
         var badRequestResult = result as BadRequestObjectResult;

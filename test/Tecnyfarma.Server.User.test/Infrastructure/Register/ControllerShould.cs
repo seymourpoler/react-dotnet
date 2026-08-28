@@ -8,7 +8,7 @@ using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.Register;
 using Controller = Tecnyfarma.Server.User.Infrastructure.Register.Controller;
 
-namespace Tecnyfarma.Server.User.test.Infrastructure.SignUp;
+namespace Tecnyfarma.Server.User.test.Infrastructure.Register;
 
 public class ControllerShould
 {
@@ -27,7 +27,7 @@ public class ControllerShould
         useCase.Execute(Arg.Any<Args>()).Returns(Task.FromResult<Either<Error, Unit>>(Unit.Default));
         var request = new Request { Email = "user@example.com", Password = "secret123" };
 
-        var result = await controller.SignUp(request);
+        var result = await controller.Register(request);
         
         result.ShouldBeOfType<OkResult>();
     }
@@ -38,7 +38,7 @@ public class ControllerShould
         useCase.Execute(Arg.Any<Args>()).Returns(Task.FromResult<Either<Error, Unit>>(new Error("error message")));
         var request = new Request { Email = "user@example.com", Password = "secret123" };
 
-        var result = await controller.SignUp(request);
+        var result = await controller.Register(request);
 
         result.ShouldBeOfType<BadRequestObjectResult>();
         var badRequestResult = result as BadRequestObjectResult;
