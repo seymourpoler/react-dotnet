@@ -1,4 +1,6 @@
 using Tecnyfarma.Server.User.Infrastructure;
+using Tecnyfarma.Server.User.Infrastructure.DataBase;
+
 namespace Tecnyfarma.Server;
 
 public class Program
@@ -9,7 +11,7 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllers();
-        builder.Services.AddUserDependencies();
+        builder.Services.AddUserDependencies(builder.Configuration);
 
         var app = builder.Build();
         app.UseDefaultFiles();
@@ -21,6 +23,12 @@ public class Program
         app.MapControllers();
         app.MapFallbackToFile("/index.html");
 
+        using (var scope = app.Services.CreateScope())
+        {
+            var usersDb = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
+            //usersDb.Database.Migrate();
+        }
+        
         app.Run();
     }
 }
