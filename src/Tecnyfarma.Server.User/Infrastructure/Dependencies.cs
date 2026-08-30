@@ -16,5 +16,6 @@ public static class Dependencies
         services.AddScoped<SaveUserRepository, SqliteUserRepository>();
         services.AddScoped<FindUserRepository, SqliteUserRepository>();
         services.AddScoped<Application.LogIn.UseCase>();
+        services.AddScoped<Application.Register.UseCase>();
     }
 }
