@@ -12,7 +12,7 @@ public static class Dependencies
     {
         var connectionString = configuration.GetConnectionString("UsersDatabase") ?? "Data Source=users.db";
         services.AddDbContext<UsersDbContext>(options => options.UseSqlite(connectionString));
-        services.AddScoped<UserRepository, SqlUserRepository>();
+        services.AddScoped<UserRepository, SqliteUserRepository>();
         services.AddScoped<Application.Register.UseCase>();
         services.AddScoped<Application.LogIn.UseCase>();
     }
