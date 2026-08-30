@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { ContactUs } from './components/ContactUs';
 import { Weather } from './components/weather/Weather';
 import { Register } from './components/user/register/Register';
+import { Login } from './components/user/login/Login';
 
 export function App() {
     return (
@@ -15,6 +16,7 @@ export function App() {
                 <Link to="/contact">Contact</Link> |{' '}
                 <Link to="/weather">Weather</Link> |{' '}
                 <Link to="/register">Register</Link> |{' '}
+                <Link to="/login">Login</Link> |{' '}
             </nav>
 
             <Routes>
@@ -23,6 +25,7 @@ export function App() {
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/weather" element={<Weather />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </BrowserRouter>
     );
