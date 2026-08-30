@@ -1,4 +1,5 @@
 ﻿namespace Tecnyfarma.Server.User.Domain;
+
 public class User
 {
     public Guid Id { get; private set; }
@@ -15,7 +16,7 @@ public class User
         CreatedAtUtc = DateTime.UtcNow;
         Type = Type.Freemium;
     }
-
+    
     public bool IsEqualTo(User other)
     {
         return  Email.IsEqualTo(other.Email) && Password.IsEqualTo(other.Password);
