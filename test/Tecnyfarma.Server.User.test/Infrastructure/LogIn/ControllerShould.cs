@@ -1,4 +1,6 @@
 using LanguageExt;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
@@ -18,6 +20,12 @@ public class ControllerShould
     {
         useCase = Substitute.For<UseCase>(Substitute.For<FindUserRepository>());
         controller = new Controller(useCase);
+        var httpContext = Substitute.For<HttpContext>();
+        var serviceProvider = Substitute.For<IServiceProvider>();
+        var authenticationService = Substitute.For<IAuthenticationService>();
+        serviceProvider.GetService(typeof(IAuthenticationService)).Returns(authenticationService);
+        httpContext.RequestServices.Returns(serviceProvider);
+        controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
     }
     
     [Fact]
