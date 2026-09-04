@@ -6,6 +6,7 @@ import { ContactUs } from './components/ContactUs';
 import { Weather } from './components/weather/Weather';
 import { Register } from './components/user/register/Register';
 import { Login } from './components/user/login/Login';
+import {Logout} from "./components/user/logout/Logout.tsx";
 
 export function App() {
     return (
@@ -17,6 +18,7 @@ export function App() {
                 <Link to="/weather">Weather</Link> |{' '}
                 <Link to="/register">Register</Link> |{' '}
                 <Link to="/login">Login</Link> |{' '}
+                <Link to="/logout">Logout</Link> |{' '}
             </nav>
 
             <Routes>
@@ -26,6 +28,7 @@ export function App() {
                 <Route path="/weather" element={<Weather />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/logout" element={<Logout />} />
             </Routes>
         </BrowserRouter>
     );
