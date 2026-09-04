@@ -26,7 +26,7 @@ export function Logout(){
     return (
         <div style={{ marginBottom: 24 }}>
             <h2>Are you sure?</h2>
-            <button type="button" onClick={handleLogout} disabled={loading}>Login</button>
+            <button type="button" onClick={handleLogout} disabled={loading}>Logout</button>
             {message && <div style={{ marginTop: 8 }}>{message}</div>}
         </div>
     );
