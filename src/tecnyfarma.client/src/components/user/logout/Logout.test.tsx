@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { Logout } from './Logout';
 import * as LogoutService from './LogoutService';
 
@@ -29,7 +29,9 @@ describe('Logout', () => {
         mockedLogout.mockResolvedValue(mockResponse(true));
 
         render(<Logout />);
-        fireEvent.click(screen.getByRole('button'));
+        await act(async () => {
+            fireEvent.click(screen.getByRole('button'));
+        });
 
         await waitFor(() => {
             expect(screen.getByText('Logout successful!')).toBeInTheDocument();
@@ -40,7 +42,9 @@ describe('Logout', () => {
         mockedLogout.mockResolvedValue(mockResponse(false, 'Unauthorized'));
 
         render(<Logout />);
-        fireEvent.click(screen.getByRole('button'));
+        await act(async () => {
+            fireEvent.click(screen.getByRole('button'));
+        });
 
         await waitFor(() => {
             expect(screen.getByText('Logout failed: Unauthorized')).toBeInTheDocument();
@@ -51,7 +55,9 @@ describe('Logout', () => {
         mockedLogout.mockRejectedValue(new Error('Network error'));
 
         render(<Logout />);
-        fireEvent.click(screen.getByRole('button'));
+        await act(async () => {
+            fireEvent.click(screen.getByRole('button'));
+        });
 
         await waitFor(() => {
             expect(screen.getByText('Logout failed: Network error')).toBeInTheDocument();
@@ -67,10 +73,14 @@ describe('Logout', () => {
         render(<Logout />);
         const button = screen.getByRole('button');
 
-        fireEvent.click(button);
+        await act(async () => {
+            fireEvent.click(button);
+        });
         expect(button).toBeDisabled();
 
-        resolveLogout(mockResponse(true));
+        await act(async () => {
+            resolveLogout(mockResponse(true));
+        });
         await waitFor(() => {
             expect(button).not.toBeDisabled();
         });
@@ -80,7 +90,9 @@ describe('Logout', () => {
         mockedLogout.mockResolvedValue(mockResponse(true));
 
         render(<Logout />);
-        fireEvent.click(screen.getByRole('button'));
+        await act(async () => {
+            fireEvent.click(screen.getByRole('button'));
+        });
 
         expect(mockedLogout).toHaveBeenCalledTimes(1);
     });
