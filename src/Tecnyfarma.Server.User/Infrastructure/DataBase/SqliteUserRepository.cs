@@ -37,7 +37,7 @@ public class SqliteUserRepository(UsersDbContext dbContext) : FindUserRepository
     {
         return await (
             from email in Email.Create(user.Email).ToAsync()
-            from password in Password.Create(user.Password).ToAsync()
+            from password in Password.CreateWithEncryptedValue(user.Password).ToAsync()
             select new Domain.User(email, password)
         );
     }

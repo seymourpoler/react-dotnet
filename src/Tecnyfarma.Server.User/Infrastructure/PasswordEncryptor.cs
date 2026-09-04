@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
-
 namespace Tecnyfarma.Server.User.Infrastructure;
 
 public static class PasswordEncryptor
@@ -9,11 +8,11 @@ public static class PasswordEncryptor
     {
         return Convert.ToBase64String(
             KeyDerivation.Pbkdf2(
-                password: password!,
+                password: password,
                 salt: Array.Empty<byte>(),
                 prf: KeyDerivationPrf.HMACSHA256,
                 iterationCount: 100000,
-                numBytesRequested: 256 / 8)
+                numBytesRequested: 32)
         );
     } 
 }

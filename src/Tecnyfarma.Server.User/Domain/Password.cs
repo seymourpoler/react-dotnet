@@ -9,7 +9,7 @@ public class Password
         
     private Password(string value)
     {
-        Value = PasswordEncryptor.Encrypt(value);
+        Value = value;
     }
     
     public static Either<Error, Password> Create(string password)
@@ -19,9 +19,15 @@ public class Password
             return new Error("Password must be at least 6 characters long");
         }
         
-        return new Password(password);
+        var encryptedPassword = PasswordEncryptor.Encrypt(password);
+        return new Password(encryptedPassword);
     }
 
+    public static Either<Error, Password> CreateWithEncryptedValue(string value)
+    {
+        return new Password(value);
+    }
+    
     public bool IsEqualTo(Password other)
     {
         return  Value.Equals(other.Value, StringComparison.InvariantCultureIgnoreCase);
