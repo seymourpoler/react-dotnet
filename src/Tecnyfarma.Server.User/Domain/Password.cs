@@ -1,5 +1,4 @@
-﻿using System;
-using LanguageExt;
+﻿using LanguageExt;
 using Tecnyfarma.Server.User.Infrastructure;
 
 namespace Tecnyfarma.Server.User.Domain;
