@@ -11,6 +11,7 @@ describe('App', () => {
     expect(screen.getByRole('link', { name: /Weather/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Register/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Login/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Logout/i })).toBeInTheDocument();
   });
 
   it('renders Home page by default at /', () => {
