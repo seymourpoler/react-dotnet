@@ -1,6 +1,11 @@
-﻿import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+﻿import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { Weather } from './Weather';
+import * as WeatherService from './WeatherService';
+
+vi.mock('./WeatherService');
+
+const mockedPopulateWeather = vi.mocked(WeatherService.populateWeather);
 
 const forecasts = [
 	{
@@ -18,28 +23,19 @@ const forecasts = [
 ];
 
 describe('Weather', () => {
-	let fetch: ReturnType<typeof vi.spyOn>;
-
 	beforeEach(() => {
-		fetch = vi
-			.spyOn(global, 'fetch')
-			.mockResolvedValue({
-				ok: true,
-				json: async () => forecasts,
-			} as any);
-	});
-
-	afterEach(() => {
-		fetch.mockRestore();
-		vi.resetAllMocks();
+		vi.clearAllMocks();
 	});
 
 	it('renders loading state initially', () => {
+		mockedPopulateWeather.mockReturnValue(new Promise(() => {}));
 		render(<Weather />);
 		expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
 	});
 
 	it('renders weather table after data loads', async () => {
+		mockedPopulateWeather.mockResolvedValue(forecasts);
+
 		render(<Weather />);
 		await waitFor(() => expect(screen.getByText('Sunny')).toBeInTheDocument());
 		expect(screen.getByText('Cloudy')).toBeInTheDocument();
