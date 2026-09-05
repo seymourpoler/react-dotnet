@@ -3,7 +3,9 @@
     <BuildType Project="Debug" />
     <Build />
   </Project>
+  <Project Path="src/Tecnyfarma.Server.Product/Tecnyfarma.Server.Product.csproj" />
   <Project Path="src/Tecnyfarma.Server.User/Tecnyfarma.Server.User.csproj" />
   <Project Path="src/Tecnyfarma.Server/Tecnyfarma.Server.csproj" />
+  <Project Path="test/Tecnyfarma.Server.Product.Test/Tecnyfarma.Server.Product.Test.csproj" />
   <Project Path="test/Tecnyfarma.Server.User.test/Tecnyfarma.Server.User.test.csproj" />
 </Solution>

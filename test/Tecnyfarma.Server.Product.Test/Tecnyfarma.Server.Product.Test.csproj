@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Tecnyfarma.Server.User\Tecnyfarma.Server.User.csproj" />
+      <Folder Include="Infrastructure\" />
     </ItemGroup>
-
+    
 </Project>

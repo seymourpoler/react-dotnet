@@ -6,6 +6,7 @@ using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.Register;
 using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.Register;
+using Xunit;
 using Controller = Tecnyfarma.Server.User.Infrastructure.Register.Controller;
 
 namespace Tecnyfarma.Server.User.test.Infrastructure.Register;

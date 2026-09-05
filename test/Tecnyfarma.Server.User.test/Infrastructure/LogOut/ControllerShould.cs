@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
+using Xunit;
 
 namespace Tecnyfarma.Server.User.test.Infrastructure.LogOut;
 

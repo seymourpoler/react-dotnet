@@ -8,6 +8,7 @@ using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.LogIn;
 using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.LogIn;
+using Xunit;
 using Controller = Tecnyfarma.Server.User.Infrastructure.LogIn.Controller;
 
 namespace Tecnyfarma.Server.User.test.Infrastructure.LogIn;

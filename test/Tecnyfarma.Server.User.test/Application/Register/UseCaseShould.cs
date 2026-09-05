@@ -4,6 +4,7 @@ using Shouldly;
 using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.Register;
 using Tecnyfarma.Server.User.Domain;
+using Xunit;
 
 namespace Tecnyfarma.Server.User.test.Application.Register;
 
