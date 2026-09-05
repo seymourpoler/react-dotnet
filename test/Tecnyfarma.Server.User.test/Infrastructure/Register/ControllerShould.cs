@@ -15,7 +15,7 @@ public class ControllerShould
     private readonly Controller controller;
 
     public ControllerShould(){
-        useCase = Substitute.For<UseCase>(Substitute.For<SaveUserRepository>());
+        useCase = Substitute.For<UseCase>(Substitute.For<SaveUserRepository>(), Substitute.For<Server.User.Application.LogIn.FindUserRepository>());
         controller = new Controller(useCase);
     }
 

@@ -9,12 +9,16 @@ namespace Tecnyfarma.Server.User.test.Application.Register;
 public class UseCaseShould
 {
     private readonly SaveUserRepository repository;
+    private readonly Server.User.Application.LogIn.FindUserRepository findUserRepository;
     private readonly UseCase useCase;
 
     public UseCaseShould()
     {
         repository = Substitute.For<SaveUserRepository>();
-        useCase = new UseCase(repository);
+        findUserRepository = Substitute.For<Server.User.Application.LogIn.FindUserRepository>();
+        findUserRepository.FindAsync(Arg.Any<Email>())
+            .Returns(new Error("User not found"));
+        useCase = new UseCase(repository, findUserRepository);
     }
     
     [Theory]
@@ -66,6 +70,25 @@ public class UseCaseShould
         );
     }
     
+    [Fact]
+    public async Task ReturnErrorWhenUserIsAlreadyRegistered()
+    {
+        var email = Email.Create("user@example.com").Match(Right: x => x, Left: _ => throw new Exception());
+        var password = Password.Create("valid-password").Match(Right: x => x, Left: _ => throw new Exception());
+        findUserRepository.FindAsync(Arg.Any<Email>())
+            .Returns(new Server.User.Domain.User(email, password));
+
+        var args = new Args("user@example.com", "valid-password");
+
+        var result = await useCase.Execute(args);
+
+        result.Match(
+            _ => Assert.Fail("Expected an error but got a success result"),
+            error => error.Message.ShouldBe("User already registered")
+        );
+        await repository.DidNotReceive().SaveAsync(Arg.Any<Server.User.Domain.User>());
+    }
+
     [Fact]
     public async Task ReturnSuccessWhenRegistrationIsValid()
     {
