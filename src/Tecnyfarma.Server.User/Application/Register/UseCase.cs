@@ -3,7 +3,7 @@ using Tecnyfarma.Server.User.Domain;
 
 namespace Tecnyfarma.Server.User.Application.Register;
 
-public class UseCase(SaveUserRepository repository, LogIn.FindUserRepository findUserRepository)
+public class UseCase(UserRepository repository)
 {
     public virtual async Task<Either<Error, Unit>> Execute(Args args)
     {
@@ -19,7 +19,7 @@ public class UseCase(SaveUserRepository repository, LogIn.FindUserRepository fin
 
     private async Task<Either<Error, Unit>> EnsureThatTheNewUserIsNotAlreadyRegistered(Email email)
     {
-        var found = await findUserRepository.FindAsync(email);
+        var found = await repository.FindAsync(email);
         return found.Match<Either<Error, Unit>>(
             _ => new Error("User already registered"),
             _ => Unit.Default

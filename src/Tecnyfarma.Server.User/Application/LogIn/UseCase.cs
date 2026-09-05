@@ -3,7 +3,7 @@ using Tecnyfarma.Server.User.Domain;
 
 namespace Tecnyfarma.Server.User.Application.LogIn;
 
-public class UseCase(FindUserRepository repository)
+public class UseCase(UserRepository repository)
 {
     public virtual async Task<Either<Error, Unit>> Execute(Args args)
     {

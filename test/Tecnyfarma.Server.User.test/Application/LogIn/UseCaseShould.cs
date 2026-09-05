@@ -1,6 +1,7 @@
 using LanguageExt;
 using NSubstitute;
 using Shouldly;
+using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.LogIn;
 using Tecnyfarma.Server.User.Domain;
 
@@ -8,12 +9,12 @@ namespace Tecnyfarma.Server.User.test.Application.LogIn;
 
 public class UseCaseShould
 {
-    private readonly FindUserRepository repository;
+    private readonly UserRepository repository;
     private readonly UseCase useCase;
 
     public UseCaseShould()
     {
-        repository =  Substitute.For<FindUserRepository>();
+        repository =  Substitute.For<UserRepository>();
         useCase = new UseCase(repository);
     }
     

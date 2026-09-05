@@ -2,6 +2,7 @@ using LanguageExt;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
+using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.Register;
 using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.Register;
@@ -15,7 +16,7 @@ public class ControllerShould
     private readonly Controller controller;
 
     public ControllerShould(){
-        useCase = Substitute.For<UseCase>(Substitute.For<SaveUserRepository>(), Substitute.For<Server.User.Application.LogIn.FindUserRepository>());
+        useCase = Substitute.For<UseCase>(Substitute.For<UserRepository>());
         controller = new Controller(useCase);
     }
 

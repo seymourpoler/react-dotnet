@@ -1,12 +1,11 @@
 ﻿using LanguageExt;
 using Microsoft.EntityFrameworkCore;
-using Tecnyfarma.Server.User.Application.LogIn;
-using Tecnyfarma.Server.User.Application.Register;
+using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Domain;
 
 namespace Tecnyfarma.Server.User.Infrastructure.DataBase;
 
-public class SqliteUserRepository(UsersDbContext dbContext) : FindUserRepository, SaveUserRepository
+public class SqliteUserRepository(UsersDbContext dbContext) : UserRepository
 {
     public async Task<Either<Error, Unit>> SaveAsync(Domain.User user)
     {
