@@ -20,7 +20,6 @@ public class ControllerShould
         controller = new Controller(useCase);
     }
 
-
     [Fact]
     public async Task ReturnOkWhenRegistrationSucceeds()
     {
