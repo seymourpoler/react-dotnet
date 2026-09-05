@@ -4,18 +4,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
-using Controller = Tecnyfarma.Server.User.Infrastructure.LogOut.Controller;
 
 namespace Tecnyfarma.Server.User.test.Infrastructure.LogOut;
 
 public class ControllerShould
 {
-    private readonly Controller controller;
+    private readonly Tecnyfarma.Server.User.Infrastructure.LogOut.Controller controller;
     private readonly IAuthenticationService authenticationService;
 
     public ControllerShould()
     {
-        controller = new Controller();
+        controller = new Tecnyfarma.Server.User.Infrastructure.LogOut.Controller();
         var httpContext = Substitute.For<HttpContext>();
         var serviceProvider = Substitute.For<IServiceProvider>();
         authenticationService = Substitute.For<IAuthenticationService>();
