@@ -10,12 +10,12 @@ namespace Tecnyfarma.Server.User.test.Application.LogIn;
 
 public class UseCaseShould
 {
-    private readonly UserRepository repository;
+    private readonly Repository repository;
     private readonly UseCase useCase;
 
     public UseCaseShould()
     {
-        repository =  Substitute.For<UserRepository>();
+        repository =  Substitute.For<Repository>();
         useCase = new UseCase(repository);
     }
     

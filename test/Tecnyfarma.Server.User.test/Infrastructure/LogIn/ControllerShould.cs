@@ -20,7 +20,7 @@ public class ControllerShould
 
     public ControllerShould()
     {
-        useCase = Substitute.For<UseCase>(Substitute.For<UserRepository>());
+        useCase = Substitute.For<UseCase>(Substitute.For<Repository>());
         controller = new Controller(useCase);
         var httpContext = Substitute.For<HttpContext>();
         var serviceProvider = Substitute.For<IServiceProvider>();

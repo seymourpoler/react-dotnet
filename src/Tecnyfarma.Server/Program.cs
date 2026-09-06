@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Tecnyfarma.Server.Product.Infrastructure;
 using Tecnyfarma.Server.User.Infrastructure;
 using Tecnyfarma.Server.User.Infrastructure.DataBase;
+using DbContext = Tecnyfarma.Server.User.Infrastructure.DataBase.DbContext;
 
 namespace Tecnyfarma.Server;
 
@@ -22,6 +24,7 @@ public class Program
             });
         builder.Services.AddControllers();
         builder.Services.AddUserDependencies(builder.Configuration);
+        builder.Services.AddProductDependencies(builder.Configuration);
 
         var app = builder.Build();
         app.UseDefaultFiles();
@@ -36,7 +39,7 @@ public class Program
 
         using (var scope = app.Services.CreateScope())
         {
-            var usersDb = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
+            var usersDb = scope.ServiceProvider.GetRequiredService<DbContext>();
             usersDb.Database.Migrate();
         }
         

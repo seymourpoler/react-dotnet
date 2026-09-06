@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Infrastructure\" />
+      <ProjectReference Include="..\..\src\Tecnyfarma.Server.Product\Tecnyfarma.Server.Product.csproj" />
     </ItemGroup>
     
 </Project>

@@ -9,7 +9,7 @@ using Tecnyfarma.Server.User.Infrastructure.DataBase;
 
 namespace Tecnyfarma.Server.User.Infrastructure.DataBase.Migrations
 {
-    [DbContext(typeof(UsersDbContext))]
+    [DbContext(typeof(DbContext))]
     partial class UsersDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
