@@ -18,6 +18,11 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="WolverineFx" Version="6.33.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Tecnyfarma.Server.User.Message\Tecnyfarma.Server.User.Message.csproj" />
     </ItemGroup>
 
 </Project>

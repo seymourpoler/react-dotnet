@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Tecnyfarma.Server.Product.Infrastructure;
 using Tecnyfarma.Server.User.Infrastructure;
 using Tecnyfarma.Server.User.Infrastructure.DataBase;
+using Wolverine;
 using DbContext = Tecnyfarma.Server.User.Infrastructure.DataBase.DbContext;
 
 namespace Tecnyfarma.Server;
@@ -13,6 +14,13 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        using var host = Host.CreateDefaultBuilder()
+            .UseWolverine(opts =>
+            {
+                opts.MultipleHandlerBehavior = MultipleHandlerBehavior.Separated;
+            }).StartAsync();
+        
+        
         // Add services to the container.
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>

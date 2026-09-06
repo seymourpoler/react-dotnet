@@ -4,6 +4,7 @@
     <Build />
   </Project>
   <Project Path="src/Tecnyfarma.Server.Product/Tecnyfarma.Server.Product.csproj" />
+  <Project Path="src/Tecnyfarma.Server.User.Message/Tecnyfarma.Server.User.Message.csproj" />
   <Project Path="src/Tecnyfarma.Server.User/Tecnyfarma.Server.User.csproj" />
   <Project Path="src/Tecnyfarma.Server/Tecnyfarma.Server.csproj" />
   <Project Path="test/Tecnyfarma.Server.Product.Test/Tecnyfarma.Server.Product.Test.csproj" />

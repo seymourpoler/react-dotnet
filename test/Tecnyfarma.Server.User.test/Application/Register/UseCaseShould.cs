@@ -4,19 +4,22 @@ using Shouldly;
 using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.Register;
 using Tecnyfarma.Server.User.Domain;
+using Wolverine;
 using Xunit;
 
 namespace Tecnyfarma.Server.User.test.Application.Register;
 
 public class UseCaseShould
 {
+    private readonly IMessageBus bus;
     private readonly Repository repository;
     private readonly UseCase useCase;
 
     public UseCaseShould()
     {
         repository = Substitute.For<Repository>();
-        useCase = new UseCase(repository);
+        bus = Substitute.For<IMessageBus>();
+        useCase = new UseCase(repository, bus);
     }
     
     [Theory]
