@@ -16,12 +16,9 @@ public static class Dependencies
         services.AddScoped<Repository, SqliteRepository>();
         services.AddScoped<Application.LogIn.UseCase>();
         services.AddScoped<Application.Register.UseCase>();
-    }
 
-    public static void MigrateUserDatabase(this IServiceProvider services)
-    {
-        using var scope = services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+        var options = new DbContextOptionsBuilder<DbContext>().UseSqlite(connectionString).Options;
+        using var dbContext = new DbContext(options);
         dbContext.Database.Migrate();
     }
 }

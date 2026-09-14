@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Tecnyfarma.Server.Product.Application;
 using Tecnyfarma.Server.Product.Application.Product;
 using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Infrastructure.DataBase;
@@ -19,13 +18,11 @@ public static class Dependencies
         services.AddScoped<FindProductsUseCase>();
         services.AddScoped<ProductRepository, SqliteProductRepository>();
         services.AddScoped<UserRepository, SqliteUserRepository>();
-        return services;
-    }
 
-    public static void MigrateProductDatabase(this IServiceProvider services)
-    {
-        using var scope = services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+        var options = new DbContextOptionsBuilder<DbContext>().UseSqlite(connectionString).Options;
+        using var dbContext = new DbContext(options);
         dbContext.Database.Migrate();
+
+        return services;
     }
 }

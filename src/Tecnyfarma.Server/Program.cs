@@ -40,9 +40,6 @@ public class Program
         app.MapControllers();
         app.MapFallbackToFile("/index.html");
 
-        app.Services.MigrateUserDatabase();
-        app.Services.MigrateProductDatabase();
-        
         app.Run();
     }
 }
