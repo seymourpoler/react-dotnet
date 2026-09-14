@@ -4,6 +4,7 @@ using Shouldly;
 using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.Register;
 using Tecnyfarma.Server.User.Domain;
+using Tecnyfarma.Server.User.Message;
 using Wolverine;
 using Xunit;
 
@@ -91,7 +92,7 @@ public class UseCaseShould
     }
 
     [Fact]
-    public async Task ReturnSuccessWhenRegistrationIsValid()
+    public async Task RegisterAFreemiumUser()
     {
         var args = new Args("user@example.com", "valid-password");
         repository.FindAsync(Arg.Any<Email>()).Returns(new Error("User not found"));
@@ -104,5 +105,23 @@ public class UseCaseShould
             _ => Assert.True(true, "Expected an success but got an error result"),
             error => Assert.Fail($"Expected success but got error: {error.Message}")
         );
+        await bus.PublishAsync(Arg.Is<FreemiumUserCreated>(x => x.Email == "user@example.com"));
+    }
+    
+    [Fact]
+    public async Task RegisterAPremiumUser()
+    {
+        var args = new Args("user@example.com", "valid-password");
+        repository.FindAsync(Arg.Any<Email>()).Returns(new Error("User not found"));
+        repository.SaveAsync(Arg.Is<Server.User.Domain.User>(x => x.Email.Value == "user@example.com"))
+            .Returns(Unit.Default);
+
+        var result = await useCase.Execute(args);
+
+        result.Match(
+            _ => Assert.True(true, "Expected an success but got an error result"),
+            error => Assert.Fail($"Expected success but got error: {error.Message}")
+        );
+        await bus.PublishAsync(Arg.Is<PremiumUserCreated>(x => x.Email == "user@example.com"));
     }
 }
