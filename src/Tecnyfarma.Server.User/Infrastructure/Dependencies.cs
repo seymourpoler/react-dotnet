@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Tecnyfarma.Server.User.Application;
@@ -12,7 +13,9 @@ public static class Dependencies
     public static void AddUserDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("UsersDatabase") ?? "Data Source=users.db";
-        services.AddDbContext<DbContext>(options => options.UseSqlite(connectionString));
+        services.AddDbContext<DbContext>(options => options
+            .UseSqlite(connectionString)
+            .ReplaceService<IHistoryRepository, NoLockSqliteHistoryRepository>());
         services.AddScoped<Repository, SqliteRepository>();
         services.AddScoped<Application.LogIn.UseCase>();
         services.AddScoped<Application.Register.UseCase>();
