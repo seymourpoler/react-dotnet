@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
-using Tecnyfarma.Server.Product.Application;
+using Tecnyfarma.Server.Product.Application.Poduct;
 using Xunit;
 using Controller = Tecnyfarma.Server.Product.Infrastructure.Controller;
 
@@ -11,13 +11,13 @@ namespace Tecnyfarma.Server.Product.Test.Infrastructure;
 
 public class ControllerShould
 {
-    private readonly UseCase useCase;
+    private readonly FindProductsUseCase _findProductsUseCase;
     private readonly Controller controller;
 
     public ControllerShould()
     {
-        useCase = Substitute.For<UseCase>(Substitute.For<Repository>());
-        controller = new Controller(useCase);
+        _findProductsUseCase = Substitute.For<FindProductsUseCase>(null, null);
+        controller = new Controller(_findProductsUseCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
     }
@@ -25,7 +25,7 @@ public class ControllerShould
     [Fact]
     public async Task ReturnProductsWhenUserIsNotLogged()
     {
-        useCase.ExecuteAsync(Arg.Any<Args>()).Returns(Task.FromResult(new Result()));
+        _findProductsUseCase.ExecuteAsync(Arg.Any<Args>()).Returns(new List<Tecnyfarma.Server.Product.Domain.Product>());
 
         var result = await controller.FindProducts();
 
@@ -35,12 +35,12 @@ public class ControllerShould
     [Fact]
     public async Task ReturnProductsWhenUserIsLogged()
     {
-        useCase.ExecuteAsync(Arg.Any<Args>()).Returns(Task.FromResult(new Result()));
+        _findProductsUseCase.ExecuteAsync(Arg.Any<Args>()).Returns(new List<Tecnyfarma.Server.Product.Domain.Product>());
         SetLoggedUser("e@mail.com");
 
         var result = await controller.FindProducts();
 
-        await useCase.Received().ExecuteAsync(Arg.Is<Args>(args => args.Email == "e@mail.com"));
+        await _findProductsUseCase.Received().ExecuteAsync(Arg.Is<Args>(args => args.Email == "e@mail.com"));
         result.ShouldBeOfType<OkObjectResult>();
     }
 

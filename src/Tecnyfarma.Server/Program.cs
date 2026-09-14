@@ -2,9 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Tecnyfarma.Server.Product.Infrastructure;
 using Tecnyfarma.Server.User.Infrastructure;
-using Tecnyfarma.Server.User.Infrastructure.DataBase;
 using Wolverine;
-using DbContext = Tecnyfarma.Server.User.Infrastructure.DataBase.DbContext;
 
 namespace Tecnyfarma.Server;
 
@@ -13,13 +11,11 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        using var host = Host.CreateDefaultBuilder()
-            .UseWolverine(opts =>
-            {
-                opts.MultipleHandlerBehavior = MultipleHandlerBehavior.Separated;
-            }).StartAsync();
-        
+        builder.Host.UseWolverine(opts =>
+        {
+            opts.MultipleHandlerBehavior = MultipleHandlerBehavior.Separated;
+            opts.Discovery.IncludeAssembly(typeof(FreemiumUserCreatedHandler).Assembly);
+        });
         
         // Add services to the container.
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -47,8 +43,10 @@ public class Program
 
         using (var scope = app.Services.CreateScope())
         {
-            var usersDb = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var usersDb = scope.ServiceProvider.GetRequiredService<Tecnyfarma.Server.User.Infrastructure.DataBase.DbContext>();
             usersDb.Database.Migrate();
+            var productsDb = scope.ServiceProvider.GetRequiredService<Tecnyfarma.Server.Product.Infrastructure.DataBase.DbContext>();
+            productsDb.Database.Migrate();
         }
         
         app.Run();

@@ -37,6 +37,7 @@ public class UseCase(Repository repository, IMessageBus bus)
             await bus.PublishAsync(new FreemiumUserCreated
             {
                 Email = user.Email.Value,
+                CreatedAtUtc = user.CreatedAtUtc
             });
             return Either<Error, Unit>.Right(Unit.Default);
         }
@@ -44,6 +45,7 @@ public class UseCase(Repository repository, IMessageBus bus)
         await bus.PublishAsync(new PremiumUserCreated
         {
             Email = user.Email.Value,
+            CreatedAtUtc = user.CreatedAtUtc
         });
         return Either<Error, Unit>.Right(Unit.Default);
     }

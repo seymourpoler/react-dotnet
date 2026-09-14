@@ -1,7 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tecnyfarma.Server.Product.Application;
+using Tecnyfarma.Server.Product.Application.Poduct;
+using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Infrastructure.DataBase;
+using DbContext = Tecnyfarma.Server.Product.Infrastructure.DataBase.DbContext;
 
 namespace Tecnyfarma.Server.Product.Infrastructure;
 
@@ -10,10 +14,11 @@ public static class Dependencies
     public static IServiceCollection AddProductDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("ProductsDatabase") ?? "Data Source=products.db";
-        // services.AddDbContext<ProductsDbContext>(options => options.UseSqlite(connectionString));
+        services.AddDbContext<DbContext>(options => options.UseSqlite(connectionString));
         
-        services.AddScoped<UseCase>();
-        services.AddScoped<Repository, SqliteRepository>();
+        services.AddScoped<FindProductsUseCase>();
+        services.AddScoped<ProductRepository, SqliteProductRepository>();
+        services.AddScoped<UserRepository, SqliteUserRepository>();
         return services;
     }
 }

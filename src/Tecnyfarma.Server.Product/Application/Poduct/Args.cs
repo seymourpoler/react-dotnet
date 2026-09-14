@@ -1,4 +1,4 @@
-﻿namespace Tecnyfarma.Server.Product.Application;
+﻿namespace Tecnyfarma.Server.Product.Application.Poduct;
 
 public class Args
 {

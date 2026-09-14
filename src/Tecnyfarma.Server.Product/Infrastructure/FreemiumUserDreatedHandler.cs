@@ -1,11 +1,12 @@
-﻿using Tecnyfarma.Server.User.Message;
+﻿using Tecnyfarma.Server.Product.Application.User;
+using Tecnyfarma.Server.User.Message;
 
 namespace Tecnyfarma.Server.Product.Infrastructure;
 
-public class FreemiumUserCreatedHandler
+public class FreemiumUserCreatedHandler(CreateUserUseCase createUserUseCase)
 {
-    public Task Handle(FreemiumUserCreated freemiumUserCreated)
+    public async Task Handle(FreemiumUserCreated userCreated)
     {
-        throw new NotImplementedException();
+        await createUserUseCase.ExecuteAsync(userCreated.Email, Domain.UserType.Freemium);
     }
 }

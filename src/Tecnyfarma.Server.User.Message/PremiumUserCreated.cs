@@ -3,4 +3,5 @@
 public class PremiumUserCreated
 {
     public string Email { get; set; }
+    public DateTime CreatedAtUtc { get;  set; }
 }
