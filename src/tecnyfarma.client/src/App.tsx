@@ -16,6 +16,7 @@ export function App() {
                 <Link to="/about">About</Link> |{' '}
                 <Link to="/contact">Contact</Link> |{' '}
                 <Link to="/weather">Weather</Link> |{' '}
+                <Link to="/products">Products</Link> |{' '}
                 <Link to="/register">Register</Link> |{' '}
                 <Link to="/login">Login</Link> |{' '}
                 <Link to="/logout">Logout</Link> |{' '}
