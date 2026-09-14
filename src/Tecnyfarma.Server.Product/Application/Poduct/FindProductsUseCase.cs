@@ -5,7 +5,7 @@ namespace Tecnyfarma.Server.Product.Application.Poduct;
 
 public class FindProductsUseCase(UserRepository userRepository, ProductRepository productRepository)
 {
-    public virtual async Task<Either<Tecnyfarma.Server.Product.Domain.Error, List<Domain.Product>>> ExecuteAsync(Args args)
+    public virtual async Task<Either<Domain.Error, List<Domain.Product>>> ExecuteAsync(Args args)
     {
         return await (
             from user in userRepository.FindUserAsync(args.Email).ToAsync()
