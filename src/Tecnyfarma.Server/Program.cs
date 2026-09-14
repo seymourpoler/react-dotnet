@@ -14,7 +14,7 @@ public class Program
         builder.Host.UseWolverine(opts =>
         {
             opts.MultipleHandlerBehavior = MultipleHandlerBehavior.Separated;
-            opts.Discovery.IncludeAssembly(typeof(FreemiumUserCreatedHandler).Assembly);
+            opts.Discovery.IncludeAssembly(typeof(Tecnyfarma.Server.Product.Infrastructure.Dependencies).Assembly);
         });
         
         // Add services to the container.
