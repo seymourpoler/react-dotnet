@@ -2,11 +2,9 @@ using LanguageExt;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
-using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.Register;
 using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.Register;
-using Wolverine;
 using Xunit;
 using Controller = Tecnyfarma.Server.User.Infrastructure.Register.Controller;
 
@@ -18,7 +16,7 @@ public class ControllerShould
     private readonly Controller controller;
 
     public ControllerShould(){
-        useCase = Substitute.For<UseCase>(Substitute.For<Repository>(), Substitute.For<IMessageBus>());
+        useCase = Substitute.For<UseCase>(null, null);
         controller = new Controller(useCase);
     }
 
@@ -43,6 +41,7 @@ public class ControllerShould
 
         result.ShouldBeOfType<BadRequestObjectResult>();
         var badRequestResult = result as BadRequestObjectResult;
-        badRequestResult!.Value.ShouldBe("error message");
+        badRequestResult.ShouldNotBeNull();
+        badRequestResult.Value.ShouldBe("error message");
     }
 }
