@@ -16,6 +16,7 @@ public static class Dependencies
         services.AddDbContext<DbContext>(options => options.UseSqlite(connectionString));
         
         services.AddScoped<FindProductsUseCase>();
+        services.AddScoped<CreateUserUseCase>();
         services.AddScoped<ProductRepository, SqliteProductRepository>();
         services.AddScoped<UserRepository, SqliteUserRepository>();
 
