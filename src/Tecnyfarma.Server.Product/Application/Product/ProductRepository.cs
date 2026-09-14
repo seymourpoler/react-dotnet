@@ -1,7 +1,7 @@
 ﻿using LanguageExt;
 using Tecnyfarma.Server.Product.Domain;
 
-namespace Tecnyfarma.Server.Product.Application.Poduct;
+namespace Tecnyfarma.Server.Product.Application.Product;
 
 public interface ProductRepository
 {

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tecnyfarma.Server.Product.Application;
-using Tecnyfarma.Server.Product.Application.Poduct;
+using Tecnyfarma.Server.Product.Application.Product;
 using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Infrastructure.DataBase;
 using DbContext = Tecnyfarma.Server.Product.Infrastructure.DataBase.DbContext;

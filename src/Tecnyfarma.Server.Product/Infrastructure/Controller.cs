@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using Tecnyfarma.Server.Product.Application.Poduct;
+using Tecnyfarma.Server.Product.Application.Product;
 
 namespace Tecnyfarma.Server.Product.Infrastructure;
 

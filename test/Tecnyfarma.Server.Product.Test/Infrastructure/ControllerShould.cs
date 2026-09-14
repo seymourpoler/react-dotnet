@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
-using Tecnyfarma.Server.Product.Application.Poduct;
+using Tecnyfarma.Server.Product.Application.Product;
 using Xunit;
 using Controller = Tecnyfarma.Server.Product.Infrastructure.Controller;
 

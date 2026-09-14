@@ -1,7 +1,7 @@
 ﻿using LanguageExt;
 using Tecnyfarma.Server.Product.Application.User;
 
-namespace Tecnyfarma.Server.Product.Application.Poduct;
+namespace Tecnyfarma.Server.Product.Application.Product;
 
 public class FindProductsUseCase(UserRepository userRepository, ProductRepository productRepository)
 {

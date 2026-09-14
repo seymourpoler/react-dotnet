@@ -1,5 +1,5 @@
 ﻿using LanguageExt;
-using Tecnyfarma.Server.Product.Application.Poduct;
+using Tecnyfarma.Server.Product.Application.Product;
 using Tecnyfarma.Server.Product.Domain;
     
 namespace Tecnyfarma.Server.Product.Infrastructure.DataBase;
