@@ -17,4 +17,11 @@ public static class Dependencies
         services.AddScoped<Application.LogIn.UseCase>();
         services.AddScoped<Application.Register.UseCase>();
     }
+
+    public static void MigrateUserDatabase(this IServiceProvider services)
+    {
+        using var scope = services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+        dbContext.Database.Migrate();
+    }
 }

@@ -21,4 +21,11 @@ public static class Dependencies
         services.AddScoped<UserRepository, SqliteUserRepository>();
         return services;
     }
+
+    public static void MigrateProductDatabase(this IServiceProvider services)
+    {
+        using var scope = services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+        dbContext.Database.Migrate();
+    }
 }

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.EntityFrameworkCore;
 using Tecnyfarma.Server.Product.Infrastructure;
 using Tecnyfarma.Server.User.Infrastructure;
 using Wolverine;
@@ -41,13 +40,8 @@ public class Program
         app.MapControllers();
         app.MapFallbackToFile("/index.html");
 
-        using (var scope = app.Services.CreateScope())
-        {
-            var usersDb = scope.ServiceProvider.GetRequiredService<Tecnyfarma.Server.User.Infrastructure.DataBase.DbContext>();
-            usersDb.Database.Migrate();
-            var productsDb = scope.ServiceProvider.GetRequiredService<Tecnyfarma.Server.Product.Infrastructure.DataBase.DbContext>();
-            productsDb.Database.Migrate();
-        }
+        app.Services.MigrateUserDatabase();
+        app.Services.MigrateProductDatabase();
         
         app.Run();
     }
