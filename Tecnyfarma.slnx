@@ -8,5 +8,5 @@
   <Project Path="src/Tecnyfarma.Server.User/Tecnyfarma.Server.User.csproj" />
   <Project Path="src/Tecnyfarma.Server/Tecnyfarma.Server.csproj" />
   <Project Path="test/Tecnyfarma.Server.Product.Test/Tecnyfarma.Server.Product.Test.csproj" />
-  <Project Path="test/Tecnyfarma.Server.User.test/Tecnyfarma.Server.User.test.csproj" />
+  <Project Path="test/Tecnyfarma.Server.User.Test/Tecnyfarma.Server.User.Test.csproj" />
 </Solution>
