@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { About } from './components/About';
 import { Home } from './components/Home';
 import { ContactUs } from './components/ContactUs';
-import { Weather } from './components/weather/Weather';
 import { Product } from './components/product/Product';
 import { Register } from './components/user/register/Register';
 import { Login } from './components/user/login/Login';
@@ -16,7 +15,6 @@ export function App() {
                 <Link to="/">Home</Link> |{' '}
                 <Link to="/about">About</Link> |{' '}
                 <Link to="/contact">Contact</Link> |{' '}
-                <Link to="/weather">Weather</Link> |{' '}
                 <Link to="/products">Products</Link> |{' '}
                 <Link to="/register">Register</Link> |{' '}
                 <Link to="/login">Login</Link> |{' '}
@@ -27,7 +25,6 @@ export function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<ContactUs />} />
-                <Route path="/weather" element={<Weather />} />
                 <Route path="/products" element={<Product />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
