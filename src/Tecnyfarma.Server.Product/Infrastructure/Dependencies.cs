@@ -13,7 +13,7 @@ public static class Dependencies
 {
     public static IServiceCollection AddProductDependencies(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("ProductsDatabase") ?? "Data Source=products.db";
+        var connectionString = configuration.GetConnectionString("ProductsDatabase") ?? "Data Source=products.sqlite";
         services.AddDbContext<DbContext>(options => options
             .UseSqlite(connectionString)
             .ReplaceService<IHistoryRepository, NoLockSqliteHistoryRepository>());

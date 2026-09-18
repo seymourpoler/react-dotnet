@@ -12,7 +12,7 @@ public static class Dependencies
 {
     public static void AddUserDependencies(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("UsersDatabase") ?? "Data Source=users.db";
+        var connectionString = configuration.GetConnectionString("UsersDatabase") ?? "Data Source=users.sqlite";
         services.AddDbContext<DbContext>(options => options
             .UseSqlite(connectionString)
             .ReplaceService<IHistoryRepository, NoLockSqliteHistoryRepository>());

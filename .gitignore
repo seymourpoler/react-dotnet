@@ -19,3 +19,9 @@ obj/
 *.runtimeconfig.json
 *.runtimeconfig.dev.json
 *.user
+
+# SQLite runtime artifacts
+*.db-shm
+*.db-wal
+*.probe.db*
+*.db
