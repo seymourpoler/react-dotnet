@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using LanguageExt;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
@@ -11,13 +12,13 @@ namespace Tecnyfarma.Server.Product.Test.Infrastructure;
 
 public class ControllerShould
 {
-    private readonly FindProductsUseCase _findProductsUseCase;
+    private readonly FindProductsUseCase findProducts;
     private readonly Controller controller;
 
     public ControllerShould()
     {
-        _findProductsUseCase = Substitute.For<FindProductsUseCase>(null, null);
-        controller = new Controller(_findProductsUseCase);
+        findProducts = Substitute.For<FindProductsUseCase>(null, null);
+        controller = new Controller(findProducts);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
     }
@@ -25,7 +26,7 @@ public class ControllerShould
     [Fact]
     public async Task ReturnProductsWhenUserIsNotLogged()
     {
-        _findProductsUseCase.ExecuteAsync(Arg.Any<Args>()).Returns(new List<Tecnyfarma.Server.Product.Domain.Product>());
+        findProducts.ExecuteAsync(Arg.Any<Args>()).Returns(new List<Tecnyfarma.Server.Product.Domain.Product>());
 
         var result = await controller.FindProducts();
 
@@ -35,15 +36,25 @@ public class ControllerShould
     [Fact]
     public async Task ReturnProductsWhenUserIsLogged()
     {
-        _findProductsUseCase.ExecuteAsync(Arg.Any<Args>()).Returns(new List<Tecnyfarma.Server.Product.Domain.Product>());
+        findProducts.ExecuteAsync(Arg.Any<Args>()).Returns(new List<Tecnyfarma.Server.Product.Domain.Product>());
         SetLoggedUser("e@mail.com");
 
         var result = await controller.FindProducts();
 
-        await _findProductsUseCase.Received().ExecuteAsync(Arg.Is<Args>(args => args.Email == "e@mail.com"));
+        await findProducts.Received().ExecuteAsync(Arg.Is<Args>(args => args.Email == "e@mail.com"));
         result.ShouldBeOfType<OkObjectResult>();
     }
 
+    [Fact]
+    public async Task ReturnBadRequestWhenThereIsAndError()
+    {
+        findProducts.ExecuteAsync(Arg.Any<Args>()).Returns(new Tecnyfarma.Server.Product.Domain.Error("error"));
+
+        var result = await controller.FindProducts();
+
+        result.ShouldBeOfType<BadRequestObjectResult>();
+    }
+    
     private void SetLoggedUser(string email)
     {
         var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, email) }, "test");

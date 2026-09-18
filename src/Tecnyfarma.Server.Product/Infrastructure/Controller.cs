@@ -12,6 +12,9 @@ public class Controller(FindProductsUseCase findProductsUseCase) : ControllerBas
     {
         var email = User.FindFirst(ClaimTypes.Email)?.Value;
         var result = await findProductsUseCase.ExecuteAsync(new Args(email));
-        return Ok(result);
+        return result.Match<IActionResult>(
+            products => Ok(products),
+            error => BadRequest(error.Message)
+        );
     }
 }
