@@ -4,6 +4,7 @@ import { About } from './components/About';
 import { Home } from './components/Home';
 import { ContactUs } from './components/ContactUs';
 import { Product } from './components/product/Product';
+import { Purchase } from './components/purchase/Purchase';
 import { Register } from './components/user/register/Register';
 import { Login } from './components/user/login/Login';
 import {Logout} from "./components/user/logout/Logout.tsx";
@@ -26,6 +27,7 @@ export function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<ContactUs />} />
                 <Route path="/products" element={<Product />} />
+                <Route path="/purchase/:productId" element={<Purchase />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />

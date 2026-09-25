@@ -1,4 +1,5 @@
 ﻿import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { find } from './ProductService';
 import type { Product } from './Product';
 
@@ -40,6 +41,7 @@ export function Product() {
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Price</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,6 +51,7 @@ export function Product() {
                                     <td>{product.name}</td>
                                     <td>{product.description}</td>
                                     <td>{product.price}</td>
+                                    <td><Link to={`/purchase/${product.id}`}>Comprar</Link></td>
                                 </tr>
                             )}
                         </tbody>
