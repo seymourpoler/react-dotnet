@@ -7,16 +7,14 @@ export function Product() {
     const [error, setError] = useState<string>();
 
     useEffect(() => {
-        find()
-            .then(async (response) => {
+        find().then(async (response) => {
                 if (!response.ok) {
                     setError(`Failed to load products (${response.status})`);
                     return;
                 }
                 const data = (await response.json()) as Product[];
                 setProducts(Array.isArray(data) ? data : []);
-            })
-            .catch(() => setError('Failed to load products'));
+            }).catch(() => setError('Failed to load products'));
     }, []);
 
     if (error !== undefined) {
