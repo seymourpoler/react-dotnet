@@ -3,6 +3,7 @@
     <BuildType Project="Debug" />
     <Build />
   </Project>
+  <Project Path="src/Tecnyfarma.Server.Product.Message/Tecnyfarma.Server.Product.Message.csproj" />
   <Project Path="src/Tecnyfarma.Server.Product/Tecnyfarma.Server.Product.csproj" />
   <Project Path="src/Tecnyfarma.Server.Purchase/Tecnyfarma.Server.Purchase.csproj" />
   <Project Path="src/Tecnyfarma.Server.User.Message/Tecnyfarma.Server.User.Message.csproj" />

@@ -1,9 +1,9 @@
-﻿using Tecnyfarma.Server.Purchase.Application;
+﻿using Tecnyfarma.Server.Purchase.Application.User;
 using Tecnyfarma.Server.User.Message;
 
 namespace Tecnyfarma.Server.Purchase.Infrastructure;
 
-public class FreemiumUserCreatedUserHandler(CreateUserUseCase createUserUseCase)
+public class FreemiumUserCreatedHandler(CreateUserUseCase createUserUseCase)
 {
     public async Task Handle(FreemiumUserCreated userCreated)
     {

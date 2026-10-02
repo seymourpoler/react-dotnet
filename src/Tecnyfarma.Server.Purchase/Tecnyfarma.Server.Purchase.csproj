@@ -7,10 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="LanguageExt.Core" Version="4.4.9" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.11" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Tecnyfarma.Server.Product.Message\Tecnyfarma.Server.Product.Message.csproj" />
       <ProjectReference Include="..\Tecnyfarma.Server.User.Message\Tecnyfarma.Server.User.Message.csproj" />
     </ItemGroup>
 
