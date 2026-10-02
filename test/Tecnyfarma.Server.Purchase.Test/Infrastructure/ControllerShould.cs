@@ -5,19 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Tecnyfarma.Server.Purchase.Application.Purchase;
 using Tecnyfarma.Server.Purchase.Domain;
-using Controller = Tecnyfarma.Server.Purchase.Infrastructure.Controller;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure;
 
 public class ControllerShould
 {
     private readonly CreatePurchaseUseCase useCase;
-    private readonly Controller controller;
+    private readonly Tecnyfarma.Server.Purchase.Infrastructure.Controller controller;
     
     public ControllerShould()
     {
         useCase = Substitute.For<CreatePurchaseUseCase>(null, null, null);
-        controller = new Controller(useCase);
+        controller = new Tecnyfarma.Server.Purchase.Infrastructure.Controller(useCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
     }
@@ -25,8 +24,8 @@ public class ControllerShould
     [Fact]
     public async Task ReturnErrorWhenUserIsNotLoggedIn()
     {
+        useCase.ExecuteAsync(Arg.Any<Args>()).Returns(new Error("User not found"));
         var idProduct = Guid.NewGuid();
-        useCase.ExecuteAsync(idProduct, Arg.Any<string>()).Returns(new Error("User not found"));
 
         var result = await controller.CreatePurchase(idProduct);
         
@@ -43,7 +42,7 @@ public class ControllerShould
         var user = new ClaimsPrincipal(identity);
         controller.HttpContext!.User.Returns(user);
         
-        useCase.ExecuteAsync(idProduct, email).Returns(Either<Error, Unit>.Right(Unit.Default));
+        useCase.ExecuteAsync(Arg.Is<Args>(x => x.Id == idProduct && x.Email == email)).Returns(Either<Error, Unit>.Right(Unit.Default));
         
         var result = await controller.CreatePurchase(idProduct);
         

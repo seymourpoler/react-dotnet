@@ -18,7 +18,7 @@ public class Controller : ControllerBase
     public async Task<IActionResult> CreatePurchase(Guid idProduct)
     {
         var email = User.FindFirst(ClaimTypes.Email)?.Value;
-        var result = await useCase.ExecuteAsync(idProduct, email);
+        var result = await useCase.ExecuteAsync(new Args(idProduct, email));
 
         return result.Match<IActionResult>(
             Right: _ => Ok(),

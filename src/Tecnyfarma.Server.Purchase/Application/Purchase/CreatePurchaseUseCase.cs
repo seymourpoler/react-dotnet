@@ -7,7 +7,7 @@ namespace Tecnyfarma.Server.Purchase.Application.Purchase;
 
 public class CreatePurchaseUseCase(UserRepository userRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository)
 {
-    public virtual async Task<Either<Error, Unit>> ExecuteAsync(Guid idProduct, string email)
+    public virtual async Task<Either<Error, Unit>> ExecuteAsync(Args args)
     {
         throw new NotImplementedException();
     }
