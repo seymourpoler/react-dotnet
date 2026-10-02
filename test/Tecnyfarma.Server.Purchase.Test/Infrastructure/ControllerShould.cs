@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Tecnyfarma.Server.Purchase.Application.Purchase;
 using Tecnyfarma.Server.Purchase.Domain;
-using Tecnyfarma.Server.Purchase.Infrastructure;
 using Controller = Tecnyfarma.Server.Purchase.Infrastructure.Controller;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure;
