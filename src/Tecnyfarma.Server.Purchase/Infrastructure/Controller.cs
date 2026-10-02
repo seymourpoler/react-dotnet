@@ -5,11 +5,11 @@ using Tecnyfarma.Server.Purchase.Application.Purchase;
 namespace Tecnyfarma.Server.Purchase.Infrastructure;
 
 [ApiController]
-public class PurchaseController : ControllerBase
+public class Controller : ControllerBase
 {
     private readonly CreatePurchaseUseCase useCase;
 
-    public PurchaseController(CreatePurchaseUseCase useCase)
+    public Controller(CreatePurchaseUseCase useCase)
     {
         this.useCase = useCase;
     }

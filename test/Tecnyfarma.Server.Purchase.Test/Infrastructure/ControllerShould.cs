@@ -6,18 +6,19 @@ using NSubstitute;
 using Tecnyfarma.Server.Purchase.Application.Purchase;
 using Tecnyfarma.Server.Purchase.Domain;
 using Tecnyfarma.Server.Purchase.Infrastructure;
+using Controller = Tecnyfarma.Server.Purchase.Infrastructure.Controller;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure;
 
-public class PurchaseControllerShould
+public class ControllerShould
 {
     private readonly CreatePurchaseUseCase useCase;
-    private readonly PurchaseController controller;
+    private readonly Controller controller;
     
-    public PurchaseControllerShould()
+    public ControllerShould()
     {
         useCase = Substitute.For<CreatePurchaseUseCase>(null, null, null);
-        controller = new PurchaseController(useCase);
+        controller = new Controller(useCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
     }
