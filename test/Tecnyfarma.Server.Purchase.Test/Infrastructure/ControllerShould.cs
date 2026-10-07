@@ -24,7 +24,7 @@ public class ControllerShould
     [Fact]
     public async Task ReturnErrorWhenUserIsNotLoggedIn()
     {
-        useCase.ExecuteAsync(Arg.Any<Args>()).Returns(new Error("User not found"));
+        useCase.ExecuteAsync(Arg.Any<Guid>(), Arg.Any<string>()).Returns(new Error("User not found"));
         var idProduct = Guid.NewGuid();
 
         var result = await controller.CreatePurchase(idProduct);
@@ -42,7 +42,7 @@ public class ControllerShould
         var user = new ClaimsPrincipal(identity);
         controller.HttpContext!.User.Returns(user);
         
-        useCase.ExecuteAsync(Arg.Is<Args>(x => x.Id == idProduct && x.Email == email)).Returns(Either<Error, Unit>.Right(Unit.Default));
+        useCase.ExecuteAsync(idProduct, email).Returns(Either<Error, Unit>.Right(Unit.Default));
         
         var result = await controller.CreatePurchase(idProduct);
         

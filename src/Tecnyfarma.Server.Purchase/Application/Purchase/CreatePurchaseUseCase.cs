@@ -7,8 +7,11 @@ namespace Tecnyfarma.Server.Purchase.Application.Purchase;
 
 public class CreatePurchaseUseCase(UserRepository userRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository)
 {
-    public virtual async Task<Either<Error, Unit>> ExecuteAsync(Args args)
+    public virtual async Task<Either<Error, Unit>> ExecuteAsync(Guid idProduct, string email)
     {
-        throw new NotImplementedException();
+        return await EitherAsync<Error, Unit>.From(() => userRepository.FindUserAsync(email))
+            .Bind(user => EitherAsync<Error, Unit>.From(() => productRepository.FindProductAsync(idProduct))
+                .Bind(product => EitherAsync<Error, Unit>.From(() => Domain.Purchase.Create(user, product))
+                    .Bind(purchase => EitherAsync<Error, Unit>.From(() => purchaseRepository.SavePurchaseAsync(purchase)))));
     }
 }
