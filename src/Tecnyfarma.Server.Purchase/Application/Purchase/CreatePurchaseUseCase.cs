@@ -9,9 +9,18 @@ public class CreatePurchaseUseCase(UserRepository userRepository, ProductReposit
 {
     public virtual async Task<Either<Error, Unit>> ExecuteAsync(Guid idProduct, string email)
     {
-        return await EitherAsync<Error, Unit>.From(() => userRepository.FindUserAsync(email))
-            .Bind(user => EitherAsync<Error, Unit>.From(() => productRepository.FindProductAsync(idProduct))
-                .Bind(product => EitherAsync<Error, Unit>.From(() => Domain.Purchase.Create(user, product))
-                    .Bind(purchase => EitherAsync<Error, Unit>.From(() => purchaseRepository.SavePurchaseAsync(purchase)))));
+        var userResult = await userRepository.FindUserAsync(email);
+        var productResult = await productRepository.FindProductAsync(idProduct);
+
+        return userResult.Match(
+            Left: error => Either<Error, Unit>.Left(error),
+            Right: user => productResult
+                .Match(Left: error => Either<Error, Unit>.Left(error),
+                    Right: product => Domain.Purchase.Create(user, product)
+                        .Match(Left: error => Either<Error, Unit>.Left(error),
+                            Right: purchase => purchaseRepository.SavePurchaseAsync(purchase)
+                        )
+                )
+        );
     }
 }
