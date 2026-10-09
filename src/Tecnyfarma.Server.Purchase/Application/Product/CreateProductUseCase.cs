@@ -7,6 +7,10 @@ public class CreateProductUseCase(ProductRepository repository)
 {
     public virtual async Task<Either<Error, Unit>> ExecuteAsync(CreateProductArgs args)
     {
-        throw new NotImplementedException();
+        return await (
+            from product in Domain.Product.Create(args.IdProduct, args.Name, args.Price).ToAsync()
+            from result in repository.SaveProductAsync(product).ToAsync()
+            select result
+        );
     }
 }
