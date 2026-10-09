@@ -78,8 +78,7 @@ public class SqliteProductRepositoryShould : IDisposable
             Left: _ => Assert.Fail("Save failed"),
             Right: x => x.ShouldBeOfType<Unit>()
         );
-        await using var verificationContext = new Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext(options);
-        var stored = await verificationContext.Products.FirstOrDefaultAsync(p => p.Id == product.Id);
+        var stored = await dbContext.Products.FirstOrDefaultAsync(p => p.Id == product.Id);
         stored.ShouldNotBeNull();
         stored!.Name.ShouldBe(ProductName);
         stored.Price.ShouldBe(ProductPrice);

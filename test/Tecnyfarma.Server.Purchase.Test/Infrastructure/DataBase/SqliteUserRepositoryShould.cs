@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Shouldly;
 using Tecnyfarma.Server.Purchase.Domain;
 using Tecnyfarma.Server.Purchase.Infrastructure.DataBase;
-using AppDbContext = Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext;
-using DbUser = Tecnyfarma.Server.Purchase.Infrastructure.DataBase.Models.User;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure.DataBase;
 
@@ -15,23 +13,24 @@ public class SqliteUserRepositoryShould : IDisposable
 
     private readonly InMemoryDatabaseRoot databaseRoot = new();
     private readonly string databaseName = Guid.NewGuid().ToString();
-    private readonly DbContextOptions<AppDbContext> options;
-    private readonly AppDbContext dbContext;
+    private readonly DbContextOptions<Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext> options;
+    private readonly Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext dbContext;
     private readonly SqliteUserRepository repository;
 
     public SqliteUserRepositoryShould()
     {
-        options = new DbContextOptionsBuilder<AppDbContext>()
+        options = new DbContextOptionsBuilder<Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext>()
             .UseInMemoryDatabase(databaseName, databaseRoot)
             .Options;
-        dbContext = new AppDbContext(options);
+        dbContext = new Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext(options);
         repository = new SqliteUserRepository(dbContext);
     }
 
     [Fact]
     public async Task ReturnTheUserWhenItExists()
     {
-        dbContext.Users.Add(new DbUser { Id = Guid.NewGuid(), Email = UserEmail, Type = UserType.Premium });
+        var dbUser = new Tecnyfarma.Server.Purchase.Infrastructure.DataBase.Models.User { Id = Guid.NewGuid(), Email = UserEmail, Type = UserType.Premium };
+        dbContext.Users.Add(dbUser);
         await dbContext.SaveChangesAsync();
 
         var result = await repository.FindUserAsync(UserEmail);
@@ -77,8 +76,7 @@ public class SqliteUserRepositoryShould : IDisposable
             Left: _ => Assert.Fail("Expected a user but got the error"),
             Right: x => x.ShouldBeOfType<Unit>()
         );
-        await using var verificationContext = new AppDbContext(options);
-        var stored = await verificationContext.Users.FirstOrDefaultAsync(u => u.Email == UserEmail);
+        var stored = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == UserEmail);
         stored.ShouldNotBeNull();
         stored!.Type.ShouldBe(UserType.Freemium);
     }
