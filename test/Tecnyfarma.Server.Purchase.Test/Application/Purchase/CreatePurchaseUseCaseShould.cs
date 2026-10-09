@@ -106,9 +106,13 @@ public class CreatePurchaseUseCaseShould
         );
     }
 
-    private void GivenAUser(UserType type = UserType.Freemium) =>
-        userRepository.FindUserAsync(Email).Returns(new Domain.User(Email, type));
+    private void GivenAUser(UserType type = UserType.Freemium)
+    {
+        userRepository.FindUserAsync(Email).Returns(Domain.User.Create(Email, type));
+    }
 
-    private void GivenAProduct(float price = 100f) =>
-        productRepository.FindProductAsync(ProductId).Returns(new Domain.Product(ProductId, "Product", price));
+    private void GivenAProduct(float price = 100f)
+    {
+        productRepository.FindProductAsync(ProductId).Returns(Domain.Product.Create(ProductId, "Product", price));
+    }
 }
