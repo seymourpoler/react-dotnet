@@ -1,4 +1,6 @@
-﻿namespace Tecnyfarma.Server.Purchase.Domain;
+﻿using LanguageExt;
+
+namespace Tecnyfarma.Server.Purchase.Domain;
 
 public class Product
 {
@@ -6,10 +8,15 @@ public class Product
     public string Name { get; private set; }
     public float Price { get; private set; }
     
-    public Product(Guid id, string name, float price)
+    private Product(Guid id, string name, float price)
     {
         Id = id;
         Name = name;
         Price = price;
+    }
+
+    public static Either<Error, Product> Create(Guid id, string name, float price)
+    {
+        return new Product(id, name, price);
     }
 }

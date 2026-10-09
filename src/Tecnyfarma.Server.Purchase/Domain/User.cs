@@ -1,4 +1,6 @@
-﻿namespace Tecnyfarma.Server.Purchase.Domain;
+﻿using LanguageExt;
+
+namespace Tecnyfarma.Server.Purchase.Domain;
 
 public class User
 {
@@ -6,11 +8,16 @@ public class User
     public string Email { get; }
     public UserType Type { get; }
 
-    public User(string email, UserType type)
+    private User(string email, UserType type)
     {
         Id = Guid.NewGuid();
         Email = email;
         Type = type;
+    }
+
+    public static Either<Error, User> Create(string email, UserType type)
+    {
+        return new User(email, type);
     }
     
     public float CalculatePrice(float price)
