@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Shouldly;
 using Tecnyfarma.Server.Purchase.Infrastructure.DataBase;
-using AppDbContext = Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext;
-using DbProduct = Tecnyfarma.Server.Purchase.Infrastructure.DataBase.Models.Product;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure.DataBase;
 
@@ -15,17 +13,17 @@ public class SqliteProductRepositoryShould : IDisposable
 
     private readonly InMemoryDatabaseRoot databaseRoot = new();
     private readonly string databaseName = Guid.NewGuid().ToString();
-    private readonly DbContextOptions<AppDbContext> options;
-    private readonly AppDbContext dbContext;
+    private readonly DbContextOptions<Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext> options;
+    private readonly Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext dbContext;
     private readonly SqliteProductRepository repository;
 
     public SqliteProductRepositoryShould()
     {
-        options = new DbContextOptionsBuilder<AppDbContext>()
+        options = new DbContextOptionsBuilder<Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext>()
             .UseInMemoryDatabase(databaseName, databaseRoot)
             .Options;
 
-        dbContext = new AppDbContext(options);
+        dbContext = new Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext(options);
         repository = new SqliteProductRepository(dbContext);
     }
 
@@ -33,7 +31,7 @@ public class SqliteProductRepositoryShould : IDisposable
     public async Task ReturnTheProductWhenItExists()
     {
         var id = Guid.NewGuid();
-        dbContext.Products.Add(new DbProduct { Id = id, Name = ProductName, Price = ProductPrice });
+        dbContext.Products.Add(new Tecnyfarma.Server.Purchase.Infrastructure.DataBase.Models.Product { Id = id, Name = ProductName, Price = ProductPrice });
         await dbContext.SaveChangesAsync();
 
         var result = await repository.FindProductAsync(id);
@@ -80,7 +78,7 @@ public class SqliteProductRepositoryShould : IDisposable
             Left: _ => Assert.Fail("Save failed"),
             Right: x => x.ShouldBeOfType<Unit>()
         );
-        await using var verificationContext = new AppDbContext(options);
+        await using var verificationContext = new Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext(options);
         var stored = await verificationContext.Products.FirstOrDefaultAsync(p => p.Id == product.Id);
         stored.ShouldNotBeNull();
         stored!.Name.ShouldBe(ProductName);
@@ -111,11 +109,5 @@ public class SqliteProductRepositoryShould : IDisposable
     public void Dispose()
     {
         dbContext.Dispose();
-    }
-
-    private sealed class ThrowingDbContext(DbContextOptions<AppDbContext> options) : AppDbContext(options)
-    {
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
-            throw new InvalidOperationException("Save failed");
     }
 }
