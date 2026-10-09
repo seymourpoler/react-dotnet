@@ -18,6 +18,8 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Email).IsRequired().HasMaxLength(256);
             builder.Property(u => u.Type).IsRequired();
+
+            builder.HasIndex(u => u.Email).IsUnique();
         });
         
         modelBuilder.Entity<Models.Product>(builder =>
