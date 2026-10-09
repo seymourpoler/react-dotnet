@@ -6,7 +6,7 @@ using Tecnyfarma.Server.Purchase.Application.Product;
 using Tecnyfarma.Server.Purchase.Application.Purchase;
 using Tecnyfarma.Server.Purchase.Application.User;
 using Tecnyfarma.Server.Purchase.Infrastructure.DataBase;
-using DbContext = Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext;
+
 
 namespace Tecnyfarma.Server.Purchase.Infrastructure;
 
@@ -15,7 +15,7 @@ public static class Dependencies
     public static IServiceCollection AddPurchaseDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("PurchasesDatabase") ?? "Data Source=purchases.sqlite";
-        services.AddDbContext<DbContext>(options => options
+        services.AddDbContext<DataBase.DbContext>(options => options
             .UseSqlite(connectionString)
             .ReplaceService<IHistoryRepository, NoLockSqliteHistoryRepository>());
         
@@ -24,11 +24,12 @@ public static class Dependencies
         services.AddScoped<CreateProductUseCase>();
         services.AddScoped<ProductRepository, SqliteProductRepository>();
         services.AddScoped<UserRepository, SqliteUserRepository>();
+        services.AddScoped<PurchaseRepository, SqlitePurchaseRepository>();
         
-        var options = new DbContextOptionsBuilder<DbContext>()
+        var options = new DbContextOptionsBuilder<DataBase.DbContext>()
             .UseSqlite(connectionString)
             .Options;
-        using var dbContext = new DbContext(options);
+        using var dbContext = new DataBase.DbContext(options);
         dbContext.Database.Migrate();
         
         return services;
