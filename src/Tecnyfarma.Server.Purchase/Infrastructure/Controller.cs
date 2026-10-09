@@ -5,15 +5,8 @@ using Tecnyfarma.Server.Purchase.Application.Purchase;
 namespace Tecnyfarma.Server.Purchase.Infrastructure;
 
 [ApiController]
-public class Controller : ControllerBase
+public class Controller(CreatePurchaseUseCase useCase) : ControllerBase
 {
-    private readonly CreatePurchaseUseCase useCase;
-
-    public Controller(CreatePurchaseUseCase useCase)
-    {
-        this.useCase = useCase;
-    }
-
     [HttpPost("api/v0/purchases")]
     public async Task<IActionResult> CreatePurchase(Guid idProduct)
     {
