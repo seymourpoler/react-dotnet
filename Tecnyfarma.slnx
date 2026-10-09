@@ -3,10 +3,13 @@
     <BuildType Project="Debug" />
     <Build />
   </Project>
+  <Project Path="src/Tecnyfarma.Server.Product.Message/Tecnyfarma.Server.Product.Message.csproj" />
   <Project Path="src/Tecnyfarma.Server.Product/Tecnyfarma.Server.Product.csproj" />
+  <Project Path="src/Tecnyfarma.Server.Purchase/Tecnyfarma.Server.Purchase.csproj" />
   <Project Path="src/Tecnyfarma.Server.User.Message/Tecnyfarma.Server.User.Message.csproj" />
   <Project Path="src/Tecnyfarma.Server.User/Tecnyfarma.Server.User.csproj" />
   <Project Path="src/Tecnyfarma.Server/Tecnyfarma.Server.csproj" />
   <Project Path="test/Tecnyfarma.Server.Product.Test/Tecnyfarma.Server.Product.Test.csproj" />
+  <Project Path="test/Tecnyfarma.Server.Purchase.Test/Tecnyfarma.Server.Purchase.Test.csproj" />
   <Project Path="test/Tecnyfarma.Server.User.Test/Tecnyfarma.Server.User.Test.csproj" />
 </Solution>

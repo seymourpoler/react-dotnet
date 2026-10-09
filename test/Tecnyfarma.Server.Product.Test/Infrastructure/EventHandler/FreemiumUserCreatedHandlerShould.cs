@@ -2,10 +2,11 @@
 using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Domain;
 using Tecnyfarma.Server.Product.Infrastructure;
+using Tecnyfarma.Server.Product.Infrastructure.EventHandler;
 using Tecnyfarma.Server.User.Message;
 using Xunit;
 
-namespace Tecnyfarma.Server.Product.Test.Infrastructure;
+namespace Tecnyfarma.Server.Product.Test.Infrastructure.EventHandler;
 
 public class FreemiumUserCreatedHandlerShould
 {

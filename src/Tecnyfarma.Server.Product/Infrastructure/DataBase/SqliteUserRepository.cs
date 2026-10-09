@@ -22,7 +22,6 @@ public class SqliteUserRepository(DbContext dbContext) : UserRepository
     {
         await dbContext.Users.AddAsync(new Models.User { Email = user.Email, Type = user.Type });
         await dbContext.SaveChangesAsync();
-
         return Unit.Default;
     }
 }

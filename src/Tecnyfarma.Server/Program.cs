@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Tecnyfarma.Server.Product.Infrastructure;
+using Tecnyfarma.Server.Purchase.Infrastructure;
 using Tecnyfarma.Server.User.Infrastructure;
 using Wolverine;
 
@@ -28,6 +29,7 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddUserDependencies(builder.Configuration);
         builder.Services.AddProductDependencies(builder.Configuration);
+        builder.Services.AddPurchaseDependencies(builder.Configuration);
 
         var app = builder.Build();
         app.UseDefaultFiles();

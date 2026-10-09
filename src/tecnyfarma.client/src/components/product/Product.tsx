@@ -1,4 +1,5 @@
 ﻿import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { find } from './ProductService';
 import type { Product } from './Product';
 
@@ -7,16 +8,14 @@ export function Product() {
     const [error, setError] = useState<string>();
 
     useEffect(() => {
-        find()
-            .then(async (response) => {
+        find().then(async (response) => {
                 if (!response.ok) {
                     setError(`Failed to load products (${response.status})`);
                     return;
                 }
                 const data = (await response.json()) as Product[];
                 setProducts(Array.isArray(data) ? data : []);
-            })
-            .catch(() => setError('Failed to load products'));
+            }).catch(() => setError('Failed to load products'));
     }, []);
 
     if (error !== undefined) {
@@ -42,6 +41,7 @@ export function Product() {
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Price</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,6 +51,7 @@ export function Product() {
                                     <td>{product.name}</td>
                                     <td>{product.description}</td>
                                     <td>{product.price}</td>
+                                    <td><Link to={`/purchase/${product.id}`}>Comprar</Link></td>
                                 </tr>
                             )}
                         </tbody>
