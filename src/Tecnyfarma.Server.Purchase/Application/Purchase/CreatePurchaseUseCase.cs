@@ -9,18 +9,12 @@ public class CreatePurchaseUseCase(UserRepository userRepository, ProductReposit
 {
     public virtual async Task<Either<Error, Unit>> ExecuteAsync(Guid idProduct, string email)
     {
-        var userResult = await userRepository.FindUserAsync(email);
-        var productResult = await productRepository.FindProductAsync(idProduct);
-
-        return userResult.Match(
-            Left: error => Either<Error, Unit>.Left(error),
-            Right: user => productResult
-                .Match(Left: error => Either<Error, Unit>.Left(error),
-                    Right: product => Domain.Purchase.Create(user, product)
-                        .Match(Left: error => Either<Error, Unit>.Left(error),
-                            Right: purchase => purchaseRepository.SavePurchaseAsync(purchase)
-                        )
-                )
+        return await (
+            from user in userRepository.FindUserAsync(email).ToAsync()
+            from product in productRepository.FindProductAsync(idProduct).ToAsync()
+            from purchase in Domain.Purchase.Create(user, product).ToAsync()
+            from result in purchaseRepository.SavePurchaseAsync(purchase).ToAsync()
+            select result
         );
     }
 }

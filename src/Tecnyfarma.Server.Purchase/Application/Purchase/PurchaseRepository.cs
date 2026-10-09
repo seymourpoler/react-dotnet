@@ -1,5 +1,5 @@
 ﻿using LanguageExt;
-using LanguageExt.Common;
+using Tecnyfarma.Server.Purchase.Domain;
 
 namespace Tecnyfarma.Server.Purchase.Application.Purchase;
 
