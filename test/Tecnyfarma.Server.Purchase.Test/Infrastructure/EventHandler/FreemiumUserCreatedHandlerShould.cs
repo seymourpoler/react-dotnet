@@ -1,9 +1,9 @@
 ﻿using NSubstitute;
 using Tecnyfarma.Server.Purchase.Application.User;
-using Tecnyfarma.Server.Purchase.Infrastructure;
+using Tecnyfarma.Server.Purchase.Infrastructure.EventHandler;
 using Tecnyfarma.Server.User.Message;
 
-namespace Tecnyfarma.Server.Purchase.Test.Infrastructure;
+namespace Tecnyfarma.Server.Purchase.Test.Infrastructure.EventHandler;
 
 public class FreemiumUserCreatedHandlerShould
 {

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Sqlite.Migrations.Internal;
 
-namespace Tecnyfarma.Server.Product.Infrastructure;
+namespace Tecnyfarma.Server.Purchase.Infrastructure.DataBase;
 
 public sealed class NoLockSqliteHistoryRepository : SqliteHistoryRepository
 {

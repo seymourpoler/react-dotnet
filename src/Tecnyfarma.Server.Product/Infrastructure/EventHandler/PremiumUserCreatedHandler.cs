@@ -1,7 +1,7 @@
 ﻿using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.User.Message;
 
-namespace Tecnyfarma.Server.Product.Infrastructure;
+namespace Tecnyfarma.Server.Product.Infrastructure.EventHandler;
 
 public class PremiumUserCreatedHandler(CreateUserUseCase createUserUseCase)
 {

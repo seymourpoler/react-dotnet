@@ -1,7 +1,7 @@
 ﻿using Tecnyfarma.Server.Product.Message;
 using Tecnyfarma.Server.Purchase.Application.Product;
 
-namespace Tecnyfarma.Server.Purchase.Infrastructure;
+namespace Tecnyfarma.Server.Purchase.Infrastructure.EventHandler;
 
 public class ProductCreatedHandler(CreateProductUseCase useCase)
 {
