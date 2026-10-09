@@ -12,7 +12,7 @@ public class FreemiumUserCreatedHandlerShould
 
     public FreemiumUserCreatedHandlerShould()
     {
-        createUserUseCase = Substitute.For<CreateUserUseCase>();
+        createUserUseCase = Substitute.For<CreateUserUseCase>(Substitute.For<UserRepository>());
         handler = new FreemiumUserCreatedHandler(createUserUseCase);
     }
     

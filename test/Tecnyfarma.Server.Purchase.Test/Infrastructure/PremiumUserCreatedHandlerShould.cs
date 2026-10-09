@@ -12,7 +12,7 @@ public class PremiumUserCreatedHandlerShould
 
     public PremiumUserCreatedHandlerShould()
     {
-        createUserUseCase = Substitute.For<CreateUserUseCase>();
+        createUserUseCase = Substitute.For<CreateUserUseCase>(Substitute.For<UserRepository>());
         handler = new PremiumUserCreatedHandler(createUserUseCase);
     }
     
