@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { About } from './components/About';
 import { Home } from './components/Home';
 import { ContactUs } from './components/ContactUs';
-import { Product } from './components/product/Product';
+import { Product } from './components/product/Product.tsx';;
 import { Purchase } from './components/purchase/Purchase';
 import { Register } from './components/user/register/Register';
 import { Login } from './components/user/login/Login';
