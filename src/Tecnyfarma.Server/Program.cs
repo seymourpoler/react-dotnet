@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Tecnyfarma.Server.Product.Infrastructure;
 using Tecnyfarma.Server.Purchase.Infrastructure;
 using Tecnyfarma.Server.User.Infrastructure;
@@ -15,6 +16,11 @@ public class Program
         {
             opts.MultipleHandlerBehavior = MultipleHandlerBehavior.Separated;
             opts.Discovery.IncludeAssembly(typeof(Tecnyfarma.Server.Product.Infrastructure.Dependencies).Assembly);
+            opts.Discovery.IncludeAssembly(typeof(Tecnyfarma.Server.Purchase.Infrastructure.Dependencies).Assembly);
+            opts.Discovery.IncludeAssembly(typeof(Tecnyfarma.Server.User.Infrastructure.Dependencies).Assembly);
+            opts.CodeGeneration.AlwaysUseServiceLocationFor<DbContextOptions<Tecnyfarma.Server.User.Infrastructure.DataBase.DbContext>>();
+            opts.CodeGeneration.AlwaysUseServiceLocationFor<DbContextOptions<Tecnyfarma.Server.Product.Infrastructure.DataBase.DbContext>>();
+            opts.CodeGeneration.AlwaysUseServiceLocationFor<DbContextOptions<Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext>>();
         });
         
         // Add services to the container.
