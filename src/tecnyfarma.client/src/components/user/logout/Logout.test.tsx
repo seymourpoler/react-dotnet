@@ -22,7 +22,7 @@ describe('Logout', () => {
     it('renders heading and button', () => {
         render(<Logout />);
         expect(screen.getByRole('heading', { name: /are you sure/i })).toBeInTheDocument();
-        expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /logout/i })).toBeInTheDocument();
     });
 
     it('shows success message on successful logout', async () => {
