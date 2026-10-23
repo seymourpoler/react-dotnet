@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Tecnyfarma.Server.Product.Application.Product;
 using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Infrastructure.DataBase;
-using DbContext = Tecnyfarma.Server.Product.Infrastructure.DataBase.DbContext;
 
 namespace Tecnyfarma.Server.Product.Infrastructure;
 
@@ -14,7 +13,7 @@ public static class Dependencies
     public static IServiceCollection AddProductDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("ProductsDatabase") ?? "Data Source=products.sqlite";
-        services.AddDbContext<DbContext>(options => options
+        services.AddDbContext<DataBase.DbContext>(options => options
             .UseSqlite(connectionString)
             .ReplaceService<IHistoryRepository, NoLockSqliteHistoryRepository>());
         
@@ -23,11 +22,11 @@ public static class Dependencies
         services.AddScoped<ProductRepository, SqliteProductRepository>();
         services.AddScoped<UserRepository, SqliteUserRepository>();
 
-        var options = new DbContextOptionsBuilder<DbContext>()
+        var options = new DbContextOptionsBuilder<DataBase.DbContext>()
             .UseSqlite(connectionString)
             .ReplaceService<IHistoryRepository, NoLockSqliteHistoryRepository>()
             .Options;
-        using var dbContext = new DbContext(options);
+        using var dbContext = new DataBase.DbContext(options);
         dbContext.Database.Migrate();
 
         return services;
