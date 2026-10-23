@@ -8,10 +8,10 @@ namespace Tecnyfarma.Server.Purchase.Infrastructure;
 public class Controller(CreatePurchaseUseCase useCase) : ControllerBase
 {
     [HttpPost("api/v0/purchases")]
-    public async Task<IActionResult> CreatePurchase(Guid idProduct)
+    public async Task<IActionResult> CreatePurchase(Request request)
     {
         var email = User.FindFirst(ClaimTypes.Email)?.Value;
-        var result = await useCase.ExecuteAsync(idProduct, email);
+        var result = await useCase.ExecuteAsync(request.ProductId, email);
 
         return result.Match<IActionResult>(
             Right: _ => Ok(),

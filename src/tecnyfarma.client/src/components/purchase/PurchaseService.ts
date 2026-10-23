@@ -1,6 +1,4 @@
-export type PurchaseRequest = {
-    productId: string;
-};
+import type {PurchaseRequest} from "./PurchaseRequest.ts";
 
 export async function createPurchase(request: PurchaseRequest): Promise<Response> {
     const url = '/api/v0/purchases';

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Tecnyfarma.Server.Purchase.Application.Purchase;
 using Tecnyfarma.Server.Purchase.Domain;
+using Tecnyfarma.Server.Purchase.Infrastructure;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure;
 
@@ -27,7 +28,7 @@ public class ControllerShould
         useCase.ExecuteAsync(Arg.Any<Guid>(), Arg.Any<string>()).Returns(new Error("User not found"));
         var idProduct = Guid.NewGuid();
 
-        var result = await controller.CreatePurchase(idProduct);
+        var result = await controller.CreatePurchase(new Request { ProductId = idProduct });
         
         Assert.IsType<BadRequestObjectResult>(result);
     }
@@ -44,7 +45,7 @@ public class ControllerShould
         
         useCase.ExecuteAsync(idProduct, email).Returns(Either<Error, Unit>.Right(Unit.Default));
         
-        var result = await controller.CreatePurchase(idProduct);
+        var result = await controller.CreatePurchase(new Request { ProductId = idProduct });
         
         Assert.IsType<OkResult>(result);
     }

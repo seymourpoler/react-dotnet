@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { find } from '../product/ProductService';
 import type { Product } from '../product/Product';
 import { createPurchase } from './PurchaseService';
+import type {PurchaseRequest} from "./PurchaseRequest.ts";
 
 export function Purchase() {
     const { productId } = useParams<{ productId: string }>();
@@ -34,7 +35,10 @@ export function Purchase() {
         setLoading(true);
         setMessage(null);
         try {
-            const response = await createPurchase({ productId });
+            const purchaseRequest : PurchaseRequest = {
+                productId: productId
+            }; 
+            const response = await createPurchase(purchaseRequest);
             if (response.ok) {
                 setMessage('Purchase successful!');
                 return;
