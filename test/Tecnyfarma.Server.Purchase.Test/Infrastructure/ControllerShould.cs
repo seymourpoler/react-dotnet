@@ -32,7 +32,7 @@ public class ControllerShould
 
         var result = await controller.CreatePurchase(new Request { ProductId = idProduct });
         
-        Assert.IsType<BadRequestObjectResult>(result);
+        result.ShouldBeOfType<BadRequestObjectResult>();
     }
     
     [Fact]
