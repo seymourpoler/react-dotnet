@@ -5,6 +5,8 @@ using Tecnyfarma.Server.Purchase.Application.Product;
 using Tecnyfarma.Server.Purchase.Application.Purchase;
 using Tecnyfarma.Server.Purchase.Application.User;
 using Tecnyfarma.Server.Purchase.Domain;
+using Tecnyfarma.Server.Purchase.Message;
+using Wolverine;
 
 namespace Tecnyfarma.Server.Purchase.Test.Application.Purchase;
 
@@ -16,6 +18,7 @@ public class CreatePurchaseUseCaseShould
     private readonly UserRepository userRepository;
     private readonly ProductRepository productRepository;
     private readonly PurchaseRepository purchaseRepository;
+    private readonly IMessageBus bus;
     private readonly CreatePurchaseUseCase useCase;
 
     public CreatePurchaseUseCaseShould()
@@ -23,7 +26,8 @@ public class CreatePurchaseUseCaseShould
         userRepository = Substitute.For<UserRepository>();
         productRepository = Substitute.For<ProductRepository>();
         purchaseRepository = Substitute.For<PurchaseRepository>();
-        useCase = new CreatePurchaseUseCase(userRepository, productRepository, purchaseRepository);
+        bus = Substitute.For<IMessageBus>();
+        useCase = new CreatePurchaseUseCase(userRepository, productRepository, purchaseRepository, bus);
     }
 
     [Fact]
@@ -85,6 +89,18 @@ public class CreatePurchaseUseCaseShould
 
         await purchaseRepository.Received(1).SavePurchaseAsync(Arg.Is<Domain.Purchase>(purchase =>
             Math.Abs(purchase.Price - expectedPrice) < 0.01f));
+    }
+
+    [Fact]
+    public async Task PublishPurchaseCreatedEvent()
+    {
+        GivenAUser();
+        GivenAProduct();
+        purchaseRepository.SavePurchaseAsync(Arg.Any<Domain.Purchase>()).Returns(Unit.Default);
+
+        await useCase.ExecuteAsync(ProductId, Email);
+
+        await bus.Received().SendAsync(Arg.Any<PurchaseCreated>());
     }
     
     [Fact]

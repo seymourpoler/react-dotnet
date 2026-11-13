@@ -16,7 +16,7 @@ public class ControllerShould
     
     public ControllerShould()
     {
-        useCase = Substitute.For<CreatePurchaseUseCase>(null, null, null);
+        useCase = Substitute.For<CreatePurchaseUseCase>(null, null, null, null);
         controller = new Tecnyfarma.Server.Purchase.Infrastructure.Controller(useCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
