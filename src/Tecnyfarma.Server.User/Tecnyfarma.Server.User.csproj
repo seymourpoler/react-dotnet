@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Tecnyfarma.Server.Purchase.Message\Tecnyfarma.Server.Purchase.Message.csproj" />
       <ProjectReference Include="..\Tecnyfarma.Server.User.Message\Tecnyfarma.Server.User.Message.csproj" />
     </ItemGroup>
 
