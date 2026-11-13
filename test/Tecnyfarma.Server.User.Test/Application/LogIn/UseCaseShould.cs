@@ -10,13 +10,13 @@ namespace Tecnyfarma.Server.User.test.Application.LogIn;
 
 public class UseCaseShould
 {
-    private readonly Repository repository;
+    private readonly UserRepository userRepository;
     private readonly UseCase useCase;
 
     public UseCaseShould()
     {
-        repository =  Substitute.For<Repository>();
-        useCase = new UseCase(repository);
+        userRepository =  Substitute.For<UserRepository>();
+        useCase = new UseCase(userRepository);
     }
     
     [Theory]
@@ -57,7 +57,7 @@ public class UseCaseShould
     public async Task ReturnErrorWhenUserNotFound()
     {
         var args = new Args("user@example.com", "validpassword");
-        repository.FindAsync(Arg.Any<Email>())
+        userRepository.FindAsync(Arg.Any<Email>())
             .Returns(new Error("User not found"));
 
         var result = await useCase.Execute(args);
@@ -74,7 +74,7 @@ public class UseCaseShould
         var email = Email.Create("user@example.com").Match(Right: x => x, Left: _ => throw new Exception());
         var password = Password.Create("a-password").Match(Right: x => x, Left: _ => throw new Exception());
         var storedUser = new Server.User.Domain.User(email, password);
-        repository.FindAsync(Arg.Any<Email>()).Returns(storedUser);
+        userRepository.FindAsync(Arg.Any<Email>()).Returns(storedUser);
         var args = new Args("user@example.com", "wrongpassword!");
 
         var result = await useCase.Execute(args);
@@ -92,7 +92,7 @@ public class UseCaseShould
         var password = Password.Create("a-password").Match(Right: x => x, Left: _ => throw new Exception());
         var storedUser = new Server.User.Domain.User(email, password);
 
-        repository.FindAsync(Arg.Any<Email>())
+        userRepository.FindAsync(Arg.Any<Email>())
             .Returns(Task.FromResult<Either<Error, Server.User.Domain.User>>(storedUser));
 
         var args = new Args("user@example.com", "a-password");

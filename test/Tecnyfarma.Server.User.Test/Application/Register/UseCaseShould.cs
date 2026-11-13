@@ -13,14 +13,14 @@ namespace Tecnyfarma.Server.User.test.Application.Register;
 public class UseCaseShould
 {
     private readonly IMessageBus bus;
-    private readonly Repository repository;
+    private readonly UserRepository userRepository;
     private readonly UseCase useCase;
 
     public UseCaseShould()
     {
-        repository = Substitute.For<Repository>();
+        userRepository = Substitute.For<UserRepository>();
         bus = Substitute.For<IMessageBus>();
-        useCase = new UseCase(repository, bus);
+        useCase = new UseCase(userRepository, bus);
     }
     
     [Theory]
@@ -61,8 +61,8 @@ public class UseCaseShould
     public async Task ReturnErrorWhenRepositoryFails()
     {
         var args = new Args("user@example.com", "validpassword");
-        repository.FindAsync(Arg.Any<Email>()).Returns(new Error("User not found"));
-        repository.SaveAsync(Arg.Any<Server.User.Domain.User>())
+        userRepository.FindAsync(Arg.Any<Email>()).Returns(new Error("User not found"));
+        userRepository.SaveAsync(Arg.Any<Server.User.Domain.User>())
             .Returns(new Error("Database error"));
 
         var result = await useCase.Execute(args);
@@ -78,7 +78,7 @@ public class UseCaseShould
     {
         var email = Email.Create("user@example.com").Match(Right: x => x, Left: _ => throw new Exception());
         var password = Password.Create("valid-password").Match(Right: x => x, Left: _ => throw new Exception());
-        repository.FindAsync(Arg.Any<Email>()).Returns(new Server.User.Domain.User(email, password));
+        userRepository.FindAsync(Arg.Any<Email>()).Returns(new Server.User.Domain.User(email, password));
 
         var args = new Args("user@example.com", "valid-password");
 
@@ -88,15 +88,15 @@ public class UseCaseShould
             _ => Assert.Fail("Expected an error but got a success result"),
             error => error.Message.ShouldBe("User already registered")
         );
-        await repository.DidNotReceive().SaveAsync(Arg.Any<Server.User.Domain.User>());
+        await userRepository.DidNotReceive().SaveAsync(Arg.Any<Server.User.Domain.User>());
     }
 
     [Fact]
     public async Task RegisterAFreemiumUser()
     {
         var args = new Args("user@example.com", "valid-password");
-        repository.FindAsync(Arg.Any<Email>()).Returns(new Error("User not found"));
-        repository.SaveAsync(Arg.Is<Server.User.Domain.User>(x => x.Email.Value == "user@example.com"))
+        userRepository.FindAsync(Arg.Any<Email>()).Returns(new Error("User not found"));
+        userRepository.SaveAsync(Arg.Is<Server.User.Domain.User>(x => x.Email.Value == "user@example.com"))
             .Returns(Unit.Default);
 
         var result = await useCase.Execute(args);
@@ -112,8 +112,8 @@ public class UseCaseShould
     public async Task RegisterAPremiumUser()
     {
         var args = new Args("user@example.com", "valid-password");
-        repository.FindAsync(Arg.Any<Email>()).Returns(new Error("User not found"));
-        repository.SaveAsync(Arg.Is<Server.User.Domain.User>(x => x.Email.Value == "user@example.com"))
+        userRepository.FindAsync(Arg.Any<Email>()).Returns(new Error("User not found"));
+        userRepository.SaveAsync(Arg.Is<Server.User.Domain.User>(x => x.Email.Value == "user@example.com"))
             .Returns(Unit.Default);
 
         var result = await useCase.Execute(args);

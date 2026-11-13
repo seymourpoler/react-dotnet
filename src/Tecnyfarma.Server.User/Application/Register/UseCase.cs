@@ -6,7 +6,7 @@ using Type = Tecnyfarma.Server.User.Domain.Type;
 
 namespace Tecnyfarma.Server.User.Application.Register;
 
-public class UseCase(Repository repository, IMessageBus bus)
+public class UseCase(UserRepository userRepository, IMessageBus bus)
 {
     public virtual async Task<Either<Error, Unit>> Execute(Args args)
     {
@@ -15,7 +15,7 @@ public class UseCase(Repository repository, IMessageBus bus)
             from password in Password.Create(args.Password).ToAsync()
             from _ in EnsureThatTheNewUserIsNotAlreadyRegistered(email).ToAsync()
             let user = new Domain.User(email, password)
-            from result in repository.SaveAsync(user).ToAsync()
+            from result in userRepository.SaveAsync(user).ToAsync()
             from __ in PublishUserCreated(user).ToAsync()
             select result
         );
@@ -23,7 +23,7 @@ public class UseCase(Repository repository, IMessageBus bus)
 
     private async Task<Either<Error, Unit>> EnsureThatTheNewUserIsNotAlreadyRegistered(Email email)
     {
-        var found = await repository.FindAsync(email);
+        var found = await userRepository.FindAsync(email);
         return found.Match<Either<Error, Unit>>(
             _ => new Error("User already registered"),
             _ => Unit.Default
