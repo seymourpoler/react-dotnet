@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application.Purchase;
+using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.Purchase;
 using Xunit;
 
@@ -36,5 +37,15 @@ public class FindPurchasesControllerShould
         var result = await controller.FindPuchases();
         
         result.ShouldBeOfType<OkObjectResult>();
+    }
+    
+    [Fact]
+    public async Task ReturnErrorWhenSomethingGoesWrong()
+    {
+        useCase.ExecuteAsync(email).Returns(new Error("There is something wrong"));
+        
+        var result = await controller.FindPuchases();
+        
+        result.ShouldBeOfType<BadRequestObjectResult>();
     }
 }
