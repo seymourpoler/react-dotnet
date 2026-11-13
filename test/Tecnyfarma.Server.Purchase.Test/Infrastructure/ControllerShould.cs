@@ -3,6 +3,7 @@ using LanguageExt;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
+using Shouldly;
 using Tecnyfarma.Server.Purchase.Application.Purchase;
 using Tecnyfarma.Server.Purchase.Domain;
 using Tecnyfarma.Server.Purchase.Infrastructure;
@@ -39,15 +40,13 @@ public class ControllerShould
     {
         var idProduct = Guid.NewGuid();
         const string email = "test@example.com";
-        
         var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, email) }, "test");
         var user = new ClaimsPrincipal(identity);
         controller.HttpContext!.User.Returns(user);
-        
         useCase.ExecuteAsync(idProduct, email).Returns(Either<Error, Unit>.Right(Unit.Default));
         
         var result = await controller.CreatePurchase(new Request { ProductId = idProduct });
         
-        Assert.IsType<OkResult>(result);
+        result.ShouldBeOfType<OkResult>();
     }
 }
