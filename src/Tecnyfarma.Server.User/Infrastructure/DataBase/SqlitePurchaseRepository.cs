@@ -19,4 +19,12 @@ public class SqlitePurchaseRepository(DbContext dbContext) : PurchaseRepository
         await dbContext.SaveChangesAsync();
         return Unit.Default;    
     }
+
+    public async Task<Either<Error, Domain.Purchase[]>> FindByAsync(Email email)
+    {
+        return dbContext.Purchases
+            .Where(x => x.Email == email.Value)
+            .Select(x => new Domain.Purchase(x.Email, x.Name, x.Price, x.CreatedAtUtc))
+            .ToArray();
+    }
 }
