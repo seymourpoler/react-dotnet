@@ -2,6 +2,7 @@
 using Tecnyfarma.Server.Purchase.Application.User;
 using Tecnyfarma.Server.Purchase.Infrastructure.EventHandler;
 using Tecnyfarma.Server.User.Message;
+using Xunit;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure.EventHandler;
 

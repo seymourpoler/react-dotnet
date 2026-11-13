@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Shouldly;
 using Tecnyfarma.Server.Purchase.Domain;
 using Tecnyfarma.Server.Purchase.Infrastructure.DataBase;
+using Xunit;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure.DataBase;
 

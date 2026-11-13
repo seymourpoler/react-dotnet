@@ -2,6 +2,7 @@
 using Tecnyfarma.Server.Product.Message;
 using Tecnyfarma.Server.Purchase.Application.Product;
 using Tecnyfarma.Server.Purchase.Infrastructure.EventHandler;
+using Xunit;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure.EventHandler;
 
@@ -17,10 +18,10 @@ public class ProductCreatedHandlerShould
         
         await handler.Handle(anEvent);
 
-        await useCase.Received().ExecuteAsync(Arg.Is<CreateProductArgs>(x => 
-            x.IdProduct == idProduct &&
-            x.Name == "Test" &&
-            x.Price == 100
+        await useCase.Received().ExecuteAsync(Arg.Is<CreateProductArgs>(x =>
+                x.IdProduct == idProduct &&
+                x.Name == "Test" &&
+                x.Price == 100
             )
         );
     }

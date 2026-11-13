@@ -26,7 +26,7 @@ public class CreatePurchaseUseCase(UserRepository userRepository, ProductReposit
         var theEvent = new PurchaseCreated
         {
             Email = purchase.Email,
-            Product = product.Name,
+            Name = product.Name,
             Price = purchase.Price,
             CreatedAtUtc = purchase.CreatedAtUtc
         };
