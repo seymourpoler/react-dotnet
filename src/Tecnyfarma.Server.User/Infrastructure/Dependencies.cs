@@ -21,6 +21,7 @@ public static class Dependencies
         services.AddScoped<Application.LogIn.UseCase>();
         services.AddScoped<Application.Register.UseCase>();
         services.AddScoped<Application.Purchase.CreatePurchaseUseCase>();
+        services.AddScoped<Application.Purchase.FindPurchasesUseCase>();
         services.AddScoped<PurchaseRepository, SqlitePurchaseRepository>();
 
         var options = new DbContextOptionsBuilder<DbContext>().UseSqlite(connectionString).Options;
