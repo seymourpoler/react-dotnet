@@ -1,19 +1,34 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using Tecnyfarma.Server.Product.Application.Product;
+using Tecnyfarma.Server.Product.Application.Product.Create;
+using Tecnyfarma.Server.Product.Application.Product.Find;
 
 namespace Tecnyfarma.Server.Product.Infrastructure;
 
 [ApiController]
-public class Controller(FindProductsUseCase findProductsUseCase) : ControllerBase
+public class Controller(FindProductsUseCase findProductsUseCase, CreateProductUseCase createProductUseCase) : ControllerBase
 {
     [HttpGet("/api/v0/products")]
     public async Task<IActionResult> FindProducts()
     {
         var email = User.FindFirst(ClaimTypes.Email)?.Value;
-        var result = await findProductsUseCase.ExecuteAsync(new Args(email));
+        var args = new Tecnyfarma.Server.Product.Application.Product.Find.Args(email);
+        var result = await findProductsUseCase.ExecuteAsync(args);
+        
         return result.Match<IActionResult>(
             products => Ok(products),
+            error => BadRequest(error.Message)
+        );
+    }
+
+    [HttpPost("/api/v0/products")]
+    public async Task<IActionResult> Create(Request request)
+    {
+        var args = new Tecnyfarma.Server.Product.Application.Product.Create.Args(request.Name, request.Description, request.Price);
+        var result = await createProductUseCase.ExecuteAsync(args);
+        
+        return result.Match<IActionResult>(
+            _ => Ok(),
             error => BadRequest(error.Message)
         );
     }

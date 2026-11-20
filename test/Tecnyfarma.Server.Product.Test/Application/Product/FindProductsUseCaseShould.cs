@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.Product.Application.Product;
+using Tecnyfarma.Server.Product.Application.Product.Find;
 using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Domain;
 using Xunit;

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tecnyfarma.Server.Product.Application.Product;
+using Tecnyfarma.Server.Product.Application.Product.Create;
+using Tecnyfarma.Server.Product.Application.Product.Find;
 using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Infrastructure.DataBase;
 
@@ -19,6 +21,7 @@ public static class Dependencies
         
         services.AddScoped<FindProductsUseCase>();
         services.AddScoped<CreateUserUseCase>();
+        services.AddScoped<CreateProductUseCase>();
         services.AddScoped<ProductRepository, SqliteProductRepository>();
         services.AddScoped<UserRepository, SqliteUserRepository>();
 

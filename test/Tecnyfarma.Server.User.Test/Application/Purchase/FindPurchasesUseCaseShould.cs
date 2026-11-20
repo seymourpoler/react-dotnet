@@ -1,5 +1,4 @@
-﻿using LanguageExt;
-using NSubstitute;
+﻿using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application.Purchase;
 using Tecnyfarma.Server.User.Domain;
@@ -30,7 +29,7 @@ public class FindPurchasesUseCaseShould
 
         result.Match(
             Left: _ => Assert.Fail("Itshouldn't be here"),
-            Right: x => x.ShouldBeOfType<Unit>()
+            Right: x => x.ShouldBeOfType<Domain.Purchase[]>()
         );
     }
 
