@@ -6,7 +6,7 @@ using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Domain;
 using Xunit;
 
-namespace Tecnyfarma.Server.Product.Test.Application.Product;
+namespace Tecnyfarma.Server.Product.Test.Application.Product.Find;
 
 public class FindProductsUseCaseShould
 {
