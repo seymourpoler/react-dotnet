@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Tecnyfarma.Server.User.Application;
+using Tecnyfarma.Server.User.Application.Purchase;
 using Tecnyfarma.Server.User.Infrastructure.DataBase;
 using DbContext = Tecnyfarma.Server.User.Infrastructure.DataBase.DbContext;
 
@@ -16,9 +17,12 @@ public static class Dependencies
         services.AddDbContext<DbContext>(options => options
             .UseSqlite(connectionString)
             .ReplaceService<IHistoryRepository, NoLockSqliteHistoryRepository>());
-        services.AddScoped<Repository, SqliteRepository>();
+        services.AddScoped<UserRepository, SqliteUserRepository>();
         services.AddScoped<Application.LogIn.UseCase>();
         services.AddScoped<Application.Register.UseCase>();
+        services.AddScoped<Application.Purchase.CreatePurchaseUseCase>();
+        services.AddScoped<Application.Purchase.FindPurchasesUseCase>();
+        services.AddScoped<PurchaseRepository, SqlitePurchaseRepository>();
 
         var options = new DbContextOptionsBuilder<DbContext>().UseSqlite(connectionString).Options;
         using var dbContext = new DbContext(options);

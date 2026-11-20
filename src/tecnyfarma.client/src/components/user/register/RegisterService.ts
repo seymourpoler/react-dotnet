@@ -1,7 +1,7 @@
 ﻿export type userRegisterRequest = {
-      email: string;
-      password: string;
-    };
+    email: string;
+    password: string;
+};
 
 export async function register(request: userRegisterRequest) : Promise<Response> {
     const url = '/api/v0/users/register';

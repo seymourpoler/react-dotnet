@@ -19,6 +19,8 @@ obj/
 *.runtimeconfig.json
 *.runtimeconfig.dev.json
 *.user
+# Do not ignore the User module (the *.user pattern above is case-insensitive)
+!**/Tecnyfarma.Server.User/
 
 # SQLite runtime artifacts
 *.db-shm

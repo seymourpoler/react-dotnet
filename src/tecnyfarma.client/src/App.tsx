@@ -7,7 +7,8 @@ import { Product } from './components/product/Product.tsx';;
 import { Purchase } from './components/purchase/Purchase';
 import { Register } from './components/user/register/Register';
 import { Login } from './components/user/login/Login';
-import {Logout} from "./components/user/logout/Logout.tsx";
+import { Logout } from './components/user/logout/Logout.tsx';
+import { MyPurchases } from './components/user/purchase/MyPurchases.tsx';
 
 export function App() {
     return (
@@ -20,6 +21,7 @@ export function App() {
                 <Link to="/register">Register</Link> |{' '}
                 <Link to="/login">Login</Link> |{' '}
                 <Link to="/logout">Logout</Link> |{' '}
+                <Link to="/my-purchases">My Purchases</Link> |{' '}
             </nav>
 
             <Routes>
@@ -31,6 +33,7 @@ export function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/my-purchases" element={<MyPurchases />} />
             </Routes>
         </BrowserRouter>
     );

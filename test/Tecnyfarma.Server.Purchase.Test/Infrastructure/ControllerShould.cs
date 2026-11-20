@@ -3,9 +3,11 @@ using LanguageExt;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
+using Shouldly;
 using Tecnyfarma.Server.Purchase.Application.Purchase;
 using Tecnyfarma.Server.Purchase.Domain;
 using Tecnyfarma.Server.Purchase.Infrastructure;
+using Xunit;
 
 namespace Tecnyfarma.Server.Purchase.Test.Infrastructure;
 
@@ -16,7 +18,7 @@ public class ControllerShould
     
     public ControllerShould()
     {
-        useCase = Substitute.For<CreatePurchaseUseCase>(null, null, null);
+        useCase = Substitute.For<CreatePurchaseUseCase>(null, null, null, null);
         controller = new Tecnyfarma.Server.Purchase.Infrastructure.Controller(useCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
@@ -30,7 +32,7 @@ public class ControllerShould
 
         var result = await controller.CreatePurchase(new Request { ProductId = idProduct });
         
-        Assert.IsType<BadRequestObjectResult>(result);
+        result.ShouldBeOfType<BadRequestObjectResult>();
     }
     
     [Fact]
@@ -38,15 +40,13 @@ public class ControllerShould
     {
         var idProduct = Guid.NewGuid();
         const string email = "test@example.com";
-        
         var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, email) }, "test");
         var user = new ClaimsPrincipal(identity);
         controller.HttpContext!.User.Returns(user);
-        
         useCase.ExecuteAsync(idProduct, email).Returns(Either<Error, Unit>.Right(Unit.Default));
         
         var result = await controller.CreatePurchase(new Request { ProductId = idProduct });
         
-        Assert.IsType<OkResult>(result);
+        result.ShouldBeOfType<OkResult>();
     }
 }

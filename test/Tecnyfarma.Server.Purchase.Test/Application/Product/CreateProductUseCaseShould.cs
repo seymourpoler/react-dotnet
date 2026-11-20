@@ -3,6 +3,7 @@ using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.Purchase.Application.Product;
 using Tecnyfarma.Server.Purchase.Domain;
+using Xunit;
 
 namespace Tecnyfarma.Server.Purchase.Test.Application.Product;
 

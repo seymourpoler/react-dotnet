@@ -12,4 +12,5 @@
   <Project Path="test/Tecnyfarma.Server.Product.Test/Tecnyfarma.Server.Product.Test.csproj" />
   <Project Path="test/Tecnyfarma.Server.Purchase.Test/Tecnyfarma.Server.Purchase.Test.csproj" />
   <Project Path="test/Tecnyfarma.Server.User.Test/Tecnyfarma.Server.User.Test.csproj" />
+  <Project Path="src/Tecnyfarma.Server.Purchase.Message/Tecnyfarma.Server.Purchase.Message.csproj" />
 </Solution>

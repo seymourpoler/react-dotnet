@@ -3,6 +3,7 @@ using LanguageExt;
 using NSubstitute;
 using Tecnyfarma.Server.Purchase.Application.User;
 using Tecnyfarma.Server.Purchase.Domain;
+using Xunit;
 
 namespace Tecnyfarma.Server.Purchase.Test.Application.User;
 
