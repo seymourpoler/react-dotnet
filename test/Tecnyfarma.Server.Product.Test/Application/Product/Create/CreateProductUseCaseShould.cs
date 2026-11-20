@@ -4,6 +4,8 @@ using Shouldly;
 using Tecnyfarma.Server.Product.Application.Product;
 using Tecnyfarma.Server.Product.Application.Product.Create;
 using Tecnyfarma.Server.Product.Domain;
+using Tecnyfarma.Server.Product.Message;
+using Wolverine;
 using Xunit;
 
 namespace Tecnyfarma.Server.Product.Test.Application.Product.Create;
@@ -15,12 +17,14 @@ public class CreateProductUseCaseShould
     private const float Price = 100f;
 
     private readonly ProductRepository repository;
+    private readonly IMessageBus bus;
     private readonly CreateProductUseCase useCase;
 
     public CreateProductUseCaseShould()
     {
         repository = Substitute.For<ProductRepository>();
-        useCase = new CreateProductUseCase(repository);
+        bus = Substitute.For<IMessageBus>();
+        useCase = new CreateProductUseCase(repository, bus);
     }
 
     [Fact]
@@ -39,6 +43,7 @@ public class CreateProductUseCaseShould
             Left: _ => Assert.Fail("Expected success but got an error"),
             Right: x => x.ShouldBeOfType<Unit>()
         );
+        await bus.Received().PublishAsync(Arg.Is<ProductCreated>(x => x.Name == Name && x.Price == Price));
     }
 
     [Fact]
@@ -54,6 +59,7 @@ public class CreateProductUseCaseShould
             Left: error => error.Message.ShouldBe("database error")
         );
         await repository.Received(1).SaveAsync(Arg.Any<Tecnyfarma.Server.Product.Domain.Product>());
+        await bus.DidNotReceive().PublishAsync(Arg.Any<ProductCreated>());
     }
 
     [Theory]
@@ -76,5 +82,6 @@ public class CreateProductUseCaseShould
             Left: error => error.Message.ShouldBe(expectedError)
         );
         await repository.DidNotReceive().SaveAsync(Arg.Any<Tecnyfarma.Server.Product.Domain.Product>());
+        await bus.DidNotReceive().PublishAsync(Arg.Any<ProductCreated>());
     }
 }
