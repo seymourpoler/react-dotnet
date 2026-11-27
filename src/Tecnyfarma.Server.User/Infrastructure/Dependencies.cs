@@ -4,8 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Tecnyfarma.Server.User.Application;
 using Tecnyfarma.Server.User.Application.Purchase;
+using Tecnyfarma.Server.User.Application.Purchase.Create;
+using Tecnyfarma.Server.User.Application.Purchase.Find;
 using Tecnyfarma.Server.User.Infrastructure.DataBase;
 using DbContext = Tecnyfarma.Server.User.Infrastructure.DataBase.DbContext;
+using UseCase = Tecnyfarma.Server.User.Application.Purchase.Find.UseCase;
 
 namespace Tecnyfarma.Server.User.Infrastructure;
 
@@ -20,8 +23,8 @@ public static class Dependencies
         services.AddScoped<UserRepository, SqliteUserRepository>();
         services.AddScoped<Application.LogIn.UseCase>();
         services.AddScoped<Application.Register.UseCase>();
-        services.AddScoped<Application.Purchase.CreatePurchaseUseCase>();
-        services.AddScoped<Application.Purchase.FindPurchasesUseCase>();
+        services.AddScoped<Application.Purchase.Create.UseCase>();
+        services.AddScoped<UseCase>();
         services.AddScoped<PurchaseRepository, SqlitePurchaseRepository>();
 
         var options = new DbContextOptionsBuilder<DbContext>().UseSqlite(connectionString).Options;

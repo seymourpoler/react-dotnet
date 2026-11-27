@@ -8,7 +8,7 @@ using Tecnyfarma.Server.User.Message;
 using Wolverine;
 using Xunit;
 
-namespace Tecnyfarma.Server.User.test.Application.Register;
+namespace Tecnyfarma.Server.User.Test.Application.Register;
 
 public class UseCaseShould
 {

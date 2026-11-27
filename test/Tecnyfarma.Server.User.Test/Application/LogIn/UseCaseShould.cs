@@ -6,7 +6,7 @@ using Tecnyfarma.Server.User.Application.LogIn;
 using Tecnyfarma.Server.User.Domain;
 using Xunit;
 
-namespace Tecnyfarma.Server.User.test.Application.LogIn;
+namespace Tecnyfarma.Server.User.Test.Application.LogIn;
 
 public class UseCaseShould
 {

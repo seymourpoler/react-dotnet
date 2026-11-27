@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application.Purchase;
+using Tecnyfarma.Server.User.Application.Purchase.Find;
 using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.Purchase;
 using Xunit;
@@ -14,12 +15,12 @@ public class FindPurchasesControllerShould
 {
     private const string email = "a@mail.es";
 
-    private readonly FindPurchasesUseCase useCase;
+    private readonly UseCase useCase;
     private readonly FindPurchasesController controller;
 
     public FindPurchasesControllerShould()
     {
-        useCase = Substitute.For<FindPurchasesUseCase>(Substitute.For<PurchaseRepository>());
+        useCase = Substitute.For<UseCase>(Substitute.For<PurchaseRepository>());
         controller = new FindPurchasesController(useCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };

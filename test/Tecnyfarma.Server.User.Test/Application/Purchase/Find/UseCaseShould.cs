@@ -1,22 +1,23 @@
 ﻿using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application.Purchase;
+using Tecnyfarma.Server.User.Application.Purchase.Find;
 using Tecnyfarma.Server.User.Domain;
 using Xunit;
 
-namespace Tecnyfarma.Server.User.Test.Application.Purchase;
+namespace Tecnyfarma.Server.User.Test.Application.Purchase.Find;
 
-public class FindPurchasesUseCaseShould
+public class UseCaseShould
 {
     private const string email = "an@email.com";
 
     private readonly PurchaseRepository repository;
-    private readonly FindPurchasesUseCase useCase;
+    private readonly UseCase useCase;
 
-    public FindPurchasesUseCaseShould()
+    public UseCaseShould()
     {
         repository = Substitute.For<PurchaseRepository>();
-        useCase = new FindPurchasesUseCase(repository);
+        useCase = new UseCase(repository);
     }
 
     [Fact]

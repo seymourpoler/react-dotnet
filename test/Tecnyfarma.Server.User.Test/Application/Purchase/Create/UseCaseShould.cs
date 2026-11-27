@@ -2,20 +2,21 @@
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application.Purchase;
+using Tecnyfarma.Server.User.Application.Purchase.Create;
 using Tecnyfarma.Server.User.Domain;
 using Xunit;
 
-namespace Tecnyfarma.Server.User.Test.Application.Purchase;
+namespace Tecnyfarma.Server.User.Test.Application.Purchase.Create;
 
-public class CreatePurchaseUseCaseShould
+public class UseCaseShould
 {
     private readonly  PurchaseRepository repository;
-    private readonly CreatePurchaseUseCase useCase;
+    private readonly UseCase useCase;
 
-    public CreatePurchaseUseCaseShould()
+    public UseCaseShould()
     {
         repository = Substitute.For<PurchaseRepository>();
-        useCase = new CreatePurchaseUseCase(repository);
+        useCase = new UseCase(repository);
     }
 
     [Fact]
