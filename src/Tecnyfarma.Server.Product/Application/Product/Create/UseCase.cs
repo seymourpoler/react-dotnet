@@ -5,7 +5,7 @@ using Wolverine;
 
 namespace Tecnyfarma.Server.Product.Application.Product.Create;
 
-public class CreateProductUseCase(ProductRepository repository, IMessageBus bus)
+public class UseCase(ProductRepository repository, IMessageBus bus)
 {
     public virtual async Task<Either<Error, Unit>> ExecuteAsync(Args args)
     {

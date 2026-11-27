@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Tecnyfarma.Server.Product.Test.Application.Product.Create;
 
-public class CreateProductUseCaseShould
+public class UseCaseShould
 {
     private const string Name = "Product";
     private const string Description = "Description";
@@ -18,13 +18,13 @@ public class CreateProductUseCaseShould
 
     private readonly ProductRepository repository;
     private readonly IMessageBus bus;
-    private readonly CreateProductUseCase useCase;
+    private readonly UseCase useCase;
 
-    public CreateProductUseCaseShould()
+    public UseCaseShould()
     {
         repository = Substitute.For<ProductRepository>();
         bus = Substitute.For<IMessageBus>();
-        useCase = new CreateProductUseCase(repository, bus);
+        useCase = new UseCase(repository, bus);
     }
 
     [Fact]

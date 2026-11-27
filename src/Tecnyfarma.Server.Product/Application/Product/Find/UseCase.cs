@@ -3,7 +3,7 @@ using Tecnyfarma.Server.Product.Application.User;
 
 namespace Tecnyfarma.Server.Product.Application.Product.Find;
 
-public class FindProductsUseCase(UserRepository userRepository, ProductRepository productRepository)
+public class UseCase(UserRepository userRepository, ProductRepository productRepository)
 {
     public virtual async Task<Either<Domain.Error, List<Domain.Product>>> ExecuteAsync(Args args)
     {

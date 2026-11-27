@@ -11,19 +11,20 @@ using Tecnyfarma.Server.Product.Domain;
 using Tecnyfarma.Server.Product.Infrastructure;
 using Wolverine;
 using Xunit;
+using UseCase = Tecnyfarma.Server.Product.Application.Product.Find.UseCase;
 
 namespace Tecnyfarma.Server.Product.Test.Infrastructure;
 
 public class ControllerShould
 {
-    private readonly FindProductsUseCase findProducts;
-    private readonly CreateProductUseCase createProduct;
+    private readonly UseCase findProducts;
+    private readonly Product.Application.Product.Create.UseCase createProduct;
     private readonly Tecnyfarma.Server.Product.Infrastructure.Controller controller;
 
     public ControllerShould()
     {
-        findProducts = Substitute.For<FindProductsUseCase>(null, null);
-        createProduct = Substitute.For<CreateProductUseCase>(Substitute.For<ProductRepository>(), Substitute.For<IMessageBus>());
+        findProducts = Substitute.For<UseCase>(null, null);
+        createProduct = Substitute.For<Product.Application.Product.Create.UseCase>(Substitute.For<ProductRepository>(), Substitute.For<IMessageBus>());
         controller = new Tecnyfarma.Server.Product.Infrastructure.Controller(findProducts, createProduct);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };

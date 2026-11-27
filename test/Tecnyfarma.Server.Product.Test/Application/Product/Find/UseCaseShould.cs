@@ -8,17 +8,17 @@ using Xunit;
 
 namespace Tecnyfarma.Server.Product.Test.Application.Product.Find;
 
-public class FindProductsUseCaseShould
+public class UseCaseShould
 {
     private readonly UserRepository userRepository;
     private readonly ProductRepository productRepository;
-    private readonly FindProductsUseCase findProductsUseCase;
+    private readonly UseCase useCase;
 
-    public FindProductsUseCaseShould()
+    public UseCaseShould()
     {
         userRepository = Substitute.For<UserRepository>();
         productRepository = Substitute.For<ProductRepository>();
-        findProductsUseCase = new FindProductsUseCase(userRepository, productRepository);
+        useCase = new UseCase(userRepository, productRepository);
     }
 
     [Fact]
@@ -32,7 +32,7 @@ public class FindProductsUseCaseShould
         userRepository.FindUserAsync("user@example.com").Returns(user);
         productRepository.FindProductsAsync().Returns(products);
 
-        var result = await findProductsUseCase.ExecuteAsync(new Args("user@example.com"));
+        var result = await useCase.ExecuteAsync(new Args("user@example.com"));
 
         result.Match(x =>
             {
@@ -56,7 +56,7 @@ public class FindProductsUseCaseShould
         userRepository.FindUserAsync("user@example.com").Returns(user);
         productRepository.FindProductsAsync().Returns(products);
 
-        var result = await findProductsUseCase.ExecuteAsync(new Args("user@example.com"));
+        var result = await useCase.ExecuteAsync(new Args("user@example.com"));
 
         result.Match(
             foundProducts =>
@@ -73,7 +73,7 @@ public class FindProductsUseCaseShould
     {
         userRepository.FindUserAsync(Arg.Any<string>()).Returns(new Error("User not found"));
 
-        var result = await findProductsUseCase.ExecuteAsync(new Args("user@example.com"));
+        var result = await useCase.ExecuteAsync(new Args("user@example.com"));
 
         result.Match(
             _ => Assert.Fail("Expected an error but got a success result"),
@@ -89,7 +89,7 @@ public class FindProductsUseCaseShould
         userRepository.FindUserAsync("user@example.com").Returns(user);
         productRepository.FindProductsAsync().Returns(new Error("Database error"));
 
-        var result = await findProductsUseCase.ExecuteAsync(new Args("user@example.com"));
+        var result = await useCase.ExecuteAsync(new Args("user@example.com"));
 
         result.Match(
             _ => Assert.Fail("Expected an error but got a success result"),

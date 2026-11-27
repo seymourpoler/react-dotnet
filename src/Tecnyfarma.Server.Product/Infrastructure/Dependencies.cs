@@ -7,6 +7,7 @@ using Tecnyfarma.Server.Product.Application.Product.Create;
 using Tecnyfarma.Server.Product.Application.Product.Find;
 using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Infrastructure.DataBase;
+using UseCase = Tecnyfarma.Server.Product.Application.Product.Find.UseCase;
 
 namespace Tecnyfarma.Server.Product.Infrastructure;
 
@@ -19,9 +20,9 @@ public static class Dependencies
             .UseSqlite(connectionString)
             .ReplaceService<IHistoryRepository, NoLockSqliteHistoryRepository>());
         
-        services.AddScoped<FindProductsUseCase>();
+        services.AddScoped<UseCase>();
         services.AddScoped<CreateUserUseCase>();
-        services.AddScoped<CreateProductUseCase>();
+        services.AddScoped<Application.Product.Create.UseCase>();
         services.AddScoped<ProductRepository, SqliteProductRepository>();
         services.AddScoped<UserRepository, SqliteUserRepository>();
 
