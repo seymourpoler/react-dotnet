@@ -21,7 +21,7 @@ public class ControllerShould
 
     public ControllerShould()
     {
-        useCase = Substitute.For<UseCase>(Substitute.For<PurchaseRepository>());
+        useCase = Substitute.For<UseCase>(Substitute.For<Repository>());
         controller = new Controller(useCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };

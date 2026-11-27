@@ -11,12 +11,12 @@ public class UseCaseShould
 {
     private const string email = "an@email.com";
 
-    private readonly PurchaseRepository repository;
+    private readonly Repository repository;
     private readonly UseCase useCase;
 
     public UseCaseShould()
     {
-        repository = Substitute.For<PurchaseRepository>();
+        repository = Substitute.For<Repository>();
         useCase = new UseCase(repository);
     }
 

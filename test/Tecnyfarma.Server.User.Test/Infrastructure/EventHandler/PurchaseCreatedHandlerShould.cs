@@ -14,7 +14,7 @@ public class PurchaseCreatedHandlerShould
 
     public PurchaseCreatedHandlerShould()
     {
-        useCase = Substitute.For<UseCase>(Substitute.For<PurchaseRepository>());
+        useCase = Substitute.For<UseCase>(Substitute.For<Repository>());
         handler = new PurchaseCreatedHandler(useCase);
     }
 

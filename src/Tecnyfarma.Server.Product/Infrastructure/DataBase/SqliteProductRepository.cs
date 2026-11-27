@@ -4,7 +4,7 @@ using Tecnyfarma.Server.Product.Domain;
     
 namespace Tecnyfarma.Server.Product.Infrastructure.DataBase;
 
-public class SqliteRepository(DbContext dbContext) : Repository
+public class SqliteProductRepository(DbContext dbContext) : Repository
 {
    public async Task<Either<Error, List<Domain.Product>>> FindProductsAsync()
    {

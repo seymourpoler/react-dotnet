@@ -4,7 +4,7 @@ using Tecnyfarma.Server.User.Domain;
 
 namespace Tecnyfarma.Server.User.Infrastructure.DataBase;
 
-public class SqlitePurchaseRepository(DbContext dbContext) : PurchaseRepository
+public class SqlitePurchaseRepository(DbContext dbContext) : Repository
 {
     public async Task<Either<Error, Unit>> SaveAsync(Domain.Purchase purchase)
     {

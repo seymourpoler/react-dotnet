@@ -3,7 +3,7 @@ using Tecnyfarma.Server.User.Domain;
 
 namespace Tecnyfarma.Server.User.Application.Purchase.Find;
 
-public class UseCase(PurchaseRepository repository)
+public class UseCase(Repository repository)
 {
     public virtual async Task<Either<Error, Domain.Purchase[]>> ExecuteAsync(string email)
     {

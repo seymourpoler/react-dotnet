@@ -25,7 +25,7 @@ public static class Dependencies
         services.AddScoped<Application.Register.UseCase>();
         services.AddScoped<Application.Purchase.Create.UseCase>();
         services.AddScoped<UseCase>();
-        services.AddScoped<PurchaseRepository, SqlitePurchaseRepository>();
+        services.AddScoped<Tecnyfarma.Server.User.Application.Purchase.Repository, Tecnyfarma.Server.User.Infrastructure.DataBase.SqlitePurchaseRepository>();
 
         var options = new DbContextOptionsBuilder<DbContext>().UseSqlite(connectionString).Options;
         using var dbContext = new DbContext(options);
