@@ -6,7 +6,7 @@ using NSubstitute;
 using Shouldly;
 using Xunit;
 
-namespace Tecnyfarma.Server.User.test.Infrastructure.LogOut;
+namespace Tecnyfarma.Server.User.Test.Infrastructure.LogOut;
 
 public class ControllerShould
 {

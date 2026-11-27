@@ -1,23 +1,23 @@
-﻿using LanguageExt;
-using NSubstitute;
+﻿using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application.Purchase;
+using Tecnyfarma.Server.User.Application.Purchase.Find;
 using Tecnyfarma.Server.User.Domain;
 using Xunit;
 
-namespace Tecnyfarma.Server.User.Test.Application.Purchase;
+namespace Tecnyfarma.Server.User.Test.Application.Purchase.Find;
 
-public class FindPurchasesUseCaseShould
+public class UseCaseShould
 {
-    const string email = "an@email.com";
-    
-    private readonly PurchaseRepository repository;
-    private readonly FindPurchasesUseCase useCase;
+    private const string email = "an@email.com";
 
-    public FindPurchasesUseCaseShould()
+    private readonly PurchaseRepository repository;
+    private readonly UseCase useCase;
+
+    public UseCaseShould()
     {
         repository = Substitute.For<PurchaseRepository>();
-        useCase = new FindPurchasesUseCase(repository);
+        useCase = new UseCase(repository);
     }
 
     [Fact]
@@ -25,12 +25,12 @@ public class FindPurchasesUseCaseShould
     {
         var purchases = Array.Empty<Domain.Purchase>();
         repository.FindByAsync(Arg.Any<Email>()).Returns(purchases);
-        
+
         var result = await useCase.ExecuteAsync(email);
 
         result.Match(
             Left: _ => Assert.Fail("Itshouldn't be here"),
-            Right: x => x.ShouldBeOfType<Unit>()
+            Right: x => x.ShouldBeOfType<Domain.Purchase[]>()
         );
     }
 

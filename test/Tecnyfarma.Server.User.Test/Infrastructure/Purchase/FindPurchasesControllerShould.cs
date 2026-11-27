@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using Shouldly;
 using Tecnyfarma.Server.User.Application.Purchase;
+using Tecnyfarma.Server.User.Application.Purchase.Find;
 using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.Purchase;
 using Xunit;
@@ -12,14 +13,14 @@ namespace Tecnyfarma.Server.User.Test.Infrastructure.Purchase;
 
 public class FindPurchasesControllerShould
 {
-    const string email = "a@mail.es";
-    
-    private readonly FindPurchasesUseCase useCase;
+    private const string email = "a@mail.es";
+
+    private readonly UseCase useCase;
     private readonly FindPurchasesController controller;
 
     public FindPurchasesControllerShould()
     {
-        useCase = Substitute.For<FindPurchasesUseCase>(Substitute.For<PurchaseRepository>());
+        useCase = Substitute.For<UseCase>(Substitute.For<PurchaseRepository>());
         controller = new FindPurchasesController(useCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
@@ -35,17 +36,17 @@ public class FindPurchasesControllerShould
         useCase.ExecuteAsync(email).Returns(purchases);
 
         var result = await controller.FindPuchases();
-        
+
         result.ShouldBeOfType<OkObjectResult>();
     }
-    
+
     [Fact]
     public async Task ReturnErrorWhenSomethingGoesWrong()
     {
         useCase.ExecuteAsync(email).Returns(new Error("There is something wrong"));
-        
+
         var result = await controller.FindPuchases();
-        
+
         result.ShouldBeOfType<BadRequestObjectResult>();
     }
 }
