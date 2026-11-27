@@ -17,7 +17,7 @@ public class SqlitePurchaseRepository(DbContext dbContext) : PurchaseRepository
         };
         await dbContext.Purchases.AddAsync(databasePurchase);
         await dbContext.SaveChangesAsync();
-        return Unit.Default;    
+        return Unit.Default;
     }
 
     public async Task<Either<Error, Domain.Purchase[]>> FindByAsync(Email email)

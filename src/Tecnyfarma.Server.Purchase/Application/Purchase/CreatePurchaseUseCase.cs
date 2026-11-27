@@ -16,7 +16,7 @@ public class CreatePurchaseUseCase(UserRepository userRepository, ProductReposit
             from product in productRepository.FindProductAsync(idProduct).ToAsync()
             from purchase in Domain.Purchase.Create(user, product).ToAsync()
             from result in purchaseRepository.SavePurchaseAsync(purchase).ToAsync()
-            from __ in PublishPurchaseCreated(product, purchase).ToAsync()
+            from _ in PublishPurchaseCreated(product, purchase).ToAsync()
             select result
         );
     }
@@ -30,7 +30,7 @@ public class CreatePurchaseUseCase(UserRepository userRepository, ProductReposit
             Price = purchase.Price,
             CreatedAtUtc = purchase.CreatedAtUtc
         };
-        
+
         await bus.SendAsync(theEvent);
         return Unit.Default;
     }

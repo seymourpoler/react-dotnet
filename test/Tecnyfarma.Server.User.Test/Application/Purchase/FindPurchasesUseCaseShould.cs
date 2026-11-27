@@ -8,8 +8,8 @@ namespace Tecnyfarma.Server.User.Test.Application.Purchase;
 
 public class FindPurchasesUseCaseShould
 {
-    const string email = "an@email.com";
-    
+    private const string email = "an@email.com";
+
     private readonly PurchaseRepository repository;
     private readonly FindPurchasesUseCase useCase;
 
@@ -24,7 +24,7 @@ public class FindPurchasesUseCaseShould
     {
         var purchases = Array.Empty<Domain.Purchase>();
         repository.FindByAsync(Arg.Any<Email>()).Returns(purchases);
-        
+
         var result = await useCase.ExecuteAsync(email);
 
         result.Match(

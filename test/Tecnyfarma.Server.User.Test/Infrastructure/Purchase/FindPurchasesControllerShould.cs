@@ -12,8 +12,8 @@ namespace Tecnyfarma.Server.User.Test.Infrastructure.Purchase;
 
 public class FindPurchasesControllerShould
 {
-    const string email = "a@mail.es";
-    
+    private const string email = "a@mail.es";
+
     private readonly FindPurchasesUseCase useCase;
     private readonly FindPurchasesController controller;
 
@@ -35,17 +35,17 @@ public class FindPurchasesControllerShould
         useCase.ExecuteAsync(email).Returns(purchases);
 
         var result = await controller.FindPuchases();
-        
+
         result.ShouldBeOfType<OkObjectResult>();
     }
-    
+
     [Fact]
     public async Task ReturnErrorWhenSomethingGoesWrong()
     {
         useCase.ExecuteAsync(email).Returns(new Error("There is something wrong"));
-        
+
         var result = await controller.FindPuchases();
-        
+
         result.ShouldBeOfType<BadRequestObjectResult>();
     }
 }

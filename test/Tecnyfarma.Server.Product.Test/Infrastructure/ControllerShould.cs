@@ -61,7 +61,6 @@ public class ControllerShould
         result.ShouldBeOfType<BadRequestObjectResult>();
     }
 
-
     private void SetLoggedUser(string email)
     {
         var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, email) }, "test");
@@ -75,9 +74,7 @@ public class ControllerShould
         createProduct.ExecuteAsync(Arg.Any<Tecnyfarma.Server.Product.Application.Product.Create.Args>()).Returns(Unit.Default);
         var request = new Request { Name = "a-name", Description = "a-description", Price = 10.5f };
 
-
         var result = await controller.Create(request);
-
 
         result.ShouldBeOfType<OkResult>();
     }
@@ -88,9 +85,7 @@ public class ControllerShould
         createProduct.ExecuteAsync(Arg.Any<Tecnyfarma.Server.Product.Application.Product.Create.Args>()).Returns(new Error("There is an error"));
         var request = new Request { Name = "a-name", Description = "a-description", Price = 10.5f };
 
-
         var result = await controller.Create(request);
-
 
         result.ShouldBeOfType<BadRequestObjectResult>();
     }
