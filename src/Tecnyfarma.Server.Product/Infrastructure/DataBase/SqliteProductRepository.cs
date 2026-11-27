@@ -7,8 +7,24 @@ namespace Tecnyfarma.Server.Product.Infrastructure.DataBase;
 public class SqliteProductRepository(DbContext dbContext) : ProductRepository
 {
    public async Task<Either<Error, List<Domain.Product>>> FindProductsAsync()
+   {
+       return dbContext.Products.Select(p => new Domain.Product(
+               p.Id,
+               p.Name,
+               p.Description,
+               p.Price))
+           .ToList();
+   }
+
+    public async Task<Either<Error, Unit>> SaveAsync(Domain.Product product)
     {
-        var products = dbContext.Products.Select(p => new Domain.Product(p.Id, p.Name, p.Description, p.Price)).ToList();
-        return products.Select(p => new Domain.Product(p.Id, p.Name, p.Description, p.Price)).ToList();
+        await dbContext.Products.AddAsync(new Models.Product
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Description = product.Description,
+            Price = product.Price
+        });
+        return Unit.Default;
     }
 }

@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Tecnyfarma.Server.Product.Message\Tecnyfarma.Server.Product.Message.csproj" />
       <ProjectReference Include="..\Tecnyfarma.Server.User.Message\Tecnyfarma.Server.User.Message.csproj" />
     </ItemGroup>
 
