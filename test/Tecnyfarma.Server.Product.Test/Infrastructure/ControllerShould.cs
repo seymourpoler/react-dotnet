@@ -9,6 +9,7 @@ using Tecnyfarma.Server.Product.Application.Product.Create;
 using Tecnyfarma.Server.Product.Application.Product.Find;
 using Tecnyfarma.Server.Product.Domain;
 using Tecnyfarma.Server.Product.Infrastructure;
+using Wolverine;
 using Xunit;
 
 namespace Tecnyfarma.Server.Product.Test.Infrastructure;
@@ -22,7 +23,7 @@ public class ControllerShould
     public ControllerShould()
     {
         findProducts = Substitute.For<FindProductsUseCase>(null, null);
-        createProduct = Substitute.For<CreateProductUseCase>(Substitute.For<ProductRepository>());
+        createProduct = Substitute.For<CreateProductUseCase>(Substitute.For<ProductRepository>(), Substitute.For<IMessageBus>());
         controller = new Tecnyfarma.Server.Product.Infrastructure.Controller(findProducts, createProduct);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
@@ -59,7 +60,8 @@ public class ControllerShould
 
         result.ShouldBeOfType<BadRequestObjectResult>();
     }
-    
+
+
     private void SetLoggedUser(string email)
     {
         var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, email) }, "test");
@@ -71,10 +73,12 @@ public class ControllerShould
     public async Task ReturnCreatedProduct()
     {
         createProduct.ExecuteAsync(Arg.Any<Tecnyfarma.Server.Product.Application.Product.Create.Args>()).Returns(Unit.Default);
-        var request = new Request { Name = "a-name",  Description = "a-description", Price = 10.5f };
-        
+        var request = new Request { Name = "a-name", Description = "a-description", Price = 10.5f };
+
+
         var result = await controller.Create(request);
-        
+
+
         result.ShouldBeOfType<OkResult>();
     }
 
@@ -82,10 +86,12 @@ public class ControllerShould
     public async Task ReturnErrorWhenThereIsAnErrorOnCreatingProduct()
     {
         createProduct.ExecuteAsync(Arg.Any<Tecnyfarma.Server.Product.Application.Product.Create.Args>()).Returns(new Error("There is an error"));
-        var request = new Request { Name = "a-name",  Description = "a-description", Price = 10.5f };
-        
+        var request = new Request { Name = "a-name", Description = "a-description", Price = 10.5f };
+
+
         var result = await controller.Create(request);
-        
+
+
         result.ShouldBeOfType<BadRequestObjectResult>();
     }
 }
