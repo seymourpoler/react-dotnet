@@ -28,7 +28,7 @@ public class CreatePurchaseUseCaseShould
                 x.CreatedAtUtc == new DateTime(2026, 01, 01)
             )
         ).Returns(Unit.Default);
-        var args = new CreatePurchaseArgs("ab@email.com", "any-nae", 10, new DateTime(2026,01,01));
+        var args = new Args("ab@email.com", "any-nae", 10, new DateTime(2026,01,01));
         
         var result = await useCase.ExecuteAsync(args);
 
@@ -42,7 +42,7 @@ public class CreatePurchaseUseCaseShould
     public async Task ReturnErrorWhenThePurchaseCannotBeCreated()
     {
         repository.SaveAsync(Arg.Any<Domain.Purchase>()).Returns(new Error("database error"));
-        var args = new CreatePurchaseArgs("ab@email.com", "any-nae", 10, new DateTime(2026,01,01));
+        var args = new Args("ab@email.com", "any-nae", 10, new DateTime(2026,01,01));
         
         var result = await useCase.ExecuteAsync(args);
         

@@ -30,7 +30,7 @@ public class PurchaseCreatedHandlerShould
 
         await handler.Handle(anEvent);
 
-        useCase.Received().ExecuteAsync(Arg.Is<CreatePurchaseArgs>(x =>
+        useCase.Received().ExecuteAsync(Arg.Is<Args>(x =>
                 x.Email == "an@email.com" &&
                 x.Name == "any-name" &&
                 x.Price == 10 &&

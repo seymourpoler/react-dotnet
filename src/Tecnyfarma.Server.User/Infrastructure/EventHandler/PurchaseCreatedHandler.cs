@@ -7,7 +7,7 @@ public class PurchaseCreatedHandler(CreatePurchaseUseCase useCase)
 {
     public async Task Handle(PurchaseCreated purchaseCreated)
     {
-        var args = new CreatePurchaseArgs(
+        var args = new Args(
             purchaseCreated.Email,
             purchaseCreated.Name,
             purchaseCreated.Price,
