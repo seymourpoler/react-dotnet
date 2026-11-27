@@ -16,13 +16,13 @@ public class UseCaseShould
     private const string Description = "Description";
     private const float Price = 100f;
 
-    private readonly ProductRepository repository;
+    private readonly Repository repository;
     private readonly IMessageBus bus;
     private readonly UseCase useCase;
 
     public UseCaseShould()
     {
-        repository = Substitute.For<ProductRepository>();
+        repository = Substitute.For<Repository>();
         bus = Substitute.For<IMessageBus>();
         useCase = new UseCase(repository, bus);
     }

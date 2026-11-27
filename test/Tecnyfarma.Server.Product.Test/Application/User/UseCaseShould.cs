@@ -9,13 +9,13 @@ namespace Tecnyfarma.Server.Product.Test.Application.User;
 
 public class UseCaseShould
 {
-    private readonly UserRepository userRepository;
-    private readonly CreateUserUseCase useCase;
+    private readonly Repository repository;
+    private readonly UseCase useCase;
 
     public UseCaseShould()
     {
-        userRepository = Substitute.For<UserRepository>();
-        useCase = new CreateUserUseCase(userRepository);
+        repository = Substitute.For<Repository>();
+        useCase = new UseCase(repository);
     }
 
     [Theory]
@@ -23,11 +23,11 @@ public class UseCaseShould
     [InlineData(UserType.Premium)]
     public async Task SaveTheUserWithTheGivenType(UserType type)
     {
-        userRepository.SaveUserAsync(Arg.Any<Tecnyfarma.Server.Product.Domain.User>()).Returns(Unit.Default);
+        repository.SaveUserAsync(Arg.Any<Tecnyfarma.Server.Product.Domain.User>()).Returns(Unit.Default);
 
         var result = await useCase.ExecuteAsync("user@example.com", type);
 
-        await userRepository.Received(1).SaveUserAsync(Arg.Is<Tecnyfarma.Server.Product.Domain.User>(
+        await repository.Received(1).SaveUserAsync(Arg.Is<Tecnyfarma.Server.Product.Domain.User>(
             user => user.Email == "user@example.com" && user.Type == type));
         result.IsRight.ShouldBeTrue();
     }
@@ -35,7 +35,7 @@ public class UseCaseShould
     [Fact]
     public async Task ReturnTheErrorWhenTheUserCannotBeSaved()
     {
-        userRepository.SaveUserAsync(Arg.Any<Tecnyfarma.Server.Product.Domain.User>()).Returns(new Error("Database error"));
+        repository.SaveUserAsync(Arg.Any<Tecnyfarma.Server.Product.Domain.User>()).Returns(new Error("Database error"));
 
         var result = await useCase.ExecuteAsync("user@example.com", UserType.Freemium);
 
@@ -43,6 +43,6 @@ public class UseCaseShould
             _ => Assert.Fail("Expected an error but got a success result"),
             error => error.Message.ShouldBe("Database error")
         );
-        await userRepository.Received(1).SaveUserAsync(Arg.Any<Tecnyfarma.Server.Product.Domain.User>());
+        await repository.Received(1).SaveUserAsync(Arg.Any<Tecnyfarma.Server.Product.Domain.User>());
     }
 }

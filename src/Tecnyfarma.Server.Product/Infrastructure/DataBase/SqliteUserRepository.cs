@@ -5,7 +5,7 @@ using Tecnyfarma.Server.Product.Domain;
 
 namespace Tecnyfarma.Server.Product.Infrastructure.DataBase;
 
-public class SqliteUserRepository(DbContext dbContext) : UserRepository
+public class SqliteUserRepository(DbContext dbContext) : Repository
 {
     public async Task<Either<Error, Tecnyfarma.Server.Product.Domain.User>> FindUserAsync(string email)
     {

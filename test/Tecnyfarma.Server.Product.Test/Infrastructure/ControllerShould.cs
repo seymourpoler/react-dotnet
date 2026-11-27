@@ -24,7 +24,7 @@ public class ControllerShould
     public ControllerShould()
     {
         findProducts = Substitute.For<UseCase>(null, null);
-        createProduct = Substitute.For<Product.Application.Product.Create.UseCase>(Substitute.For<ProductRepository>(), Substitute.For<IMessageBus>());
+        createProduct = Substitute.For<Product.Application.Product.Create.UseCase>(Substitute.For<Repository>(), Substitute.For<IMessageBus>());
         controller = new Tecnyfarma.Server.Product.Infrastructure.Controller(findProducts, createProduct);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };

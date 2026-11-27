@@ -5,20 +5,21 @@ using Tecnyfarma.Server.Product.Application.Product.Find;
 using Tecnyfarma.Server.Product.Application.User;
 using Tecnyfarma.Server.Product.Domain;
 using Xunit;
+using UseCase = Tecnyfarma.Server.Product.Application.Product.Find.UseCase;
 
 namespace Tecnyfarma.Server.Product.Test.Application.Product.Find;
 
 public class UseCaseShould
 {
-    private readonly UserRepository userRepository;
-    private readonly ProductRepository productRepository;
+    private readonly Tecnyfarma.Server.Product.Application.User.Repository userRepository;
+    private readonly Tecnyfarma.Server.Product.Application.Product.Repository repository;
     private readonly UseCase useCase;
 
     public UseCaseShould()
     {
-        userRepository = Substitute.For<UserRepository>();
-        productRepository = Substitute.For<ProductRepository>();
-        useCase = new UseCase(userRepository, productRepository);
+        userRepository = Substitute.For<Tecnyfarma.Server.Product.Application.User.Repository>();
+        repository = Substitute.For<Tecnyfarma.Server.Product.Application.Product.Repository>();
+        useCase = new UseCase(userRepository, repository);
     }
 
     [Fact]
@@ -30,7 +31,7 @@ public class UseCaseShould
             new(Guid.NewGuid(), "Product 1", "Description 1", 100f)
         };
         userRepository.FindUserAsync("user@example.com").Returns(user);
-        productRepository.FindProductsAsync().Returns(products);
+        repository.FindProductsAsync().Returns(products);
 
         var result = await useCase.ExecuteAsync(new Args("user@example.com"));
 
@@ -42,7 +43,7 @@ public class UseCaseShould
             _ => Assert.Fail("Expected products but got an error")
         );
         await userRepository.Received(1).FindUserAsync("user@example.com");
-        await productRepository.Received(1).FindProductsAsync();
+        await repository.Received(1).FindProductsAsync();
     }
 
     [Fact]
@@ -54,7 +55,7 @@ public class UseCaseShould
             new(Guid.NewGuid(), "Product 1", "Description 1", 100f)
         };
         userRepository.FindUserAsync("user@example.com").Returns(user);
-        productRepository.FindProductsAsync().Returns(products);
+        repository.FindProductsAsync().Returns(products);
 
         var result = await useCase.ExecuteAsync(new Args("user@example.com"));
 
@@ -79,7 +80,7 @@ public class UseCaseShould
             _ => Assert.Fail("Expected an error but got a success result"),
             error => error.Message.ShouldBe("User not found")
         );
-        await productRepository.DidNotReceive().FindProductsAsync();
+        await repository.DidNotReceive().FindProductsAsync();
     }
 
     [Fact]
@@ -87,7 +88,7 @@ public class UseCaseShould
     {
         var user = new Tecnyfarma.Server.Product.Domain.User("user@example.com", UserType.Freemium);
         userRepository.FindUserAsync("user@example.com").Returns(user);
-        productRepository.FindProductsAsync().Returns(new Error("Database error"));
+        repository.FindProductsAsync().Returns(new Error("Database error"));
 
         var result = await useCase.ExecuteAsync(new Args("user@example.com"));
 

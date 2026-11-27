@@ -10,13 +10,13 @@ namespace Tecnyfarma.Server.Product.Test.Infrastructure.EventHandler;
 
 public class PremiumUserCreatedHandlerShould
 {
-    private readonly CreateUserUseCase useCase;
+    private readonly UseCase useCase;
     private readonly PremiumUserCreatedHandler handler;
 
     public PremiumUserCreatedHandlerShould()
     {
-        var userRepository = Substitute.For<UserRepository>();
-        useCase = Substitute.For<CreateUserUseCase>(userRepository);
+        var userRepository = Substitute.For<Repository>();
+        useCase = Substitute.For<UseCase>(userRepository);
         handler = new PremiumUserCreatedHandler(useCase);
     }
 

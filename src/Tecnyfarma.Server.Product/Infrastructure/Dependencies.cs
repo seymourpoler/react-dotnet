@@ -21,10 +21,10 @@ public static class Dependencies
             .ReplaceService<IHistoryRepository, NoLockSqliteHistoryRepository>());
         
         services.AddScoped<UseCase>();
-        services.AddScoped<CreateUserUseCase>();
+        services.AddScoped<Application.User.UseCase>();
         services.AddScoped<Application.Product.Create.UseCase>();
-        services.AddScoped<ProductRepository, SqliteProductRepository>();
-        services.AddScoped<UserRepository, SqliteUserRepository>();
+        services.AddScoped<Tecnyfarma.Server.Product.Application.Product.Repository, SqliteRepository>();
+        services.AddScoped<Tecnyfarma.Server.Product.Application.User.Repository, SqliteUserRepository>();
 
         var options = new DbContextOptionsBuilder<DataBase.DbContext>()
             .UseSqlite(connectionString)
