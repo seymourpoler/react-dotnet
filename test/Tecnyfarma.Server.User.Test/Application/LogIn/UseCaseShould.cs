@@ -57,8 +57,7 @@ public class UseCaseShould
     public async Task ReturnErrorWhenUserNotFound()
     {
         var args = new Args("user@example.com", "validpassword");
-        userRepository.FindAsync(Arg.Any<Email>())
-            .Returns(new Error("User not found"));
+        userRepository.FindAsync(Arg.Any<Email>()).Returns(new Error("User not found"));
 
         var result = await useCase.Execute(args);
 
@@ -73,8 +72,8 @@ public class UseCaseShould
     {
         var email = Email.Create("user@example.com").Match(Right: x => x, Left: _ => throw new Exception());
         var password = Password.Create("a-password").Match(Right: x => x, Left: _ => throw new Exception());
-        var storedUser = new Server.User.Domain.User(email, password);
-        userRepository.FindAsync(Arg.Any<Email>()).Returns(storedUser);
+        var user = new Server.User.Domain.User(email, password);
+        userRepository.FindAsync(Arg.Any<Email>()).Returns(user);
         var args = new Args("user@example.com", "wrongpassword!");
 
         var result = await useCase.Execute(args);
@@ -90,11 +89,8 @@ public class UseCaseShould
     {
         var email = Email.Create("user@example.com").Match(Right: x => x, Left: _ => throw new Exception());
         var password = Password.Create("a-password").Match(Right: x => x, Left: _ => throw new Exception());
-        var storedUser = new Server.User.Domain.User(email, password);
-
-        userRepository.FindAsync(Arg.Any<Email>())
-            .Returns(Task.FromResult<Either<Error, Server.User.Domain.User>>(storedUser));
-
+        var user = new Server.User.Domain.User(email, password);
+        userRepository.FindAsync(Arg.Any<Email>()).Returns(Task.FromResult<Either<Error, Server.User.Domain.User>>(user));
         var args = new Args("user@example.com", "a-password");
 
         var result = await useCase.Execute(args);

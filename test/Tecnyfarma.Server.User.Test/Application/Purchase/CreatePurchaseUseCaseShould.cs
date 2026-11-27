@@ -24,7 +24,7 @@ public class CreatePurchaseUseCaseShould
         repository.SaveAsync(Arg.Is<Domain.Purchase>(x =>
                 x.Email == "ab@email.com" &&
                 x.Name == "any-nae" &&
-                x.Price == 10 &&
+                x.Price == 10f &&
                 x.CreatedAtUtc == new DateTime(2026, 01, 01)
             )
         ).Returns(Unit.Default);
