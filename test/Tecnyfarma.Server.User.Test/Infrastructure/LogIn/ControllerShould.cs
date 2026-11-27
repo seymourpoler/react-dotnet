@@ -11,7 +11,7 @@ using Tecnyfarma.Server.User.Infrastructure.LogIn;
 using Xunit;
 using Controller = Tecnyfarma.Server.User.Infrastructure.LogIn.Controller;
 
-namespace Tecnyfarma.Server.User.test.Infrastructure.LogIn;
+namespace Tecnyfarma.Server.User.Test.Infrastructure.LogIn;
 
 public class ControllerShould
 {

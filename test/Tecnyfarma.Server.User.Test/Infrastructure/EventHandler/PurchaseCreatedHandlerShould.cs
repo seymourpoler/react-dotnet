@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using Tecnyfarma.Server.Purchase.Message;
 using Tecnyfarma.Server.User.Application.Purchase;
+using Tecnyfarma.Server.User.Application.Purchase.Create;
 using Tecnyfarma.Server.User.Infrastructure.EventHandler;
 using Xunit;
 
@@ -8,12 +9,12 @@ namespace Tecnyfarma.Server.User.Test.Infrastructure.EventHandler;
 
 public class PurchaseCreatedHandlerShould
 {
-    private readonly CreatePurchaseUseCase useCase;
+    private readonly UseCase useCase;
     private readonly PurchaseCreatedHandler handler;
 
     public PurchaseCreatedHandlerShould()
     {
-        useCase = Substitute.For<CreatePurchaseUseCase>(Substitute.For<PurchaseRepository>());
+        useCase = Substitute.For<UseCase>(Substitute.For<PurchaseRepository>());
         handler = new PurchaseCreatedHandler(useCase);
     }
 
@@ -30,7 +31,7 @@ public class PurchaseCreatedHandlerShould
 
         await handler.Handle(anEvent);
 
-        useCase.Received().ExecuteAsync(Arg.Is<CreatePurchaseArgs>(x =>
+        useCase.Received().ExecuteAsync(Arg.Is<Args>(x =>
                 x.Email == "an@email.com" &&
                 x.Name == "any-name" &&
                 x.Price == 10 &&

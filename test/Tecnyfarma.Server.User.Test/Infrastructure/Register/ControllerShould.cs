@@ -8,7 +8,7 @@ using Tecnyfarma.Server.User.Infrastructure.Register;
 using Xunit;
 using Controller = Tecnyfarma.Server.User.Infrastructure.Register.Controller;
 
-namespace Tecnyfarma.Server.User.test.Infrastructure.Register;
+namespace Tecnyfarma.Server.User.Test.Infrastructure.Register;
 
 public class ControllerShould
 {

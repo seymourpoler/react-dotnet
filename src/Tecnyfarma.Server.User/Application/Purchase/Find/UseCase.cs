@@ -1,9 +1,9 @@
 ﻿using LanguageExt;
 using Tecnyfarma.Server.User.Domain;
 
-namespace Tecnyfarma.Server.User.Application.Purchase;
+namespace Tecnyfarma.Server.User.Application.Purchase.Find;
 
-public class FindPurchasesUseCase(PurchaseRepository repository)
+public class UseCase(PurchaseRepository repository)
 {
     public virtual async Task<Either<Error, Domain.Purchase[]>> ExecuteAsync(string email)
     {
