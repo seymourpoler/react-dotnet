@@ -8,20 +8,21 @@ using Tecnyfarma.Server.User.Application.Purchase.Find;
 using Tecnyfarma.Server.User.Domain;
 using Tecnyfarma.Server.User.Infrastructure.Purchase;
 using Xunit;
+using Controller = Tecnyfarma.Server.User.Infrastructure.Purchase.Controller;
 
 namespace Tecnyfarma.Server.User.Test.Infrastructure.Purchase;
 
-public class FindPurchasesControllerShould
+public class ControllerShould
 {
     private const string email = "a@mail.es";
 
     private readonly UseCase useCase;
-    private readonly FindPurchasesController controller;
+    private readonly Controller controller;
 
-    public FindPurchasesControllerShould()
+    public ControllerShould()
     {
         useCase = Substitute.For<UseCase>(Substitute.For<PurchaseRepository>());
-        controller = new FindPurchasesController(useCase);
+        controller = new Controller(useCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };
         var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, email) }, "test");

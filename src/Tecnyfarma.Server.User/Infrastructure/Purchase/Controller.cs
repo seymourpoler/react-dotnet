@@ -7,7 +7,7 @@ using Tecnyfarma.Server.User.Application.Purchase.Find;
 namespace Tecnyfarma.Server.User.Infrastructure.Purchase;
 
 [ApiController]
-public class FindPurchasesController(UseCase useCase) : ControllerBase
+public class Controller(UseCase useCase) : ControllerBase
 {
     [Authorize]
     [HttpGet("/api/v0/users/purchases")]
