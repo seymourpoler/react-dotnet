@@ -13,12 +13,12 @@ public class ProductCreatedHandlerShould
     {
         var idProduct = Guid.NewGuid();
         var anEvent = new ProductCreated { Id = idProduct, Name =  "Test" , Price = 100 };
-        var useCase = Substitute.For<CreateProductUseCase>(Substitute.For<ProductRepository>());
+        var useCase = Substitute.For<UseCase>(Substitute.For<ProductRepository>());
         var handler = new ProductCreatedHandler(useCase);
         
         await handler.Handle(anEvent);
 
-        await useCase.Received().ExecuteAsync(Arg.Is<CreateProductArgs>(x =>
+        await useCase.Received().ExecuteAsync(Arg.Is<Args>(x =>
                 x.IdProduct == idProduct &&
                 x.Name == "Test" &&
                 x.Price == 100

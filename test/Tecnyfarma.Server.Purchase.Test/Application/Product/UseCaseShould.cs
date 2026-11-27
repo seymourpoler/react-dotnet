@@ -7,26 +7,26 @@ using Xunit;
 
 namespace Tecnyfarma.Server.Purchase.Test.Application.Product;
 
-public class CreateProductUseCaseShould
+public class UseCaseShould
 {
     private const string Name = "Product";
     private const float Price = 100f;
     private static readonly Guid ProductId = Guid.NewGuid();
 
-    private readonly ProductRepository repository;
-    private readonly CreateProductUseCase useCase;
+    private readonly ProductRepository productRepository;
+    private readonly UseCase useCase;
 
-    public CreateProductUseCaseShould()
+    public UseCaseShould()
     {
-        repository = Substitute.For<ProductRepository>();
-        useCase = new CreateProductUseCase(repository);
+        productRepository = Substitute.For<ProductRepository>();
+        useCase = new UseCase(productRepository);
     }
 
     [Fact]
     public async Task SaveTheProductBuiltFromTheArguments()
     {
-        repository.SaveProductAsync(Arg.Any<Domain.Product>()).Returns(Unit.Default);
-        var args = new CreateProductArgs(ProductId, Name, Price);
+        productRepository.SaveProductAsync(Arg.Any<Domain.Product>()).Returns(Unit.Default);
+        var args = new Args(ProductId, Name, Price);
         
         var result = await useCase.ExecuteAsync(args);
 
@@ -34,7 +34,7 @@ public class CreateProductUseCaseShould
             Left: _ => Assert.Fail("Expected an error but got success result"),
             Right: x => x.ShouldBeOfType<Unit>()
         );
-        await repository.Received(1).SaveProductAsync(Arg.Is<Domain.Product>(product =>
+        await productRepository.Received(1).SaveProductAsync(Arg.Is<Domain.Product>(product =>
             product.Id == ProductId &&
             product.Name == Name &&
             product.Price == Price));
@@ -43,8 +43,8 @@ public class CreateProductUseCaseShould
     [Fact]
     public async Task ReturnErrorWhenTheProductCannotBeSaved()
     {
-        repository.SaveProductAsync(Arg.Any<Domain.Product>()).Returns(new Error("database error"));
-        var args = new CreateProductArgs(ProductId, Name, Price);
+        productRepository.SaveProductAsync(Arg.Any<Domain.Product>()).Returns(new Error("database error"));
+        var args = new Args(ProductId, Name, Price);
         
         var result = await useCase.ExecuteAsync(args);
 

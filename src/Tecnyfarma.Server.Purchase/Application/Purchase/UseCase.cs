@@ -7,7 +7,7 @@ using Wolverine;
 
 namespace Tecnyfarma.Server.Purchase.Application.Purchase;
 
-public class CreatePurchaseUseCase(UserRepository userRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository, IMessageBus bus)
+public class UseCase(UserRepository userRepository, ProductRepository productRepository, PurchaseRepository purchaseRepository, IMessageBus bus)
 {
     public virtual async Task<Either<Error, Unit>> ExecuteAsync(Guid idProduct, string email)
     {

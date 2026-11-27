@@ -3,10 +3,10 @@ using Tecnyfarma.Server.User.Message;
 
 namespace Tecnyfarma.Server.Purchase.Infrastructure.EventHandler;
 
-public class PremiumUserCreatedHandler(CreateUserUseCase createUserUseCase)
+public class PremiumUserCreatedHandler(UseCase useCase)
 {
     public async Task Handle(PremiumUserCreated userCreated)
     {
-        await createUserUseCase.ExecuteAsync(userCreated.Email, Domain.UserType.Premium);
+        await useCase.ExecuteAsync(userCreated.Email, Domain.UserType.Premium);
     }
 }

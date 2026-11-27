@@ -8,13 +8,13 @@ namespace Tecnyfarma.Server.Purchase.Test.Infrastructure.EventHandler;
 
 public class PremiumUserCreatedHandlerShould
 {
-    private readonly CreateUserUseCase createUserUseCase;
+    private readonly UseCase useCase;
     private readonly PremiumUserCreatedHandler handler;
 
     public PremiumUserCreatedHandlerShould()
     {
-        createUserUseCase = Substitute.For<CreateUserUseCase>(Substitute.For<UserRepository>());
-        handler = new PremiumUserCreatedHandler(createUserUseCase);
+        useCase = Substitute.For<UseCase>(Substitute.For<UserRepository>());
+        handler = new PremiumUserCreatedHandler(useCase);
     }
     
     [Fact]
@@ -26,6 +26,6 @@ public class PremiumUserCreatedHandlerShould
         
         await handler.Handle(anEvent);
         
-        await createUserUseCase.Received(1).ExecuteAsync(anEvent.Email, Domain.UserType.Premium);
+        await useCase.Received(1).ExecuteAsync(anEvent.Email, Domain.UserType.Premium);
     }
 }

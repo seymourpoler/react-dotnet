@@ -6,7 +6,7 @@ using Tecnyfarma.Server.Purchase.Application.Purchase;
 namespace Tecnyfarma.Server.Purchase.Infrastructure;
 
 [ApiController]
-public class Controller(CreatePurchaseUseCase useCase) : ControllerBase
+public class Controller(UseCase useCase) : ControllerBase
 {
     [Authorize]
     [HttpPost("api/v0/purchases")]

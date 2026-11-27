@@ -7,15 +7,15 @@ using Xunit;
 
 namespace Tecnyfarma.Server.Purchase.Test.Application.User;
 
-public class CreateUserUseCaseShould
+public class UseCaseShould
 {
     private readonly UserRepository userRepository;
-    private readonly CreateUserUseCase useCase;
+    private readonly UseCase useCase;
 
-    public CreateUserUseCaseShould()
+    public UseCaseShould()
     {
         userRepository = Substitute.For<UserRepository>();
-        useCase = new CreateUserUseCase(userRepository);
+        useCase = new UseCase(userRepository);
     }
 
     [Fact]

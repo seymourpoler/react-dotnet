@@ -13,12 +13,12 @@ namespace Tecnyfarma.Server.Purchase.Test.Infrastructure;
 
 public class ControllerShould
 {
-    private readonly CreatePurchaseUseCase useCase;
+    private readonly UseCase useCase;
     private readonly Tecnyfarma.Server.Purchase.Infrastructure.Controller controller;
     
     public ControllerShould()
     {
-        useCase = Substitute.For<CreatePurchaseUseCase>(null, null, null, null);
+        useCase = Substitute.For<UseCase>(null, null, null, null);
         controller = new Tecnyfarma.Server.Purchase.Infrastructure.Controller(useCase);
         var httpContext = Substitute.For<HttpContext>();
         controller.ControllerContext = new ControllerContext { HttpContext = httpContext };

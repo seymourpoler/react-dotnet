@@ -16,7 +16,7 @@ public class SqliteProductRepositoryShould : IDisposable
     private readonly string databaseName = Guid.NewGuid().ToString();
     private readonly DbContextOptions<Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext> options;
     private readonly Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext dbContext;
-    private readonly SqliteProductRepository repository;
+    private readonly SqliteProductRepository productRepository;
 
     public SqliteProductRepositoryShould()
     {
@@ -25,7 +25,7 @@ public class SqliteProductRepositoryShould : IDisposable
             .Options;
 
         dbContext = new Tecnyfarma.Server.Purchase.Infrastructure.DataBase.DbContext(options);
-        repository = new SqliteProductRepository(dbContext);
+        productRepository = new SqliteProductRepository(dbContext);
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class SqliteProductRepositoryShould : IDisposable
         dbContext.Products.Add(new Tecnyfarma.Server.Purchase.Infrastructure.DataBase.Models.Product { Id = id, Name = ProductName, Price = ProductPrice });
         await dbContext.SaveChangesAsync();
 
-        var result = await repository.FindProductAsync(id);
+        var result = await productRepository.FindProductAsync(id);
 
         result.Match(
             Left: error => Assert.Fail($"Expected a product but got the error '{error.Message}'"),
@@ -50,7 +50,7 @@ public class SqliteProductRepositoryShould : IDisposable
     [Fact]
     public async Task ReturnErrorWhenTheProductDoesNotExist()
     {
-        var result = await repository.FindProductAsync(Guid.NewGuid());
+        var result = await productRepository.FindProductAsync(Guid.NewGuid());
 
         result.Match(
             Right: _ => Assert.Fail("Expected an error but got a product"),
@@ -60,7 +60,7 @@ public class SqliteProductRepositoryShould : IDisposable
     [Fact]
     public async Task ReturnErrorWhenTheLookupFails()
     {
-        var result = await repository.FindProductAsync(Guid.NewGuid());
+        var result = await productRepository.FindProductAsync(Guid.NewGuid());
 
         result.Match(
             Left: error => error.Message.ShouldBe("Product not found"),
@@ -73,7 +73,7 @@ public class SqliteProductRepositoryShould : IDisposable
     {
         var product = GivenAProduct();
 
-        var result = await repository.SaveProductAsync(product);
+        var result = await productRepository.SaveProductAsync(product);
 
         result.Match(
             Left: _ => Assert.Fail("Save failed"),
