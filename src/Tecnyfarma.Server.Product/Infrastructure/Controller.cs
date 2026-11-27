@@ -7,7 +7,9 @@ using UseCase = Tecnyfarma.Server.Product.Application.Product.Find.UseCase;
 namespace Tecnyfarma.Server.Product.Infrastructure;
 
 [ApiController]
-public class Controller(Tecnyfarma.Server.Product.Application.Product.Find.UseCase findProductUseCase, Tecnyfarma.Server.Product.Application.Product.Create.UseCase createProductUseCase) : ControllerBase
+public class Controller(
+    Tecnyfarma.Server.Product.Application.Product.Find.UseCase findProductUseCase,
+    Tecnyfarma.Server.Product.Application.Product.Create.UseCase createProductUseCase) : ControllerBase
 {
     [HttpGet("/api/v0/products")]
     public async Task<IActionResult> FindProducts()
